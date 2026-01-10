@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayan's Portfolio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👁️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Berkeley+Mono&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #fafafa;
+            --text: #1a1a1a;
+            --link: #0066cc;
+            --border: #e0e0e0;
+            --hover: #000;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Berkeley Mono', 'Courier New', monospace;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 650px;
+            margin: 0 auto;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HEADER */
+        .site-header {
+            margin-bottom: 3rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .site-nav {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .site-nav a {
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 1rem;
+        }
+
+        .site-nav a:hover {
+            text-decoration: underline;
+        }
+
+        /* MAIN CONTENT */
+        h1 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            letter-spacing: -0.02em;
+        }
+
+        h2 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 2.5rem 0 1rem 0;
+            letter-spacing: -0.01em;
+        }
+
+        h3 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 1.5rem 0 0.5rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            color: var(--text);
+        }
+
+        a {
+            color: var(--link);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease;
+        }
+
+        a:hover {
+            border-bottom: 1px solid var(--link);
+        }
+
+        /* LISTS */
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+        }
+
+        /* LINKS SECTION */
+        .links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .links a {
+            color: var(--text);
+            text-decoration: none;
+            padding: 0.3rem 0;
+        }
+
+        .links a:hover {
+            color: var(--hover);
+            text-decoration: underline;
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 3rem;
+        }
+
+        /* TIMELINE */
+        .timeline-item {
+            margin-bottom: 2rem;
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline-org {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        /* PROJECT CARD */
+        .project {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .project:last-child {
+            border-bottom: none;
+        }
+
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-title {
+            font-weight: 600;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .tag {
+            color: #666;
+            background: transparent;
+            border: 1px solid var(--border);
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+        }
+
+        /* FOOTER */
+        footer {
+            margin-top: 5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        /* CODE BLOCKS */
+        code {
+            background: #f5f5f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: inherit;
+            font-size: 0.9em;
+        }
+
+        /* EMPHASIS */
+        strong {
+            font-weight: 600;
+        }
+
+        em {
+            font-style: italic;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            body {
+                padding: 1.5rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            .project-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        /* CURSOR */
+        ::selection {
+            background: #000;
+            color: #fff;
+        }
+
+        /* MINIMAL ANIMATIONS */
+        @media (prefers-reduced-motion: no-preference) {
+            a, .tag {
+                transition: all 0.15s ease;
+            }
+        }
+
+        /* PARTICLE CANVAS */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.4;
+        }
+
+        /* TERMINAL */
+        .terminal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .terminal-overlay.active {
+            display: flex;
+        }
+
+        .terminal {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 800px;
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .terminal-header {
+            background: #2a2a2a;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border-bottom: 1px solid #333;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .terminal-button.red { 
+            background: #ff5f57;
+        }
+
+        .terminal-button.red:hover {
+            background: #ff3b30;
+            transform: scale(1.1);
+        }
+
+        .terminal-button.yellow { background: #ffbd2e; }
+        .terminal-button.green { background: #28ca42; }
+
+        .terminal-title {
+            margin-left: auto;
+            color: #888;
+            font-size: 0.85rem;
+        }
+
+        .terminal-body {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            font-family: 'Berkeley Mono', 'Courier New', monospace;
+            color: #0f0;
+            background: #000;
+        }
+
+        .terminal-body::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .terminal-body::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        .terminal-body::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        .terminal-line {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+
+        .terminal-prompt {
+            color: #0f0;
+        }
+
+        .terminal-path {
+            color: #00d4ff;
+        }
+
+        .terminal-input-line {
+            display: flex;
+            align-items: center;
+        }
+
+        .terminal-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #0f0;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            background: #0f0;
+            animation: blink 1s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .terminal-error {
+            color: #ff5f57;
+        }
+
+        .terminal-success {
+            color: #28ca42;
+        }
+
+        .terminal-info {
+            color: #00d4ff;
+        }
+
+        .terminal-file {
+            color: #fff;
+        }
+
+        .terminal-dir {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        /* TERMINAL HINT */
+        .terminal-hint {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            padding: 0.75rem 1.25rem;
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: #0f0;
+            font-size: 0.85rem;
+            z-index: 9999;
+            animation: slideInRight 0.3s ease;
+            transition: opacity 0.3s ease;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .terminal-hint.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .terminal-hint kbd {
+            display: inline-block;
+            padding: 0.2rem 0.5rem;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 3px;
+            font-size: 0.8rem;
+            margin: 0 0.2rem;
+        }
+
+        /* MOBILE TERMINAL */
+        @media (max-width: 768px) {
+            .terminal {
+                width: 95%;
+                height: 80%;
+            }
+
+            .terminal-hint {
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        /* LOADING SCREEN */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .eye-container {
+            position: relative;
+            width: 200px;
+            height: 100px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .eye {
+            position: relative;
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid var(--charcoal);
+            overflow: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .eye {
+            position: relative;
+            width: 90px;
+            height: 50px;
+            background: white;
+            border-radius: 50%;
+            border: 3px solid var(--charcoal);
+            overflow: visible;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .eye-left {
+            animation: eyeOpen 2.5s ease-in-out forwards;
+        }
+
+        .eye-right {
+            animation: eyeOpen 2.5s ease-in-out 0.1s forwards;
+        }
+
+        @keyframes eyeOpen {
+            0% {
+                transform: scaleY(0.05);
+            }
+            40% {
+                transform: scaleY(0.05);
+            }
+            60% {
+                transform: scaleY(1);
+            }
+            70% {
+                transform: scaleY(0.1);
+            }
+            80% {
+                transform: scaleY(1);
+            }
+            85% {
+                transform: scaleY(0.1);
+            }
+            100% {
+                transform: scaleY(1);
+            }
+        }
+
+        .pupil {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: var(--charcoal);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: pupilAppear 2.5s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        @keyframes pupilAppear {
+            0%, 50% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            70% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .iris {
+            display: none;
+        }
+
+        .loading-text {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.9rem;
+            color: var(--charcoal);
+            opacity: 0;
+            animation: fadeInText 1s ease 1.8s forwards;
+            white-space: nowrap;
+        }
+
+        @keyframes fadeInText {
+            to {
+                opacity: 0.6;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- LOADING SCREEN -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="eye-container">
+            <div class="eye eye-left">
+                <div class="pupil">
+                    <div class="iris"></div>
+                </div>
+            </div>
+            <div class="eye eye-right">
+                <div class="pupil">
+                    <div class="iris"></div>
+                </div>
+            </div>
+            <div class="loading-text">loading...</div>
+        </div>
+    </div>
+
+    <canvas id="particle-canvas"></canvas>
+    
+    <!-- Terminal Hint -->
+    <div class="terminal-hint" id="terminal-hint">
+        Press <kbd id="modifier-key">Ctrl</kbd>+<kbd>K</kbd> to open terminal
+    </div>
+
+    <!-- Terminal Overlay -->
+    <div class="terminal-overlay" id="terminal-overlay">
+        <div class="terminal">
+            <div class="terminal-header">
+                <div class="terminal-button red" id="terminal-close-btn"></div>
+                <div class="terminal-button yellow"></div>
+                <div class="terminal-button green"></div>
+                <div class="terminal-title">ayan@portfolio:~</div>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <div class="terminal-line">
+                    <span class="terminal-success">Welcome to Ayan's Portfolio Terminal v1.0</span>
+                </div>
+                <div class="terminal-line">
+                    <span class="terminal-info">Type 'help' for available commands</span>
+                </div>
+                <div class="terminal-line"></div>
+            </div>
+        </div>
+    </div>
+    <header class="site-header">
+        <nav class="site-nav">
+            <a href="#about">about</a>
+            <a href="#projects">projects</a>
+            <a href="#experience">experience</a>
+            <a href="#contact">contact</a>
+            <a href="#" id="nav-terminal-btn">terminal</a>
+        </nav>
+    </header>
+
+    <main>
+        <h1>ayan bin saif</h1>
+
+        <div class="links">
+            <a href="mailto:ayan.binsaif@uwaterloo.ca">email</a> ·
+            <a href="https://github.com/draggle" target="_blank">github</a> ·
+            <a href="https://linkedin.com/in/stitches" target="_blank">linkedin</a>
+        </div>
+
+        <section id="about" class="section">
+            <p>mathematics student at <strong>university of waterloo</strong> specializing in ios development and computer vision. experienced in building scalable mobile apps and hci solutions using swift, python, and java.</p>
+            
+            <p>currently pursuing honours bachelors of mathematics (co-op), graduating april 2030. interested in software engineering, data science/engineering, full-stack development, and mobile engineering.</p>
+        </section>
+
+        <section id="projects" class="section">
+            <h2>projects</h2>
+
+            <div class="project">
+                <div class="project-header">
+                    <span class="project-title">rate my rez</span>
+                    <a href="https://github.com/draggle/rate-my-rez" target="_blank" style="font-size: 0.9rem;">↗</a>
+                </div>
+                <p>launched a full-stack housing platform utilizing react for the frontend and firebase for real-time data persistence. implemented secure restful-style crud operations allowing users to manage reviews via firebase auth verification. designed responsive ui components that ensured 100% layout consistency across mobile and desktop devices.</p>
+                <div class="project-tags">
+                    <span class="tag">react</span>
+                    <span class="tag">firebase</span>
+                    <span class="tag">tailwind css</span>
+                    <span class="tag">restful apis</span>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span class="project-title">cheeto-fingers</span>
+                    <a href="https://github.com/draggle/cheeto-fingers" target="_blank" style="font-size: 0.9rem;">↗</a>
+                </div>
+                <p>developed a touch-free hci mapping 21 hand-knuckle landmarks to os mouse events using vector calculus. engineered a jitter-buffering algorithm to stabilize cursor movement, reducing sensor noise by 90%. built a custom gesture-recognition engine for media navigation, including precision scrolling and volume toggling.</p>
+                <div class="project-tags">
+                    <span class="tag">python</span>
+                    <span class="tag">opencv</span>
+                    <span class="tag">mediapipe</span>
+                    <span class="tag">computer vision</span>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span class="project-title">dice duel showdown</span>
+                    <a href="https://github.com/draggle/dice-duel" target="_blank" style="font-size: 0.9rem;">↗</a>
+                </div>
+                <p>architected a strategic turn-based game featuring a probability-driven ai opponent using weighted decision trees. refactored a legacy python prototype into a robust java backend using oop design patterns like inheritance. deployed a web-based frontend with dynamic state management to track and visualize real-time battle logs.</p>
+                <div class="project-tags">
+                    <span class="tag">java</span>
+                    <span class="tag">python</span>
+                    <span class="tag">javascript</span>
+                    <span class="tag">oop</span>
+                </div>
+            </div>
+
+            <div class="project">
+                <div class="project-header">
+                    <span class="project-title">edubuddy</span>
+                </div>
+                <p>engineered native ios application using swift and swiftui within an exclusive apple-sponsored technical mentorship program. architected following apple hig, resulting in a 25% increase in perceived user navigation efficiency during beta testing. managed full sdlc from low-fidelity wireframing to final high-performance deployment in xcode.</p>
+                <div class="project-tags">
+                    <span class="tag">swift</span>
+                    <span class="tag">swiftui</span>
+                    <span class="tag">ios</span>
+                    <span class="tag">apple hig</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <h2>experience</h2>
+
+            <div class="timeline-item">
+                <div class="timeline-date">feb 2024 - jul 2024</div>
+                <div class="timeline-title">ios app developer (mentorship)</div>
+                <div class="timeline-org"><strong>apple</strong></div>
+                <p>engineered native ios applications using swift and swiftui within an exclusive apple-sponsored technical mentorship program.</p>
+                <ul>
+                    <li>architected 'edubuddy' following apple hig, resulting in a 25% increase in perceived user navigation efficiency during beta testing</li>
+                    <li>managed the full sdlc from low-fidelity wireframing to final high-performance deployment in xcode</li>
+                    <li>delivered a high-stakes technical demo to industry executives, highlighting feature scalability and memory management optimizations</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-date">2025 - present</div>
+                <div class="timeline-title">mathematics student (co-op)</div>
+                <div class="timeline-org"><strong>university of waterloo</strong></div>
+                <p>pursuing honours bachelors of mathematics with focus on ios development and computer vision. building strong foundation in data structures, algorithms, and theoretical computer science.</p>
+                <ul>
+                    <li>learning data structures & algorithms, discrete math, and computational theory</li>
+                    <li>seeking co-op opportunities for summer 2026</li>
+                </ul>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <h2>skills</h2>
+            <p><strong>languages:</strong> swift, python, java, javascript, racket, html/css, sql</p>
+            <p><strong>frameworks:</strong> swiftui, uikit, react, tailwind css, mediapipe, opencv, node.js</p>
+            <p><strong>tools/tech:</strong> git, firebase (auth/firestore), xcode, jira, restful apis</p>
+            <p><strong>core concepts:</strong> object-oriented programming (oop), data structures, ui/ux design, human-computer interaction (hci)</p>
+        </section>
+
+        <section id="about-extended" class="section">
+            <h2>misc</h2>
+            <ul>
+                <li>specializing in ios development with emphasis on swiftui and apple human interface guidelines</li>
+                <li>passionate about computer vision and human-computer interaction (hci)</li>
+                <li>experienced in full sdlc from wireframing to deployment</li>
+                <li>strong foundation in oop design patterns and data structures</li>
+                <li>open to co-op opportunities in software engineering, data science/engineering, mobile development, and full-stack roles</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="section">
+            <h2>contact</h2>
+            <p>feel free to reach out for co-op opportunities, collaborations, or just to chat about tech!</p>
+            <p><strong>email:</strong> <a href="mailto:ayan.binsaif@uwaterloo.ca">ayan.binsaif@uwaterloo.ca</a></p>
+            <p><strong>github:</strong> <a href="https://github.com/draggle" target="_blank">github.com/draggle</a></p>
+            <p><strong>linkedin:</strong> <a href="https://linkedin.com/in/stitches" target="_blank">linkedin.com/in/stitches</a></p>
+            <p><strong>location:</strong> waterloo, ontario</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2025 ayan · built with love and late nights ☕</p>
+    </footer>
+
+    <script>
+        // ==================== OS DETECTION ====================
+        // More reliable Mac detection
+        const isMac = /Mac|iPhone|iPod|iPad/i.test(navigator.platform) || 
+                      /Mac|iPhone|iPod|iPad/i.test(navigator.userAgent) ||
+                      navigator.platform === 'MacIntel';
+        
+        const modifierKey = isMac ? 'Cmd' : 'Ctrl';
+
+        // Update terminal hint with correct modifier key
+        document.getElementById('modifier-key').textContent = modifierKey;
+
+        console.log('Detected OS:', isMac ? 'Mac' : 'Windows/Linux', '| Platform:', navigator.platform);
+
+        // ==================== LOADING SCREEN ====================
+        window.addEventListener('load', () => {
+            // Wait for eye blink animation to complete (3 seconds) plus a small delay
+            setTimeout(() => {
+                const loadingScreen = document.getElementById('loading-screen');
+                loadingScreen.classList.add('fade-out');
+                
+                // Remove from DOM after fade completes
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 3200);
+        });
+
+        // ==================== PARTICLE BACKGROUND ====================
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let mouseX = 0;
+        let mouseY = 0;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 0.5;
+                this.vy = (Math.random() - 0.5) * 0.5;
+                this.radius = Math.random() * 2 + 1;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                // Mouse interaction
+                const dx = mouseX - this.x;
+                const dy = mouseY - this.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                
+                if (dist < 150) {
+                    const angle = Math.atan2(dy, dx);
+                    const force = (150 - dist) / 150;
+                    this.x -= Math.cos(angle) * force * 2;
+                    this.y -= Math.sin(angle) * force * 2;
+                }
+
+                // Wrap around screen
+                if (this.x < 0) this.x = canvas.width;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.y < 0) this.y = canvas.height;
+                if (this.y > canvas.height) this.y = 0;
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(26, 26, 26, 0.5)';
+                ctx.fill();
+            }
+        }
+
+        // Create particles
+        for (let i = 0; i < 100; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawLines() {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < 120) {
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(26, 26, 26, ${0.2 * (1 - dist / 120)})`;
+                        ctx.lineWidth = 1;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            particles.forEach(particle => {
+                particle.update();
+                particle.draw();
+            });
+
+            drawLines();
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        // ==================== TERMINAL ====================
+        const terminalOverlay = document.getElementById('terminal-overlay');
+        const terminalBody = document.getElementById('terminal-body');
+        const terminalHint = document.getElementById('terminal-hint');
+
+        // File system structure
+        const fileSystem = {
+            '/': {
+                type: 'dir',
+                contents: {
+                    'about.txt': { type: 'file', content: 'Mathematics student at UWaterloo specializing in iOS development and Computer Vision.\nExpected Graduation: April 2030\nSeeking co-op opportunities for Summer 2026' },
+                    'projects': {
+                        type: 'dir',
+                        contents: {
+                            'rate-my-rez.md': { type: 'file', content: 'Full-stack housing platform using React and Firebase\nFeatures: CRUD operations, auth verification, responsive UI\nTech: React, Firebase, Tailwind CSS, RESTful APIs' },
+                            'cheeto-fingers.md': { type: 'file', content: 'Touch-free HCI using hand-tracking\nMaps 21 hand landmarks to mouse events\nReduces sensor noise by 90%\nTech: Python, OpenCV, MediaPipe' },
+                            'dice-duel.md': { type: 'file', content: 'Strategic turn-based game with AI opponent\nProbability-driven weighted decision trees\nRefactored from Python to Java using OOP\nTech: Java, Python, JavaScript' },
+                            'edubuddy.md': { type: 'file', content: 'Native iOS app from Apple mentorship\n25% increase in user navigation efficiency\nFollows Apple HIG guidelines\nTech: Swift, SwiftUI, iOS' }
+                        }
+                    },
+                    'experience': {
+                        type: 'dir',
+                        contents: {
+                            'apple.txt': { type: 'file', content: 'iOS App Developer (Mentorship) | Feb 2024 - Jul 2024\n\nEngineered native iOS applications using Swift and SwiftUI\nManaged full SDLC from wireframing to deployment\nDelivered technical demos to industry executives' },
+                            'uwaterloo.txt': { type: 'file', content: 'Mathematics Student (Co-op) | 2025 - Present\n\nSpecializing in iOS development and Computer Vision\nLearning data structures, algorithms, and discrete mathematics\nSeeking co-op opportunities for Summer 2026' }
+                        }
+                    },
+                    'skills.txt': { type: 'file', content: 'Languages: Swift, Python, Java, JavaScript, Racket, HTML/CSS, SQL\nFrameworks: SwiftUI, UIKit, React, Tailwind CSS, MediaPipe, OpenCV, Node.js\nTools: Git, Firebase, Xcode, Jira, RESTful APIs\nConcepts: OOP, Data Structures, UI/UX Design, HCI' },
+                    'contact': {
+                        type: 'dir',
+                        contents: {
+                            'email.txt': { type: 'file', content: 'ayan.binsaif@uwaterloo.ca\n\nFeel free to reach out for co-op opportunities, collaborations, or technical discussions!' },
+                            'github.txt': { type: 'file', content: 'GitHub: github.com/draggle\n\nCheck out my projects and contributions!\n\nTo open in browser, use: open github' },
+                            'linkedin.txt': { type: 'file', content: 'LinkedIn: linkedin.com/in/stitches\n\nConnect with me professionally!\n\nTo open in browser, use: open linkedin' },
+                            'location.txt': { type: 'file', content: 'Waterloo, Ontario, Canada' }
+                        }
+                    }
+                }
+            }
+        };
+
+        let currentPath = '/';
+        let commandHistory = [];
+        let historyIndex = -1;
+
+        function addTerminalLine(content, className = '') {
+            const line = document.createElement('div');
+            line.className = 'terminal-line' + (className ? ' ' + className : '');
+            line.innerHTML = content;
+            terminalBody.appendChild(line);
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+        }
+
+        function getPrompt() {
+            return `<span class="terminal-prompt">ayan@portfolio</span>:<span class="terminal-path">${currentPath}</span>$ `;
+        }
+
+        function getCurrentDir() {
+            if (currentPath === '/') return fileSystem['/'];
+            
+            const parts = currentPath.split('/').filter(p => p);
+            let current = fileSystem['/'];
+            
+            for (const part of parts) {
+                if (current.contents && current.contents[part]) {
+                    current = current.contents[part];
+                } else {
+                    return null;
+                }
+            }
+            
+            return current;
+        }
+
+        function resolvePath(path) {
+            if (path === '/') return '/';
+            if (path.startsWith('/')) {
+                return path;
+            }
+            
+            // Handle relative paths
+            const parts = currentPath.split('/').filter(p => p);
+            const newParts = path.split('/').filter(p => p);
+            
+            for (const part of newParts) {
+                if (part === '..') {
+                    parts.pop();
+                } else if (part !== '.') {
+                    parts.push(part);
+                }
+            }
+            
+            return '/' + parts.join('/');
+        }
+
+        function handleCommand(input) {
+            const parts = input.trim().split(/\s+/);
+            const cmd = parts[0].toLowerCase();
+            const args = parts.slice(1);
+
+            commandHistory.push(input);
+            historyIndex = commandHistory.length;
+
+            addTerminalLine(getPrompt() + input);
+
+            switch (cmd) {
+                case 'help':
+                    addTerminalLine(`
+<span class="terminal-success">Available Commands:</span>
+<br>
+<span class="terminal-info">ls</span> [directory]
+    List contents of current or specified directory
+    Examples: ls, ls projects, ls /
+<br>
+<span class="terminal-info">cd</span> &lt;directory&gt;
+    Change current directory
+    Examples: cd projects, cd .., cd /
+    Use 'cd ..' to go up one level
+<br>
+<span class="terminal-info">cat</span> &lt;file&gt;
+    Display contents of a file
+    Examples: cat about.txt, cat projects/rate-my-rez.md
+<br>
+<span class="terminal-info">pwd</span>
+    Print current working directory path
+<br>
+<span class="terminal-info">clear</span>
+    Clear the terminal screen
+<br>
+<span class="terminal-info">open</span> &lt;target&gt;
+    Open external links in new tab
+    Examples: open github, open linkedin, open email
+<br>
+<span class="terminal-info">about</span>
+    Quick navigation to about section (closes terminal)
+<br>
+<span class="terminal-info">projects</span>
+    Quick navigation to projects section (closes terminal)
+<br>
+<span class="terminal-info">contact</span>
+    Quick navigation to contact section (closes terminal)
+<br>
+<span class="terminal-info">help</span>
+    Display this help message
+<br>
+<span class="terminal-success">Tips:</span>
+  • Use Tab to autocomplete file/directory names
+  • Use ↑/↓ arrows to navigate command history
+  • Press ESC or ${modifierKey}+K to close terminal
+  • Try 'open github' to visit social profiles
+                    `);
+                    break;
+
+                case 'ls':
+                    const dir = getCurrentDir();
+                    if (dir && dir.type === 'dir') {
+                        const items = Object.keys(dir.contents).map(name => {
+                            const item = dir.contents[name];
+                            if (item.type === 'dir') {
+                                return `<span class="terminal-dir">${name}/</span>`;
+                            } else {
+                                return `<span class="terminal-file">${name}</span>`;
+                            }
+                        });
+                        addTerminalLine(items.join('  '));
+                    } else {
+                        addTerminalLine('Not a directory', 'terminal-error');
+                    }
+                    break;
+
+                case 'cd':
+                    if (args.length === 0) {
+                        currentPath = '/';
+                    } else {
+                        const newPath = resolvePath(args[0]);
+                        const parts = newPath.split('/').filter(p => p);
+                        
+                        if (newPath === '/') {
+                            currentPath = '/';
+                        } else {
+                            let current = fileSystem['/'];
+                            let valid = true;
+                            
+                            for (const part of parts) {
+                                if (current.contents && current.contents[part] && current.contents[part].type === 'dir') {
+                                    current = current.contents[part];
+                                } else {
+                                    valid = false;
+                                    break;
+                                }
+                            }
+                            
+                            if (valid) {
+                                currentPath = newPath;
+                            } else {
+                                addTerminalLine(`cd: ${args[0]}: No such directory`, 'terminal-error');
+                            }
+                        }
+                    }
+                    break;
+
+                case 'cat':
+                    if (args.length === 0) {
+                        addTerminalLine('cat: missing file operand', 'terminal-error');
+                    } else {
+                        const filePath = resolvePath(args[0]);
+                        const parts = filePath.split('/').filter(p => p);
+                        let current = fileSystem['/'];
+                        
+                        for (let i = 0; i < parts.length - 1; i++) {
+                            if (current.contents && current.contents[parts[i]]) {
+                                current = current.contents[parts[i]];
+                            } else {
+                                current = null;
+                                break;
+                            }
+                        }
+                        
+                        const fileName = parts[parts.length - 1];
+                        if (current && current.contents && current.contents[fileName]) {
+                            const file = current.contents[fileName];
+                            if (file.type === 'file') {
+                                addTerminalLine(file.content.replace(/\n/g, '<br>'));
+                            } else {
+                                addTerminalLine(`cat: ${args[0]}: Is a directory`, 'terminal-error');
+                            }
+                        } else {
+                            addTerminalLine(`cat: ${args[0]}: No such file`, 'terminal-error');
+                        }
+                    }
+                    break;
+
+                case 'pwd':
+                    addTerminalLine(currentPath);
+                    break;
+
+                case 'clear':
+                    terminalBody.innerHTML = '';
+                    break;
+
+                case 'about':
+                    window.location.hash = 'about';
+                    terminalOverlay.classList.remove('active');
+                    addTerminalLine('Navigating to about section...', 'terminal-success');
+                    break;
+
+                case 'projects':
+                    window.location.hash = 'projects';
+                    terminalOverlay.classList.remove('active');
+                    addTerminalLine('Navigating to projects section...', 'terminal-success');
+                    break;
+
+                case 'contact':
+                    window.location.hash = 'contact';
+                    terminalOverlay.classList.remove('active');
+                    addTerminalLine('Opening contact section...', 'terminal-success');
+                    break;
+
+                case 'open':
+                    if (args.length === 0) {
+                        addTerminalLine('Usage: open [github|linkedin|email]', 'terminal-error');
+                    } else {
+                        const target = args[0].toLowerCase();
+                        switch(target) {
+                            case 'github':
+                                addTerminalLine('Opening GitHub profile...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://github.com/draggle', '_blank');
+                                }, 500);
+                                break;
+                            case 'linkedin':
+                                addTerminalLine('Opening LinkedIn profile...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://linkedin.com/in/stitches', '_blank');
+                                }, 500);
+                                break;
+                            case 'email':
+                                addTerminalLine('Opening email client...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.location.href = 'mailto:ayan.binsaif@uwaterloo.ca';
+                                }, 500);
+                                break;
+                            default:
+                                addTerminalLine(`Unknown target: ${target}. Try: github, linkedin, or email`, 'terminal-error');
+                        }
+                    }
+                    break;
+
+                case '':
+                    break;
+
+                default:
+                    addTerminalLine(`Command not found: ${cmd}. Type 'help' for available commands.`, 'terminal-error');
+            }
+
+            createInputLine();
+        }
+
+        function createInputLine() {
+            const inputLine = document.createElement('div');
+            inputLine.className = 'terminal-line terminal-input-line';
+            inputLine.innerHTML = getPrompt();
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'terminal-input';
+            input.id = 'terminal-input';
+            input.autocomplete = 'off';
+            input.spellcheck = false;
+            
+            inputLine.appendChild(input);
+            terminalBody.appendChild(inputLine);
+            input.focus();
+            terminalBody.scrollTop = terminalBody.scrollHeight;
+
+            input.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    const value = input.value;
+                    inputLine.remove();
+                    if (value.trim()) {
+                        handleCommand(value);
+                    } else {
+                        addTerminalLine(getPrompt());
+                        createInputLine();
+                    }
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    if (historyIndex > 0) {
+                        historyIndex--;
+                        input.value = commandHistory[historyIndex];
+                    }
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (historyIndex < commandHistory.length - 1) {
+                        historyIndex++;
+                        input.value = commandHistory[historyIndex];
+                    } else {
+                        historyIndex = commandHistory.length;
+                        input.value = '';
+                    }
+                } else if (e.key === 'Tab') {
+                    e.preventDefault();
+                    // Simple tab completion for directories
+                    const dir = getCurrentDir();
+                    if (dir && dir.type === 'dir') {
+                        const items = Object.keys(dir.contents);
+                        const partial = input.value.toLowerCase();
+                        const matches = items.filter(item => item.toLowerCase().startsWith(partial));
+                        if (matches.length === 1) {
+                            input.value = matches[0];
+                        }
+                    }
+                }
+            });
+        }
+
+        // Terminal keyboard shortcut
+        document.addEventListener('keydown', (e) => {
+            // Ctrl+K or Cmd+K
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                terminalOverlay.classList.toggle('active');
+                
+                if (terminalOverlay.classList.contains('active')) {
+                    terminalHint.classList.add('hidden');
+                    const existingInput = document.getElementById('terminal-input');
+                    if (existingInput) {
+                        existingInput.focus();
+                    } else {
+                        createInputLine();
+                    }
+                }
+            }
+
+            // ESC to close terminal
+            if (e.key === 'Escape' && terminalOverlay.classList.contains('active')) {
+                terminalOverlay.classList.remove('active');
+            }
+        });
+
+        // Close terminal when clicking outside
+        terminalOverlay.addEventListener('click', (e) => {
+            if (e.target === terminalOverlay) {
+                terminalOverlay.classList.remove('active');
+            }
+        });
+
+        // Close terminal with red button
+        document.getElementById('terminal-close-btn').addEventListener('click', () => {
+            terminalOverlay.classList.remove('active');
+        });
+
+        // Open terminal from navigation
+        document.getElementById('nav-terminal-btn').addEventListener('click', (e) => {
+            e.preventDefault();
+            terminalOverlay.classList.add('active');
+            terminalHint.classList.add('hidden');
+            const existingInput = document.getElementById('terminal-input');
+            if (existingInput) {
+                existingInput.focus();
+            } else {
+                createInputLine();
+            }
+        });
+
+        // Initialize terminal
+        createInputLine();
+
+        // Hide terminal hint after 5 seconds
+        setTimeout(() => {
+            terminalHint.classList.add('hidden');
+        }, 5000);
+
+        // ==================== SMOOTH SCROLL ====================
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // Press 'h' to go to top (only if terminal is not active)
+            if (e.key === 'h' && !terminalOverlay.classList.contains('active')) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        });
+    </script>
+</body>
+</html>
