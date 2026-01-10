@@ -181,6 +181,20 @@
             margin-bottom: 0.5rem;
         }
 
+        .project-header a {
+            font-size: 1rem;
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .project-header a:hover {
+            background: var(--charcoal);
+            color: var(--bg);
+            border-color: var(--charcoal);
+        }
+
         .project-title {
             font-weight: 600;
         }
@@ -697,7 +711,10 @@
             <div class="project">
                 <div class="project-header">
                     <span class="project-title">rate my rez</span>
-                    <a href="https://github.com/draggle/rate-my-rez" target="_blank" style="font-size: 0.9rem;">↗</a>
+                    <div style="display: flex; gap: 0.8rem; font-size: 0.9rem;">
+                        <a href="https://rate-my-rez-waterloo.vercel.app/" target="_blank">demo ↗</a>
+                        <a href="https://github.com/draggle/rate-my-rez-waterloo" target="_blank">github ↗</a>
+                    </div>
                 </div>
                 <p>launched a full-stack housing platform utilizing react for the frontend and firebase for real-time data persistence. implemented secure restful-style crud operations allowing users to manage reviews via firebase auth verification. designed responsive ui components that ensured 100% layout consistency across mobile and desktop devices.</p>
                 <div class="project-tags">
@@ -711,7 +728,7 @@
             <div class="project">
                 <div class="project-header">
                     <span class="project-title">cheeto-fingers</span>
-                    <a href="https://github.com/draggle/cheeto-fingers" target="_blank" style="font-size: 0.9rem;">↗</a>
+                    <a href="https://github.com/draggle/Cheeto-Fingers" target="_blank" style="font-size: 0.9rem;">github ↗</a>
                 </div>
                 <p>developed a touch-free hci mapping 21 hand-knuckle landmarks to os mouse events using vector calculus. engineered a jitter-buffering algorithm to stabilize cursor movement, reducing sensor noise by 90%. built a custom gesture-recognition engine for media navigation, including precision scrolling and volume toggling.</p>
                 <div class="project-tags">
@@ -725,7 +742,7 @@
             <div class="project">
                 <div class="project-header">
                     <span class="project-title">dice duel showdown</span>
-                    <a href="https://github.com/draggle/dice-duel" target="_blank" style="font-size: 0.9rem;">↗</a>
+                    <a href="https://github.com/draggle/dice-duel-showdown" target="_blank" style="font-size: 0.9rem;">github ↗</a>
                 </div>
                 <p>architected a strategic turn-based game featuring a probability-driven ai opponent using weighted decision trees. refactored a legacy python prototype into a robust java backend using oop design patterns like inheritance. deployed a web-based frontend with dynamic state management to track and visualize real-time battle logs.</p>
                 <div class="project-tags">
@@ -950,9 +967,9 @@
                     'projects': {
                         type: 'dir',
                         contents: {
-                            'rate-my-rez.md': { type: 'file', content: 'Full-stack housing platform using React and Firebase\nFeatures: CRUD operations, auth verification, responsive UI\nTech: React, Firebase, Tailwind CSS, RESTful APIs' },
-                            'cheeto-fingers.md': { type: 'file', content: 'Touch-free HCI using hand-tracking\nMaps 21 hand landmarks to mouse events\nReduces sensor noise by 90%\nTech: Python, OpenCV, MediaPipe' },
-                            'dice-duel.md': { type: 'file', content: 'Strategic turn-based game with AI opponent\nProbability-driven weighted decision trees\nRefactored from Python to Java using OOP\nTech: Java, Python, JavaScript' },
+                            'rate-my-rez.md': { type: 'file', content: 'Full-stack housing platform using React and Firebase\nFeatures: CRUD operations, auth verification, responsive UI\nTech: React, Firebase, Tailwind CSS, RESTful APIs\n\nDemo: https://rate-my-rez-waterloo.vercel.app/\nGitHub: https://github.com/draggle/rate-my-rez-waterloo' },
+                            'cheeto-fingers.md': { type: 'file', content: 'Touch-free HCI using hand-tracking\nMaps 21 hand landmarks to mouse events\nReduces sensor noise by 90%\nTech: Python, OpenCV, MediaPipe\n\nGitHub: https://github.com/draggle/Cheeto-Fingers' },
+                            'dice-duel.md': { type: 'file', content: 'Strategic turn-based game with AI opponent\nProbability-driven weighted decision trees\nRefactored from Python to Java using OOP\nTech: Java, Python, JavaScript\n\nGitHub: https://github.com/draggle/dice-duel-showdown' },
                             'edubuddy.md': { type: 'file', content: 'Native iOS app from Apple mentorship\n25% increase in user navigation efficiency\nFollows Apple HIG guidelines\nTech: Swift, SwiftUI, iOS' }
                         }
                     },
@@ -1067,7 +1084,9 @@
 <br>
 <span class="terminal-info">open</span> &lt;target&gt;
     Open external links in new tab
-    Examples: open github, open linkedin, open email
+    Socials: open github, open linkedin, open email
+    Projects: open rate-my-rez, open rate-my-rez-demo
+              open cheeto-fingers, open dice-duel
 <br>
 <span class="terminal-info">about</span>
     Quick navigation to about section (closes terminal)
@@ -1196,7 +1215,7 @@
 
                 case 'open':
                     if (args.length === 0) {
-                        addTerminalLine('Usage: open [github|linkedin|email]', 'terminal-error');
+                        addTerminalLine('Usage: open [github|linkedin|email|rate-my-rez|rate-my-rez-demo|cheeto-fingers|dice-duel]', 'terminal-error');
                     } else {
                         const target = args[0].toLowerCase();
                         switch(target) {
@@ -1218,8 +1237,32 @@
                                     window.location.href = 'mailto:ayan.binsaif@uwaterloo.ca';
                                 }, 500);
                                 break;
+                            case 'rate-my-rez':
+                                addTerminalLine('Opening Rate My Rez GitHub repo...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://github.com/draggle/rate-my-rez-waterloo', '_blank');
+                                }, 500);
+                                break;
+                            case 'rate-my-rez-demo':
+                                addTerminalLine('Opening Rate My Rez live demo...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://rate-my-rez-waterloo.vercel.app/', '_blank');
+                                }, 500);
+                                break;
+                            case 'cheeto-fingers':
+                                addTerminalLine('Opening Cheeto-Fingers GitHub repo...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://github.com/draggle/Cheeto-Fingers', '_blank');
+                                }, 500);
+                                break;
+                            case 'dice-duel':
+                                addTerminalLine('Opening Dice Duel Showdown GitHub repo...', 'terminal-success');
+                                setTimeout(() => {
+                                    window.open('https://github.com/draggle/dice-duel-showdown', '_blank');
+                                }, 500);
+                                break;
                             default:
-                                addTerminalLine(`Unknown target: ${target}. Try: github, linkedin, or email`, 'terminal-error');
+                                addTerminalLine(`Unknown target: ${target}. Try: github, linkedin, email, or project names`, 'terminal-error');
                         }
                     }
                     break;
