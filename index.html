@@ -676,6 +676,9 @@
                 <div class="terminal-line">
                     <span class="terminal-info">Type 'help' for available commands</span>
                 </div>
+                <div class="terminal-line">
+                    <span style="color: #ffbd2e;">🥚 Can you find the hidden easter egg? Read 'help' carefully...</span>
+                </div>
                 <div class="terminal-line"></div>
             </div>
         </div>
@@ -701,7 +704,7 @@
         </div>
 
         <section id="about" class="section">
-            <p>mathematics student at <strong>university of waterloo</strong> specializing in ios development and computer vision. experienced in building scalable mobile apps and hci solutions using swift, python, and java.</p>
+            <p>mathematics student at <strong>university of waterloo</strong>. experienced in building scalable mobile apps and hci solutions using swift, python, and java.</p>
             
             <p>currently pursuing honours bachelors of mathematics (co-op), graduating april 2030. interested in software engineering, data science/engineering, full-stack development, and mobile engineering.</p>
         </section>
@@ -964,7 +967,7 @@
             '/': {
                 type: 'dir',
                 contents: {
-                    'about.txt': { type: 'file', content: 'Mathematics student at UWaterloo specializing in iOS development and Computer Vision.\nExpected Graduation: April 2030\nSeeking co-op opportunities for Summer 2026' },
+                    'about.txt': { type: 'file', content: 'Mathematics student at UWaterloo\nExpected Graduation: April 2030\nInterested in: Software Engineering, Data Science/Engineering, Full-stack Development\nSeeking co-op opportunities for Summer 2026' },
                     'projects': {
                         type: 'dir',
                         contents: {
@@ -996,6 +999,13 @@
                         contents: {
                             'resume.pdf': { type: 'file', content: 'Resume PDF\n\nTo open in browser, use: open resume\nDirect link: https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf' },
                             'recommendation-letter.pdf': { type: 'file', content: 'Letter of Recommendation\nFrom: SWE Mentor at Square\nProgram: Apple iOS Development Mentorship\n\nTo open in browser, use: open recommendation\nDirect link: https://github.com/draggle/portfolio/raw/main/Ayan_Letter_Of_Recommendation.pdf' }
+                        }
+                    },
+                    '.secrets': {
+                        type: 'dir',
+                        hidden: true,
+                        contents: {
+                            'secret.txt': { type: 'file', content: 'Wow! You know your way around a terminal! 🎉\n\nIf you\'re reading this, you either:\n• Actually know Unix commands\n• Read the help docs carefully\n• Got lucky with tab completion\n\nEither way, impressive! Feel free to reach out if you want to chat about tech, terminal tricks, or just say hi.\n\n- Ayan\n\nP.S. Try typing "help" if you haven\'t already!' }
                         }
                     }
                 }
@@ -1071,9 +1081,10 @@
                     addTerminalLine(`
 <span class="terminal-success">Available Commands:</span>
 <br>
-<span class="terminal-info">ls</span> [directory]
+<span class="terminal-info">ls</span> [directory] [-a]
     List contents of current or specified directory
-    Examples: ls, ls projects, ls /
+    Use -a flag to show hidden files (files starting with .)
+    Examples: ls, ls -a, ls projects, ls -a /
 <br>
 <span class="terminal-info">cd</span> &lt;directory&gt;
     Change current directory
@@ -1114,20 +1125,28 @@
   • Use ↑/↓ arrows to navigate command history
   • Press ESC or ${modifierKey}+K to close terminal
   • Try 'open github' to visit social profiles
+  • Hidden files start with . (use 'ls -a' to see them)
                     `);
                     break;
 
                 case 'ls':
+                    const showHidden = args.includes('-a');
                     const dir = getCurrentDir();
                     if (dir && dir.type === 'dir') {
-                        const items = Object.keys(dir.contents).map(name => {
-                            const item = dir.contents[name];
-                            if (item.type === 'dir') {
-                                return `<span class="terminal-dir">${name}/</span>`;
-                            } else {
-                                return `<span class="terminal-file">${name}</span>`;
-                            }
-                        });
+                        const items = Object.keys(dir.contents)
+                            .filter(name => {
+                                // Filter hidden files unless -a flag is used
+                                if (!showHidden && name.startsWith('.')) return false;
+                                return true;
+                            })
+                            .map(name => {
+                                const item = dir.contents[name];
+                                if (item.type === 'dir') {
+                                    return `<span class="terminal-dir">${name}/</span>`;
+                                } else {
+                                    return `<span class="terminal-file">${name}</span>`;
+                                }
+                            });
                         addTerminalLine(items.join('  '));
                     } else {
                         addTerminalLine('Not a directory', 'terminal-error');
