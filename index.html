@@ -207,6 +207,7 @@
             font-size: 0.85rem;
         }
 
+
         .tag {
             color: #666;
             background: transparent;
@@ -712,6 +713,71 @@
         <section id="projects" class="section">
             <h2>projects</h2>
 
+	    <div class="project">
+    <div class="project-header">
+  <div style="display: flex; align-items: center; gap: 0.6rem;">
+      <span class="project-title">alphahedge</span>
+      <!-- YC logo inline -->
+      <img 
+          src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Y_Combinator_logo.svg" 
+          alt="Y Combinator" 
+          style="height: 1.2em; vertical-align: middle;"
+      />
+  </div>
+
+  <div style="display: flex; gap: 0.8rem; font-size: 0.9rem;">
+      <a href="https://events.ycombinator.com/fullstackhackathon" target="_blank">yc event ↗</a>
+      <a href="https://github.com/draggle/AlphaHedge" target="_blank">github ↗</a>
+  </div>
+</div>
+
+
+
+    <p>
+        developed an ai-powered investment research platform at the y combinator full-stack hackathon.
+        alphahedge orchestrates a parallel multi-agent council to simulate institutional-grade equity
+        research workflows in under 2 minutes.
+    </p>
+
+    <p>
+        three autonomous analyst agents are prompted concurrently:
+        a fundamental analyst evaluating 10-q / 10-k filings, balance sheets,
+        cash flow statements, debt structure, and valuation metrics;
+        a quantitative analyst operating on raw ohlcv data, technical indicators,
+        volatility and beta, factor exposures, and probabilistic risk-adjusted models;
+        and a sentiment analyst synthesizing news and pr flow, social media buzz,
+        analyst ratings and price targets, corporate catalysts, short interest, and narrative trend mapping.
+    </p>
+
+    <p>
+        a final judge agent reviews all analyst memos and produces a unified investment
+        recommendation tailored to the user’s risk tolerance, time horizon, and portfolio size collected
+        during onboarding. implemented retrieval-augmented q&amp;a using google gemini and managed
+        real-time persistence with supabase.
+    </p>
+
+<a href="https://www.youtube.com/watch?v=zKdAAbf10yw" target="_blank" rel="noopener noreferrer">
+  alphahedge demo ↗ 
+</a>
+
+
+    <p style="font-size: 0.85rem; color: #666; margin-top: -0.5rem; font-style: italic;">
+        built with love @
+        <a href="https://events.ycombinator.com/fullstackhackathon" target="_blank">full-stack ↗</a>,
+        hosted by sim.ai &amp; loveable @ y combinator,
+        sponsored by stripe, brex &amp; supabase.
+    </p>
+
+    <div class="project-tags">
+        <span class="tag">next.js 16</span>
+        <span class="tag">typescript</span>
+        <span class="tag">supabase</span>
+        <span class="tag">google gemini</span>
+        <span class="tag">ai agents</span>
+    </div>
+</div>
+
+
             <div class="project">
                 <div class="project-header">
                     <span class="project-title">rate my rez</span>
@@ -800,9 +866,9 @@
 
         <section id="skills" class="section">
             <h2>skills</h2>
-            <p><strong>languages:</strong> swift, python, java, javascript, racket, html/css, sql</p>
-            <p><strong>frameworks:</strong> swiftui, uikit, react, tailwind css, mediapipe, opencv, node.js</p>
-            <p><strong>tools/tech:</strong> git, firebase (auth/firestore), xcode, jira, NoSQL</p>
+            <p><strong>languages:</strong> typescript, swift, python, java, javascript, racket, html/css, sql</p>
+            <p><strong>frameworks:</strong> next.js 16, swiftui, uikit, react, tailwind css, mediapipe, opencv, node.js</p>
+            <p><strong>tools/tech:</strong> supabase, google gemini (rag), git, firebase (auth/firestore), xcode, jira, NoSQL</p>
             <p><strong>core concepts:</strong> object-oriented programming (oop), data structures, ui/ux design, human-computer interaction (hci)</p>
         </section>
 
@@ -970,6 +1036,57 @@
                     'projects': {
                         type: 'dir',
                         contents: {
+			    'alphahedge.md': {
+    type: 'file',
+    content:
+`AlphaHedge — AI Investment Research Platform (YC Hackathon)
+
+AlphaHedge orchestrates a parallel multi-agent council to simulate
+institutional-grade equity research workflows in under 2 minutes.
+
+Agents:
+
+1) Fundamental Analyst
+   - 10-Q / 10-K filings
+   - Balance sheet & cash flow analysis
+   - Debt levels & capital structure
+   - Valuation metrics
+
+2) Quantitative Analyst
+   - Raw OHLCV market data
+   - Technical indicators
+   - Volatility & beta
+   - Factor exposures
+   - Probabilistic risk-adjusted models
+
+3) Sentiment Analyst
+   - News & PR flow
+   - Social media buzz & narrative tracking
+   - Analyst ratings & price targets
+   - Corporate catalysts
+   - Short interest
+
+Judge Agent:
+Reviews all analyst memos and produces a unified investment recommendation
+tailored to:
+- User risk tolerance
+- Time horizon
+- Portfolio size (collected during onboarding)
+
+Tech Stack:
+- Next.js 16
+- TypeScript
+- Supabase (real-time persistence)
+- Google Gemini (RAG-based Q&A)
+
+Built @ YC Full-Stack Hackathon
+Hosted by Sim.ai & Loveable @ Y Combinator
+Sponsored by Stripe, Brex & Supabase
+
+GitHub:
+https://github.com/draggle/AlphaHedge`
+},
+
                             'rate-my-rez.md': { type: 'file', content: 'Full-stack housing platform using React and Firebase\nFeatures: CRUD operations, auth verification, responsive UI\nTech: React, Firebase, Tailwind CSS\n\nDemo: https://rate-my-rez-waterloo.vercel.app/\nGitHub: https://github.com/draggle/rate-my-rez-waterloo' },
                             'cheeto-fingers.md': { type: 'file', content: 'Touch-free HCI using hand-tracking\nMaps 21 hand landmarks to mouse events\nReduces sensor noise by 90%\nTech: Python, OpenCV, MediaPipe\n\nGitHub: https://github.com/draggle/Cheeto-Fingers' },
                             'dice-duel.md': { type: 'file', content: 'Strategic turn-based game with AI opponent\nProbability-driven weighted decision trees\nRefactored from Python to Java using OOP\nTech: Java, Python, JavaScript\n\nGitHub: https://github.com/draggle/dice-duel-showdown' },
@@ -983,7 +1100,7 @@
                             'uwaterloo.txt': { type: 'file', content: 'Mathematics Student (Co-op) | 2025 - Present\n\nLearning data structures, algorithms, and discrete mathematics\nSeeking co-op opportunities for Summer 2026\n\nResume:\nhttps://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf' }
                         }
                     },
-                    'skills.txt': { type: 'file', content: 'Languages: Swift, Python, Java, JavaScript, Racket, HTML/CSS, SQL\nFrameworks: SwiftUI, UIKit, React, Tailwind CSS, MediaPipe, OpenCV, Node.js\nTools: Git, Firebase, Xcode, Jira, NoSQL\nConcepts: OOP, Data Structures, UI/UX Design, HCI' },
+                    'skills.txt': { type: 'file', content: 'Languages: TypeScript, Swift, Python, Java, JavaScript, Racket, HTML/CSS, SQL\nFrameworks: Next.js 16, SwiftUI, UIKit, React, Tailwind CSS, MediaPipe, OpenCV, Node.js\nTools: Supabase, Google Gemini (RAG), Git, Firebase, Xcode, Jira, NoSQL\nConcepts: OOP, Data Structures, UI/UX Design, HCI' },
                     'contact': {
                         type: 'dir',
                         contents: {
@@ -1103,7 +1220,7 @@
 <span class="terminal-info">open</span> &lt;target&gt;
     Open external links in new tab
     Socials: open github, open linkedin, open email
-    Projects: open rate-my-rez, open rate-my-rez-demo
+    Projects: open alphahedge, open rate-my-rez, open rate-my-rez-demo
               open cheeto-fingers, open dice-duel
     Documents: open resume, open recommendation
 <br>
@@ -1242,10 +1359,17 @@
 
                 case 'open':
                     if (args.length === 0) {
-                        addTerminalLine('Usage: open [github|linkedin|email|rate-my-rez|rate-my-rez-demo|cheeto-fingers|dice-duel]', 'terminal-error');
+                        addTerminalLine('Usage: open [github|linkedin|email|alphahedge|rate-my-rez|rate-my-rez-demo|cheeto-fingers|dice-duel]', 'terminal-error');
                     } else {
                         const target = args[0].toLowerCase();
                         switch(target) {
+case 'alphahedge':
+    addTerminalLine('Opening AlphaHedge GitHub repo...', 'terminal-success');
+    setTimeout(() => {
+        window.open('https://github.com/draggle/AlphaHedge', '_blank');
+    }, 500);
+    break;
+
                             case 'github':
                                 addTerminalLine('Opening GitHub profile...', 'terminal-success');
                                 setTimeout(() => {
