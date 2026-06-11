@@ -79,6 +79,15 @@ function lcp(arr: string[]): string {
   return arr.reduce((p, s) => { while (!s.startsWith(p)) p = p.slice(0, -1); return p })
 }
 
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
+
 // ── COMPONENT ──────────────────────────────────────────────────────────────────
 interface TerminalProps {
   isOpen: boolean
@@ -129,7 +138,7 @@ export default function Terminal({ isOpen, onClose }: TerminalProps) {
     const input = raw.trim()
     setHistory(h => [...h, input])
     setHistIdx(-1)
-    addLine(prompt() + input)
+    addLine(prompt() + escapeHtml(input))
 
     const parts = input.split(/\s+/)
     const cmd   = parts[0].toLowerCase()
@@ -350,10 +359,10 @@ export default function Terminal({ isOpen, onClose }: TerminalProps) {
   if (!isOpen) return null
 
   return (
-    <div className="terminal-overlay" onClick={e => { if (e.target === e.currentTarget) onClose() }}>
+    <div className="terminal-overlay" role="dialog" aria-modal="true" aria-label="terminal" onClick={e => { if (e.target === e.currentTarget) onClose() }}>
       <div className="terminal-box">
         <div className="terminal-titlebar">
-          <div className="t-dot red" onClick={onClose} />
+          <button className="t-dot red" onClick={onClose} aria-label="Close terminal" style={{ border: 'none', cursor: 'pointer', padding: 0 }} />
           <div className="t-dot yellow" />
           <div className="t-dot green" />
           <div className="terminal-title">ayan@portfolio:~</div>
@@ -373,6 +382,7 @@ export default function Terminal({ isOpen, onClose }: TerminalProps) {
               className="terminal-input"
               autoComplete="off"
               spellCheck={false}
+              aria-label="terminal input"
               onKeyDown={handleKeyDown}
             />
             <span className="t-hint">{hint}</span>
