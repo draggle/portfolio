@@ -212,7 +212,7 @@ const CMDS: Record<string, Cmd> = {
 
   cd: {
     desc: 'Change directory.',
-    fn: () => `unfortunately, i cannot afford more directories.`,
+    fn: () => `permission denied: there's nowhere better to be.`,
   },
 
   cat: {
