@@ -43,7 +43,7 @@ const BANNER = `<span style="color:${N.green};display:block;white-space:pre;min-
 ╚═════╝ ╚═╝╚═╝  ╚═══╝    ╚══════╝╚═╝  ╚═╝╚═╝╚═╝</span>
 
 Type <span style="color:${N.gold}">'help'</span> for available commands.
-Type <span style="color:${N.gold}">'sumfetch'</span> for a quick summary.
+Type <span style="color:${N.gold}">'whoareyou'</span> for a quick summary.
 Press <span style="color:${N.gray}">ESC</span> or type <span style="color:${N.gold}">'portfolio'</span> to return to the portfolio.`
 
 // ── COMMANDS ───────────────────────────────────────────────────────────────
@@ -67,7 +67,7 @@ const CMDS: Record<string, Cmd> = {
   about: {
     desc: 'Display information about me.',
     fn: () =>
-      `hi, i'm ayan bin saif.\n\napplied mathematics with scientific computing &amp; ml student at the university of waterloo.\ncurrently engineering at ${a('https://tern.ai', 'tern.ai')} — building idps™, an ai-powered positioning stack.\n\ninterested in software engineering, data science, full-stack development, and mobile engineering.\nseeking co-op opportunities for winter 2027.\n\ntype 'sumfetch' for a quick summary.\ntype 'projects' to see what i've built.\ntype 'experience' for my work history.`,
+      `hi, i'm ayan bin saif.\n\napplied mathematics with scientific computing &amp; ml student at the university of waterloo.\ncurrently engineering at ${a('https://tern.ai', 'tern.ai')} — building idps™, an ai-powered positioning stack.\n\ninterested in software engineering, data science, full-stack development, and mobile engineering.\nseeking co-op opportunities for winter 2027.\n\ntype 'whoareyou' for a quick summary.\ntype 'projects' to see what i've built.\ntype 'experience' for my work history.`,
   },
 
   banner: {
@@ -75,7 +75,7 @@ const CMDS: Record<string, Cmd> = {
     fn: () => BANNER,
   },
 
-  sumfetch: {
+  whoareyou: {
     desc: 'Display a summary of my info.',
     fn: () =>
 `╭──────────────────────╮     <span style="color:${N.gold}">sumfetch</span>
