@@ -35,6 +35,9 @@ export default function ExperienceSection() {
           </Link>
         ))}
       </div>
+      <div className="view-all">
+        <a href="/experience" className="nyx-link">view all experience →</a>
+      </div>
     </section>
   )
 }
