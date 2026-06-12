@@ -86,9 +86,9 @@ export default function HomePage() {
         <div>
           <div className="footer-name">ayan bin saif</div>
           <div className="footer-links">
-            <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email</a>
-            <a href="https://github.com/draggle" target="_blank" rel="noopener noreferrer" className="nyx-link">github</a>
-            <a href="https://linkedin.com/in/stitches" target="_blank" rel="noopener noreferrer" className="nyx-link">linkedin</a>
+            <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email →</a>
+            <a href="https://github.com/draggle" target="_blank" rel="noopener noreferrer" className="nyx-link">github →</a>
+            <a href="https://linkedin.com/in/stitches" target="_blank" rel="noopener noreferrer" className="nyx-link">linkedin →</a>
             <a href="/contact" className="nyx-link">contact →</a>
           </div>
         </div>
