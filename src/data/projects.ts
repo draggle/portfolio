@@ -14,6 +14,7 @@ export interface Project {
   thumbnail: {
     emoji: string
     gradient: string
+    image?: string
   }
   featured: boolean
   builtAt?: string
@@ -36,7 +37,7 @@ export const projects: Project[] = [
       event: 'https://events.ycombinator.com/fullstackhackathon',
       video: 'https://www.youtube.com/watch?v=zKdAAbf10yw',
     },
-    thumbnail: { emoji: '📈', gradient: 'linear-gradient(135deg, #0f0f23, #1a1a3e)' },
+    thumbnail: { emoji: '📈', gradient: 'linear-gradient(135deg, #0f0f23, #1a1a3e)', image: '/thumbs/alphahedge.png' },
     featured: true,
     builtAt: 'YC Full-Stack Hackathon, hosted by sim.ai & loveable @ Y Combinator, sponsored by Stripe, Brex & Supabase',
   },
@@ -55,7 +56,7 @@ export const projects: Project[] = [
       github: 'https://github.com/draggle/rate-my-rez-waterloo',
       demo: 'https://rate-my-rez-waterloo.vercel.app/',
     },
-    thumbnail: { emoji: '🏠', gradient: 'linear-gradient(135deg, #0369a1, #0ea5e9)' },
+    thumbnail: { emoji: '🏠', gradient: 'linear-gradient(135deg, #0369a1, #0ea5e9)', image: '/thumbs/rate-my-rez.png' },
     featured: true,
   },
   {
@@ -71,7 +72,7 @@ export const projects: Project[] = [
     tags: ['python', 'opencv', 'mediapipe', 'computer vision'],
     links: { github: 'https://github.com/draggle/Cheeto-Fingers' },
     thumbnail: { emoji: '✋', gradient: 'linear-gradient(135deg, #166534, #16a34a)' },
-    featured: true,
+    featured: false,
   },
   {
     slug: 'dice-duel-showdown',
@@ -84,7 +85,7 @@ export const projects: Project[] = [
       'The web implementation features a custom sound engine developed via the Web Audio API to synthesize real-time game audio and utilizes CSS grid for dynamic dice animations. The computer opponent employs a probabilistic decision-making layer, specifically calculating turn-skipping chances based on current score proximity to the target, forcing users to critically analyze competitive odds and optimal roll timing.',
     ],
     tags: ['java', 'python', 'javascript', 'oop'],
-    links: { github: 'https://github.com/draggle/dice-duel-showdown' },
+    links: { github: 'https://github.com/draggle/dice-duel-showdown', demo: 'https://draggle.github.io/dice-duel-showdown/' },
     thumbnail: { emoji: '🎲', gradient: 'linear-gradient(135deg, #7c3aed, #4c1d95)' },
     featured: false,
   },

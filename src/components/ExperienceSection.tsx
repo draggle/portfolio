@@ -1,60 +1,40 @@
-'use client'
-import { useState } from 'react'
-import { experiences, type Experience } from '@/data/experience'
+import Link from 'next/link'
+import { experiences } from '@/data/experience'
 
 export default function ExperienceSection() {
-  const [active, setActive] = useState<Experience['id'] | null>(null)
-  const popover = experiences.find(e => e.id === active)
-
-  const toggle = (id: Experience['id']) =>
-    setActive(prev => (prev === id ? null : id))
-
   return (
     <section id="experience" className="section">
       <div className="sec-label">experience</div>
-      <div className="exp-row">
+      <div className="exp-cards">
         {experiences.map(exp => (
-          <button
-            key={exp.id}
-            className="exp-chip"
-            onClick={() => toggle(exp.id)}
-            aria-expanded={active === exp.id}
-          >
-            <div className="logo-sq" style={{ background: exp.logoColor }} />
-            <div>
-              <div className="exp-co">
-                {exp.company}
-                {exp.isCurrent && <span className="exp-now"> ● now</span>}
+          <Link key={exp.id} href={`/experience/${exp.id}`} className="exp-card">
+            <div className="exp-card-header">
+              {exp.logoUrl ? (
+                <div className={`exp-logo-wrap exp-logo-wrap-${exp.id}`}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={exp.logoUrl} alt={exp.company} className={`exp-logo exp-logo-${exp.id}`} />
+                </div>
+              ) : (
+                <div className="logo-sq" style={{ background: exp.logoColor }} />
+              )}
+              <div className="exp-card-meta">
+                <div className="exp-card-company">{exp.company}</div>
+                <div className="exp-card-role">
+                  {exp.role}
+                  {exp.location && <span className="exp-card-location"> · {exp.location}</span>}
+                </div>
               </div>
-              <div className="exp-role">{exp.role}</div>
+              <div className="exp-card-date">{exp.dateRange}</div>
             </div>
-          </button>
+            <p className="exp-card-desc">{exp.cardDescription ?? exp.description}</p>
+            {exp.tags && (
+              <div className="proj-tags">
+                {exp.tags.map(tag => <span key={tag} className="proj-tag">{tag}</span>)}
+              </div>
+            )}
+          </Link>
         ))}
       </div>
-
-      {popover && (
-        <div key={active} className="popover-card">
-          <div className="popover-header">
-            <div className="logo-sq" style={{ background: popover.logoColor }} />
-            <div>
-              <div className="popover-company">{popover.company}</div>
-              <div className="popover-role">{popover.role}</div>
-            </div>
-          </div>
-          <div className="popover-dates">{popover.dateRange}</div>
-          <p className="popover-desc">{popover.description}</p>
-          {popover.link && (
-            <a
-              href={popover.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="nyx-link popover-link"
-            >
-              {popover.linkLabel}
-            </a>
-          )}
-        </div>
-      )}
     </section>
   )
 }

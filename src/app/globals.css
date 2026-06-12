@@ -125,7 +125,7 @@ body {
 .nav-links a:hover { color: var(--text); }
 .term-btn {
   background: var(--text);
-  color: var(--bg);
+  color: var(--accent) !important;
   border: none;
   border-radius: 4px;
   padding: 3px 9px;
@@ -266,6 +266,17 @@ html.dark .badge {
 .exp-now { color: #22c55e; font-size: 0.63rem; }
 .exp-role { color: var(--muted); font-size: 0.7rem; transition: color 0.4s; }
 .logo-sq { width: 20px; height: 20px; border-radius: 5px; flex-shrink: 0; }
+.exp-logo-wrap {
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; width: 36px; height: 36px; border-radius: 7px;
+}
+.exp-logo-wrap-apple { background: #fff; padding: 3px; }
+html.dark .exp-logo-wrap-apple { background: #111; }
+.exp-logo { width: 100%; height: 100%; object-fit: contain; }
+.exp-logo-apple { filter: none; }
+html.dark .exp-logo-apple { filter: invert(1); }
+.exp-logo-uwaterloo { border-radius: 3px; }
+.exp-logo-tern { border-radius: 6px; }
 
 .popover-card {
   border: 1px solid var(--border);
@@ -283,7 +294,8 @@ html.dark .badge {
 .popover-role { font-size: 0.7rem; color: var(--muted); transition: color 0.4s; }
 .popover-dates { font-size: 0.7rem; color: var(--dimmed); margin: 4px 0 6px; transition: color 0.4s; }
 .popover-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.6; transition: color 0.4s; }
-.popover-link { font-size: 0.75rem; display: inline-block; margin-top: 6px; }
+.popover-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 6px; }
+.popover-link { font-size: 0.75rem; display: inline-block; }
 
 /* ── PROJECT CARDS ── */
 .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -310,8 +322,10 @@ html.dark .badge {
   font-size: 1.5rem;
   flex-shrink: 0;
 }
-.proj-card.featured .proj-thumb { width: 180px; }
-.proj-card:not(.featured) .proj-thumb { height: 90px; }
+.proj-card.featured .proj-thumb { width: 220px; }
+.proj-card:not(.featured) .proj-thumb { height: 120px; }
+.proj-thumb-img { overflow: hidden; padding: 0; }
+.proj-thumb-img img { width: 100%; height: 100%; object-fit: cover; object-position: left top; display: block; }
 .proj-body { padding: 1rem; flex: 1; }
 .proj-title-row { display: flex; align-items: center; gap: 7px; margin-bottom: 4px; }
 .proj-title { font-size: 0.9rem; font-weight: 600; color: var(--text); transition: color 0.4s; }
@@ -362,7 +376,7 @@ html.dark .badge {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 .paint-zone > *:not(.paint-canvas) { position: relative; z-index: 1; }
 
@@ -431,92 +445,166 @@ html.dark .badge {
 .detail-para strong { color: var(--text); }
 .detail-builtat { font-size: 0.75rem; color: var(--dimmed); font-style: italic; transition: color 0.4s; }
 
-/* ── TERMINAL ── */
-.terminal-overlay {
+/* ── EXPERIENCE CARDS (home section) ── */
+.exp-cards { display: flex; flex-direction: column; gap: 1rem; }
+.exp-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  background: var(--card-bg);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.2s, background 0.4s;
+}
+.exp-card:hover { border-color: var(--accent); }
+.exp-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.75rem;
+}
+.exp-card-meta { flex: 1; min-width: 0; }
+.exp-card-company { font-weight: 600; font-size: 0.9rem; color: var(--text); transition: color 0.4s; }
+.exp-card-role { font-size: 0.75rem; color: var(--muted); margin-top: 2px; transition: color 0.4s; }
+.exp-card-date { font-size: 0.72rem; color: var(--dimmed); white-space: nowrap; flex-shrink: 0; transition: color 0.4s; }
+.exp-card-location { color: var(--dimmed); font-size: 0.7rem; transition: color 0.4s; }
+.exp-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.7; margin-bottom: 0.75rem; transition: color 0.4s; }
+
+/* ── EXPERIENCE PAGES ── */
+.exp-list-meta { display: flex; align-items: center; gap: 0.75rem; }
+.exp-list-role { font-size: 0.72rem; color: var(--muted); margin-top: 2px; transition: color 0.4s; }
+.exp-detail-logo-row { display: flex; align-items: center; gap: 1rem; }
+.exp-logo-wrap-lg { width: 42px !important; height: 42px !important; }
+.exp-detail-role { font-size: 0.85rem; color: var(--muted); margin-top: 2px; transition: color 0.4s; }
+.exp-detail-dates { font-size: 0.75rem; color: var(--dimmed); margin-top: 2px; transition: color 0.4s; }
+.exp-highlights { list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem; }
+.exp-highlight-item { font-size: 0.85rem; color: var(--muted); line-height: 1.7; padding-left: 1rem; position: relative; transition: color 0.4s; }
+.exp-highlight-item::before { content: '·'; position: absolute; left: 0; color: var(--accent); }
+
+/* ── TERMINAL PAGE (Nord) ── */
+.term-page {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.85);
-  backdrop-filter: blur(10px);
   z-index: 1000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: fadeUp 0.2s ease;
-}
-.terminal-box {
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 800px;
-  height: 500px;
+  background: #2E3440;
+  color: #E5E9F0;
+  font-family: 'Berkeley Mono', 'Courier New', monospace;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  overflow: hidden;
+  cursor: text;
+  animation: fadeUp 0.15s ease;
 }
-.terminal-titlebar {
-  background: #2a2a2a;
-  padding: 0.75rem 1rem;
+.term-frame {
+  flex: 1;
+  overflow-y: auto;
+  border: 2px solid #5E81AC;
+  border-radius: 8px;
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+}
+.term-entry { margin-bottom: 0.25rem; }
+.term-prompt-row {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: nowrap;
+  gap: 0.35rem;
+}
+.term-ps1-wrap { flex-shrink: 0; }
+.term-ps1 { white-space: nowrap; flex-shrink: 0; }
+.term-output {
+  white-space: pre-wrap;
+  margin: 0.2rem 0 0.75rem 0;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+.term-input-wrap {
+  position: relative;
+  flex: 1;
   display: flex;
   align-items: center;
-  gap: 6px;
-  border-bottom: 1px solid #333;
 }
-.t-dot { width: 12px; height: 12px; border-radius: 50%; cursor: pointer; }
-.t-dot.red   { background: #ff5f57; }
-.t-dot.yellow{ background: #ffbd2e; }
-.t-dot.green { background: #28ca42; }
-.terminal-title { margin-left: auto; color: #888; font-size: 0.85rem; }
-.terminal-body {
-  flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
-  font-family: 'Berkeley Mono','Courier New',monospace;
-  font-size: 0.85rem;
-  color: #0f0;
-  background: #000;
-  line-height: 1.5;
-}
-.terminal-line { margin-bottom: 0.4rem; }
-.t-green  { color: #28ca42; }
-.t-cyan   { color: #00d4ff; }
-.t-red    { color: #ff5f57; }
-.t-yellow { color: #ffbd2e; }
-.t-white  { color: #fff; }
-.t-dim    { color: #555; }
-.terminal-input-line { display: flex; align-items: center; }
-.terminal-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  color: #0f0;
+.term-ghost {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  white-space: pre;
   font-family: inherit;
   font-size: inherit;
-  caret-color: #0f0;
+  line-height: inherit;
 }
-.t-hint {
-  color: #0f0;
-  opacity: 0.35;
-  pointer-events: none;
-  margin-left: 0.25rem;
-  font-size: 0.85em;
+.term-input {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  margin: 0;
 }
+.term-frame::-webkit-scrollbar { width: 8px; }
+.term-frame::-webkit-scrollbar-track { background: #1e252e; border-radius: 4px; }
+.term-frame::-webkit-scrollbar-thumb { background: #4C566A; border-radius: 4px; }
+.term-frame::-webkit-scrollbar-thumb:hover { background: #88C0D0; }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 640px) {
+  /* layout */
   .hero { padding: 2.5rem 1.25rem 2rem; }
   .section { padding: 2rem 1.25rem; }
-  .site-nav { padding: 0.75rem 1.25rem; }
-  .nav-links { gap: 0.8rem; font-size: 0.72rem; }
-  .proj-grid { grid-template-columns: 1fr; }
-  .proj-card.featured { flex-direction: column; }
-  .proj-card.featured .proj-thumb { width: 100%; height: 100px; }
   .hero-name { font-size: 1.8rem; }
   .site-footer { flex-direction: column; gap: 1rem; }
   .projects-page, .detail-page { padding: 1.25rem; }
+
+  /* nav — stack logo + links, hide section-only anchors */
+  .site-nav { padding: 0.75rem 1.25rem; flex-wrap: wrap; gap: 0.5rem; }
+  .nav-links { gap: 0.65rem; font-size: 0.72rem; flex-wrap: wrap; }
+  .nav-section { display: none; }
+
+  /* projects */
+  .proj-grid { grid-template-columns: 1fr; }
+  .proj-card.featured { flex-direction: column; }
+  .proj-card.featured .proj-thumb { width: 100%; height: 100px; }
+
+  /* popover */
+  .popover-card { max-width: 100%; }
+
+  /* terminal */
+  .term-page { padding: 0.4rem; font-size: 0.78rem; }
+  .term-frame { padding: 0.9rem 1rem; border-radius: 6px; }
+  .term-output { font-size: 0.75rem; }
 }
+
+/* ── CONTACT PAGE ── */
+.contact-page { max-width: 700px; margin: 0 auto; padding: 2rem; }
+.contact-title {
+  font-size: 2rem; font-weight: 400; letter-spacing: -0.02em;
+  color: var(--text); margin: 1.5rem 0 0.75rem;
+}
+.contact-intro { font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width: 480px; margin-bottom: 2rem; }
+.contact-primary { margin-bottom: 2.5rem; }
+.contact-email { font-size: 1.1rem; font-weight: 500; }
+.contact-section { margin-top: 0.5rem; }
+.contact-links { display: flex; flex-direction: column; gap: 0; margin-top: 1rem; }
+.contact-link-row {
+  display: flex; align-items: baseline; gap: 1rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.contact-link-row:last-child { border-bottom: none; }
+.contact-link-row:hover { border-bottom-color: var(--accent); }
+.contact-link-label { font-size: 0.72rem; color: var(--dimmed); width: 70px; flex-shrink: 0; letter-spacing: 0.05em; }
+.contact-link-value { font-size: 0.85rem; }
 
 /* ── SELECTION ── */
 ::selection { background: var(--accent); color: var(--bg); }
@@ -524,8 +612,3 @@ html.dark .badge {
 /* ── VIEW TRANSITIONS ── */
 ::view-transition-old(root),
 ::view-transition-new(root) { animation-duration: 0s; }
-::view-transition-old(*):not(::view-transition-old(root)),
-::view-transition-new(*):not(::view-transition-new(root)) {
-  animation-duration: 0.6s;
-  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}

@@ -25,7 +25,7 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   return (
     <div className="detail-page">
-      <Link href="/" className="nyx-link back-link">← ayan bin saif</Link>
+      <Link href="/projects" className="nyx-link back-link">← projects</Link>
 
       <div
         className="detail-header"

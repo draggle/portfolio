@@ -23,8 +23,8 @@ describe('projects data', () => {
     })
   })
 
-  it('exactly 3 projects are featured', () => {
-    expect(projects.filter(p => p.featured)).toHaveLength(3)
+  it('exactly 2 projects are featured', () => {
+    expect(projects.filter(p => p.featured)).toHaveLength(2)
   })
 
   it('alphahedge has a video link', () => {

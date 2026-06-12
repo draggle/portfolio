@@ -13,9 +13,16 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
       className={`proj-card${featured ? ' featured' : ''}`}
       style={{ viewTransitionName: `project-card-${project.slug}` } as React.CSSProperties}
     >
-      <div className="proj-thumb" style={{ background: project.thumbnail.gradient }}>
-        <span role="img" aria-label={project.title}>{project.thumbnail.emoji}</span>
-      </div>
+      {project.thumbnail.image ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <div className="proj-thumb proj-thumb-img">
+          <img src={project.thumbnail.image} alt={project.title} />
+        </div>
+      ) : (
+        <div className="proj-thumb" style={{ background: project.thumbnail.gradient }}>
+          <span role="img" aria-label={project.title}>{project.thumbnail.emoji}</span>
+        </div>
+      )}
       <div className="proj-body">
         <div className="proj-title-row">
           <span className="proj-title">{project.title}</span>
