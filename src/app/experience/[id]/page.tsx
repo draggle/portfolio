@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { experiences } from '@/data/experience'
+import { LinkPreview } from '@/components/ui/link-preview'
 
 export function generateStaticParams() {
   return experiences.map(e => ({ id: e.id }))
@@ -13,10 +14,18 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   return { title: exp ? `${exp.company} — ayan bin saif` : 'not found' }
 }
 
+const STATIC_PREVIEWS: Record<string, string> = {
+  tern:      '/previews/tern.png',
+  uwaterloo: '/previews/uwaterloo-program.png',
+}
+
 export default async function ExperienceDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const exp = experiences.find(e => e.id === id)
   if (!exp) notFound()
+
+  const linkIsPdf = exp.link?.toLowerCase().endsWith('.pdf')
+  const previewSrc = STATIC_PREVIEWS[id]
 
   return (
     <div className="detail-page">
@@ -50,9 +59,19 @@ export default async function ExperienceDetailPage({ params }: { params: Promise
 
       {exp.link && (
         <div className="detail-links">
-          <a href={exp.link} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            {exp.linkLabel ?? 'visit ↗'}
-          </a>
+          {linkIsPdf ? (
+            <a href={exp.link} target="_blank" rel="noopener noreferrer" className="detail-btn">
+              {exp.linkLabel ?? 'visit ↗'}
+            </a>
+          ) : previewSrc ? (
+            <LinkPreview url={exp.link} className="detail-btn" isStatic imageSrc={previewSrc}>
+              {exp.linkLabel ?? 'visit ↗'}
+            </LinkPreview>
+          ) : (
+            <LinkPreview url={exp.link} className="detail-btn">
+              {exp.linkLabel ?? 'visit ↗'}
+            </LinkPreview>
+          )}
         </div>
       )}
 

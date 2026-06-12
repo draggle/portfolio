@@ -3,6 +3,8 @@ import LocationWidget from '@/components/LocationWidget'
 import ExperienceSection from '@/components/ExperienceSection'
 import ProjectCard from '@/components/ProjectCard'
 import { projects } from '@/data/projects'
+import { LinkPreview } from '@/components/ui/link-preview'
+import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
 
 export default function HomePage() {
   const featured = projects.filter(p => p.featured)
@@ -11,30 +13,33 @@ export default function HomePage() {
     <PaintZone>
       <section id="about" className="hero">
         <h1 className="hero-name">ayan bin saif</h1>
-        <p className="hero-bio">
-          <a
-            href="https://uwaterloo.ca/future-students/programs/applied-mathematics-scientific-computing"
-            target="_blank"
-            rel="noopener noreferrer"
+        <div className="hero-bio">
+          <LinkPreview
+            url="https://uwaterloo.ca/future-students/programs/applied-mathematics-scientific-computing"
             className="nyx-link"
+            isStatic
+            imageSrc="/previews/uwaterloo-program.png"
           >
             applied mathematics with scientific computing and scientific machine learning ↗
-          </a>{' '}
-          student at the <a href="https://uwaterloo.ca" target="_blank" rel="noopener noreferrer" className="nyx-link"><strong>university of waterloo ↗</strong></a>
+          </LinkPreview>{' '}
+          student at the{' '}
+          <LinkPreview url="https://uwaterloo.ca" className="nyx-link" isStatic imageSrc="/previews/uwaterloo.png">
+            <strong>university of waterloo ↗</strong>
+          </LinkPreview>
           <br /><br />
           currently engineering at{' '}
-          <a href="https://tern.ai" target="_blank" rel="noopener noreferrer" className="nyx-link">
+          <LinkPreview url="https://tern.ai" className="nyx-link" isStatic imageSrc="/previews/tern.png">
             tern ↗
-          </a>
+          </LinkPreview>
           . interested in software engineering, data science, full-stack development, and mobile
           engineering.
-        </p>
+        </div>
         <div className="hero-links">
           <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email ↗</a>
           <span className="sep">·</span>
-          <a href="https://github.com/draggle" target="_blank" rel="noopener noreferrer" className="nyx-link">github ↗</a>
+          <LinkPreview url="https://github.com/draggle" className="nyx-link" isStatic imageSrc="/previews/github.png">github ↗</LinkPreview>
           <span className="sep">·</span>
-          <a href="https://linkedin.com/in/stitches" target="_blank" rel="noopener noreferrer" className="nyx-link">linkedin ↗</a>
+          <LinkedInBadgePreview className="nyx-link">linkedin ↗</LinkedInBadgePreview>
           <span className="sep">·</span>
           <a
             href="https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf"
@@ -87,8 +92,8 @@ export default function HomePage() {
           <div className="footer-name">ayan bin saif</div>
           <div className="footer-links">
             <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email →</a>
-            <a href="https://github.com/draggle" target="_blank" rel="noopener noreferrer" className="nyx-link">github →</a>
-            <a href="https://linkedin.com/in/stitches" target="_blank" rel="noopener noreferrer" className="nyx-link">linkedin →</a>
+            <LinkPreview url="https://github.com/draggle" className="nyx-link" isStatic imageSrc="/previews/github.png">github →</LinkPreview>
+            <LinkedInBadgePreview className="nyx-link">linkedin →</LinkedInBadgePreview>
             <a href="/contact" className="nyx-link">contact →</a>
           </div>
         </div>

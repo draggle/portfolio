@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { projects } from '@/data/projects'
+import { LinkPreview } from '@/components/ui/link-preview'
 
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }))
@@ -18,10 +19,19 @@ function getYouTubeId(url: string): string {
   return match?.[1] ?? ''
 }
 
+const STATIC_PREVIEWS: Record<string, { github?: string; demo?: string; event?: string; video?: string }> = {
+  'alphahedge':       { github: '/previews/alphahedge-github.png', event: '/previews/yc-event.png' },
+  'rate-my-rez':      { github: '/previews/ratemyrez-github.png', demo: '/previews/ratemyrez-demo.png' },
+  'cheeto-fingers':   { github: '/previews/cheeto-github.png' },
+  'dice-duel-showdown': { github: '/previews/dice-github.png', demo: '/previews/dice-demo.png' },
+}
+
 export default async function ProjectDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params
   const project = projects.find(p => p.slug === slug)
   if (!project) notFound()
+
+  const previews = STATIC_PREVIEWS[slug] ?? {}
 
   return (
     <div className="detail-page">
@@ -41,24 +51,24 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
       <div className="detail-links">
         {project.links.github && (
-          <a href={project.links.github} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            github ↗
-          </a>
+          previews.github
+            ? <LinkPreview url={project.links.github} className="detail-btn" isStatic imageSrc={previews.github}>github ↗</LinkPreview>
+            : <LinkPreview url={project.links.github} className="detail-btn">github ↗</LinkPreview>
         )}
         {project.links.demo && (
-          <a href={project.links.demo} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            demo ↗
-          </a>
+          previews.demo
+            ? <LinkPreview url={project.links.demo} className="detail-btn" isStatic imageSrc={previews.demo}>demo ↗</LinkPreview>
+            : <LinkPreview url={project.links.demo} className="detail-btn">demo ↗</LinkPreview>
         )}
         {project.links.event && (
-          <a href={project.links.event} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            yc event ↗
-          </a>
+          previews.event
+            ? <LinkPreview url={project.links.event} className="detail-btn" isStatic imageSrc={previews.event}>yc event ↗</LinkPreview>
+            : <LinkPreview url={project.links.event} className="detail-btn">yc event ↗</LinkPreview>
         )}
         {project.links.video && (
-          <a href={project.links.video} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            demo video ↗
-          </a>
+          previews.video
+            ? <LinkPreview url={project.links.video} className="detail-btn" isStatic imageSrc={previews.video}>demo video ↗</LinkPreview>
+            : <LinkPreview url={project.links.video} className="detail-btn">demo video ↗</LinkPreview>
         )}
         {project.links.recommendation && (
           <a href={project.links.recommendation} target="_blank" rel="noopener noreferrer" className="detail-btn">

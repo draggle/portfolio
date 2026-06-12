@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import { LinkPreview } from '@/components/ui/link-preview'
+import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
 
 export const metadata: Metadata = {
   title: 'contact — ayan bin saif',
@@ -25,24 +27,21 @@ export default function ContactPage() {
       <div className="contact-section">
         <div className="sec-label">elsewhere</div>
         <div className="contact-links">
-          <a
-            href="https://github.com/draggle"
-            target="_blank"
-            rel="noopener noreferrer"
+          <LinkPreview
+            url="https://github.com/draggle"
             className="contact-link-row"
+            isStatic
+            imageSrc="/previews/github.png"
           >
             <span className="contact-link-label">github</span>
             <span className="nyx-link contact-link-value">github.com/draggle ↗</span>
-          </a>
-          <a
-            href="https://linkedin.com/in/stitches"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="contact-link-row"
-          >
+          </LinkPreview>
+
+          <LinkedInBadgePreview className="contact-link-row">
             <span className="contact-link-label">linkedin</span>
             <span className="nyx-link contact-link-value">linkedin.com/in/stitches ↗</span>
-          </a>
+          </LinkedInBadgePreview>
+
           <a
             href="https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf"
             target="_blank"
