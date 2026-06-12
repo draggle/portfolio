@@ -1,6 +1,7 @@
 'use client'
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
+import { modShortcut, useIsMacOS } from '@/lib/platform'
 
 // ── TYPES ──────────────────────────────────────────────────────────────────
 interface HistEntry { id: number; command: string; output: string }
@@ -46,19 +47,21 @@ Type <span style="color:${N.gold}">'sumfetch'</span> for a quick summary.
 Press <span style="color:${N.gray}">ESC</span> or type <span style="color:${N.gold}">'portfolio'</span> to return to the portfolio.`
 
 // ── COMMANDS ───────────────────────────────────────────────────────────────
+function buildHelpText(cmds: Record<string, Cmd>, clearShortcut: string) {
+  const visible = Object.entries(cmds)
+    .filter(([, c]) => !c.hidden)
+    .sort(([a], [b]) => a.localeCompare(b))
+  const max = Math.max(...visible.map(([k]) => k.length))
+  const rows = visible.map(([k, c]) =>
+    `${k}${' '.repeat(max - k.length + 4)}${c.desc}`
+  ).join('\n')
+  return `available commands:\n\n${rows}\n\n[tab]: autocomplete  ·  [↑↓]: history  ·  [${clearShortcut}] / clear: clear terminal`
+}
+
 const CMDS: Record<string, Cmd> = {
   help: {
     desc: 'Display this help message.',
-    fn: () => {
-      const visible = Object.entries(CMDS)
-        .filter(([, c]) => !c.hidden)
-        .sort(([a], [b]) => a.localeCompare(b))
-      const max = Math.max(...visible.map(([k]) => k.length))
-      const rows = visible.map(([k, c]) =>
-        `${k}${' '.repeat(max - k.length + 4)}${c.desc}`
-      ).join('\n')
-      return `available commands:\n\n${rows}\n\n[tab]: autocomplete  ·  [↑↓]: history  ·  [ctrl+l] / clear: clear terminal`
-    },
+    fn: () => '', // replaced at runtime with platform-aware text
   },
 
   about: {
@@ -259,6 +262,7 @@ type NavResult = { nav: string } | null
 
 async function runShell(
   command: string,
+  cmds: Record<string, Cmd>,
   addEntry: (cmd: string, out: string) => void,
   clearEntries: () => void,
 ): Promise<NavResult> {
@@ -268,12 +272,12 @@ async function runShell(
 
   if (!cmd) { addEntry(command, ''); return null }
 
-  if (!(cmd in CMDS)) {
+  if (!(cmd in cmds)) {
     addEntry(command, `shell: command not found: ${cmd}. Try 'help' to get started.`)
     return null
   }
 
-  const output = await CMDS[cmd].fn(args)
+  const output = await cmds[cmd].fn(args)
 
   if (output === '__clear') { clearEntries(); return null }
   if (typeof output === 'string' && output.startsWith('__nav:')) {
@@ -302,6 +306,16 @@ interface TerminalProps { onClose?: () => void }
 export default function Terminal({ onClose }: TerminalProps = {}) {
   const router = useRouter()
   const close = onClose ?? (() => router.back())
+  const isMac = useIsMacOS()
+  const clearShortcut = isMac === null ? 'Ctrl+L' : modShortcut('L', isMac)
+
+  const cmds = useMemo(() => ({
+    ...CMDS,
+    help: {
+      ...CMDS.help,
+      fn: () => buildHelpText(CMDS, clearShortcut),
+    },
+  }), [clearShortcut])
 
   const [history, setHistory] = useState<HistEntry[]>([])
   const [cmdHist, setCmdHist] = useState<string[]>([])
@@ -335,7 +349,7 @@ export default function Terminal({ onClose }: TerminalProps = {}) {
   const clearEntries = () => setHistory([])
 
   // ── Autocomplete ──────────────────────────────────────────────────────────
-  const KEYS = useMemo(() => Object.keys(CMDS), [])
+  const KEYS = useMemo(() => Object.keys(cmds), [cmds])
 
   const ghostRemainder = useMemo(() => {
     if (!command || command.includes(' ')) return ''
@@ -347,14 +361,16 @@ export default function Terminal({ onClose }: TerminalProps = {}) {
   const hasMatch = useMemo(() => {
     if (!command) return true
     const lc = command.split(' ')[0].toLowerCase()
-    return lc in CMDS || KEYS.some(k => k.startsWith(lc))
-  }, [command, KEYS])
+    return lc in cmds || KEYS.some(k => k.startsWith(lc))
+  }, [command, KEYS, cmds])
 
   const inputColor = !command || hasMatch ? N.green : N.red
 
   // ── Keyboard ──────────────────────────────────────────────────────────────
   const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'c' && e.ctrlKey) {
+    const mod = e.ctrlKey || e.metaKey
+
+    if (e.key === 'c' && mod) {
       e.preventDefault()
       addEntry(command, '')
       setCommand('')
@@ -362,7 +378,7 @@ export default function Terminal({ onClose }: TerminalProps = {}) {
       return
     }
 
-    if (e.key === 'l' && e.ctrlKey) {
+    if (e.key === 'l' && mod) {
       e.preventDefault()
       clearEntries()
       return
@@ -376,7 +392,7 @@ export default function Terminal({ onClose }: TerminalProps = {}) {
 
     if (e.key === 'Enter') {
       e.preventDefault()
-      const nav = await runShell(command, addEntry, clearEntries)
+      const nav = await runShell(command, cmds, addEntry, clearEntries)
       if (command) setCmdHist(prev => [...prev, command])
       setHistIdx(0)
       setCommand('')

@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import DarkModeToggle from './DarkModeToggle'
+import TermNavLink from './TermNavLink'
 
 export default function Nav() {
   return (
@@ -10,7 +11,7 @@ export default function Nav() {
         <a href="/experience">experience</a>
         <Link href="/projects">projects</Link>
         <Link href="/contact">contact</Link>
-        <Link href="/terminal" className="term-btn">⌘K terminal</Link>
+        <TermNavLink />
         <DarkModeToggle />
       </div>
     </nav>
