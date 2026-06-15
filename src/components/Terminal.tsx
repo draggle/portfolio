@@ -193,7 +193,7 @@ const CMDS: Record<string, Cmd> = {
     fn: (args) => {
       if (!args.length) return 'usage: echo [string]'
       const s = args.join(' ')
-      if (/<script|<iframe|javascript:/i.test(s)) return 'nice try lmao'
+      if (/<script|<iframe|javascript:/i.test(s)) return 'how about no... LOL'
       return esc(s)
     },
   },
@@ -244,9 +244,9 @@ _.|o o  |_   ) )
   vi:    { desc: 'Open vi.',     fn: () => `who even uses 'vi'? try 'vim'.` },
   vim:   { desc: 'Open vim.',    fn: () => `'vim' is pretty outdated. why don't you try 'nvim'?` },
   nvim:  { desc: 'Open nvim.',   fn: () => `'nvim'? why not 'emacs'?` },
-  emacs: { desc: 'Open emacs.',  fn: () => `'emacs'? why? just use nano.` },
+  emacs: { desc: 'Open emacs.',  fn: () => `'emacs'? why? just use 'nano'.` },
   nano:  { desc: 'Open nano.',   fn: () => `why not just use vscode.` },
-  code:  { desc: 'Open VSCode.', fn: () => `hmm, try cursor.` },
+  code:  { desc: 'Open VSCode.', fn: () => `hmm, we've moved on to cursor.` },
 
   sudo: {
     desc: 'Execute as superuser.',
