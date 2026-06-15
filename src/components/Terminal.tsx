@@ -78,7 +78,7 @@ const CMDS: Record<string, Cmd> = {
   whoareyou: {
     desc: 'Display a summary of my info.',
     fn: () =>
-`╭──────────────────────╮     <span style="color:${N.gold}">sumfetch</span>
+`╭──────────────────────╮     <span style="color:${N.gold}">about ayan</span>
 │ <span style="color:${N.red}">●</span> <span style="color:${N.gold}">●</span> <span style="color:${N.green}">●</span>                │     ─────────────────────────────
 ├──────────────────────┤     <span style="color:${N.gray}">NAME</span>     ayan bin saif
 │                      │     <span style="color:${N.gray}">SCHOOL</span>   university of waterloo
@@ -207,7 +207,7 @@ const CMDS: Record<string, Cmd> = {
 
   ls: {
     desc: 'List files.',
-    fn: () => `.env  Dockerfile  secrets.txt  CuteCatVideos/`,
+    fn: () => `.env  Dockerfile  secrets.txt  Homework/  CuteCatVideos/`,
   },
 
   cd: {
@@ -241,12 +241,12 @@ _.|o o  |_   ) )
 
   clear: { desc: 'Clear the terminal.', fn: () => '__clear' },
 
-  vi:    { desc: 'Open vi.',     fn: () => `woah, you still use 'vi'? just try 'vim'.` },
-  vim:   { desc: 'Open vim.',    fn: () => `'vim' is so outdated. how about 'nvim'?` },
-  nvim:  { desc: 'Open nvim.',   fn: () => `'nvim'? too fancy. why not 'emacs'?` },
-  emacs: { desc: 'Open emacs.',  fn: () => `you know what? just use nano.` },
-  nano:  { desc: 'Open nano.',   fn: () => `at this point, just use vscode.` },
-  code:  { desc: 'Open VSCode.', fn: () => `never gonna give you up, never gonna let you down...` },
+  vi:    { desc: 'Open vi.',     fn: () => `who even uses 'vi'? try 'vim'.` },
+  vim:   { desc: 'Open vim.',    fn: () => `'vim' is pretty outdated. why don't you try 'nvim'?` },
+  nvim:  { desc: 'Open nvim.',   fn: () => `'nvim'? why not 'emacs'?` },
+  emacs: { desc: 'Open emacs.',  fn: () => `'emacs'? why? just use nano.` },
+  nano:  { desc: 'Open nano.',   fn: () => `why not just use vscode.` },
+  code:  { desc: 'Open VSCode.', fn: () => `hmm, try cursor.` },
 
   sudo: {
     desc: 'Execute as superuser.',
