@@ -41,7 +41,7 @@ export const experiences: Experience[] = [
     location: 'Toronto, Ontario, Canada',
     cardDescription: 'mentorship on ios native apps.',
     description:
-      'Built native iOS features in Swift and SwiftUI.',
+      'Mentorship on iOS native apps. Built native iOS features in Swift and SwiftUI.',
     highlights: [
       'Built EduBuddy — a personalized iOS productivity app selected for showcase among 200+ participants',
       'Reduced UI load times by 400ms through architectural improvements',

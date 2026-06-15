@@ -5,6 +5,7 @@ import ProjectCard from '@/components/ProjectCard'
 import { projects } from '@/data/projects'
 import { LinkPreview } from '@/components/ui/link-preview'
 import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
+import { AnimatedText } from '@/components/ui/animated-underline-text-one'
 
 export default function HomePage() {
   const featured = projects.filter(p => p.featured)
@@ -12,8 +13,14 @@ export default function HomePage() {
   return (
     <PaintZone>
       <section id="about" className="hero">
-        <h1 className="hero-name">ayan bin saif</h1>
+        <AnimatedText
+          text="ayan bin saif"
+          className="hero-name-wrapper"
+          textClassName="hero-name"
+          underlineClassName="hero-name-underline"
+        />
         <div className="hero-bio">
+          i'm currently studying{' '}
           <LinkPreview
             url="https://uwaterloo.ca/future-students/programs/applied-mathematics-scientific-computing"
             className="nyx-link"
@@ -22,16 +29,16 @@ export default function HomePage() {
           >
             applied mathematics with scientific computing and scientific machine learning ↗
           </LinkPreview>{' '}
-          student at the{' '}
+          at the{' '}
           <LinkPreview url="https://uwaterloo.ca" className="nyx-link" isStatic imageSrc="/previews/uwaterloo.png">
             <strong>university of waterloo ↗</strong>
           </LinkPreview>
           <br /><br />
-          currently engineering at{' '}
+          i'm currently engineering at{' '}
           <LinkPreview url="https://tern.ai" className="nyx-link" isStatic imageSrc="/previews/tern.png">
             tern ↗
           </LinkPreview>
-          . interested in software engineering, data science, full-stack development, and mobile
+          . i'm interested in software engineering, data science, full-stack development, and mobile
           engineering.
         </div>
         <div className="hero-links">
