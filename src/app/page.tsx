@@ -88,17 +88,19 @@ export default function HomePage() {
       </section>
 
       <footer className="site-footer">
-        <div>
-          <div className="footer-name">ayan bin saif</div>
-          <div className="footer-links">
-            <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email →</a>
-            <LinkPreview url="https://github.com/draggle" className="nyx-link" isStatic imageSrc="/previews/github.png">github →</LinkPreview>
-            <LinkedInBadgePreview className="nyx-link">linkedin →</LinkedInBadgePreview>
-            <a href="/contact" className="nyx-link">contact →</a>
+        <div className="footer-inner">
+          <div>
+            <div className="footer-name">ayan bin saif</div>
+            <div className="footer-links">
+              <a href="mailto:ayan.binsaif@uwaterloo.ca" className="nyx-link">email →</a>
+              <LinkPreview url="https://github.com/draggle" className="nyx-link" isStatic imageSrc="/previews/github.png">github →</LinkPreview>
+              <LinkedInBadgePreview className="nyx-link">linkedin →</LinkedInBadgePreview>
+              <a href="/contact" className="nyx-link">contact →</a>
+            </div>
           </div>
-        </div>
-        <div className="footer-right">
-          <div className="footer-copy">© 2026 ayan · built with love and late nights</div>
+          <div className="footer-right">
+            <div className="footer-copy">© 2026 ayan · built with love and late nights</div>
+          </div>
         </div>
       </footer>
     </PaintZone>

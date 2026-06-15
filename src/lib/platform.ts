@@ -7,10 +7,9 @@ export function isMacOS(): boolean {
   return /Mac|iPhone|iPod|iPad/i.test(navigator.platform)
 }
 
-/** e.g. ⌘K on macOS, Ctrl+K elsewhere */
+/** e.g. ⌘cmd on macOS, ctrl elsewhere — both 4 monospace chars, no layout shift */
 export function modShortcut(key: string, isMac: boolean): string {
-  const k = key.length === 1 ? key.toUpperCase() : key
-  return isMac ? `⌘${k}` : `Ctrl+${k}`
+  return isMac ? '⌘cmd' : 'ctrl'
 }
 
 export function useIsMacOS(): boolean | null {
