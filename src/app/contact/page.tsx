@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LinkPreview } from '@/components/ui/link-preview'
 import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
+import { ContactTitle } from '@/components/ui/contact-title'
 
 export const metadata: Metadata = {
   title: 'contact — ayan bin saif',
@@ -12,7 +13,7 @@ export default function ContactPage() {
     <div className="contact-page">
       <Link href="/" className="nyx-link back-link">← ayan bin saif</Link>
 
-      <h1 className="contact-title">get in touch</h1>
+      <ContactTitle />
       <p className="contact-intro">
         i'm currently open to winter 2027 co-op opportunities. feel free to reach out
         about roles, collaborations, or anything else.

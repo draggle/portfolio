@@ -9,7 +9,10 @@ export default function ProjectsPage() {
   return (
     <div className="projects-page">
       <Link href="/" className="nyx-link back-link">← ayan bin saif</Link>
-      <h1 className="page-title">projects</h1>
+      <div>
+        <h1 className="page-title">projects</h1>
+        <span className="page-title-line" />
+      </div>
       <div className="projects-list">
         {projects.map(project => (
           <div key={project.slug} className="project-list-item">

@@ -10,7 +10,10 @@ export default function ExperiencePage() {
   return (
     <div className="projects-page">
       <Link href="/" className="nyx-link back-link">← ayan bin saif</Link>
-      <h1 className="page-title">experience</h1>
+      <div>
+        <h1 className="page-title">experience</h1>
+        <span className="page-title-line" />
+      </div>
       <div className="projects-list">
         {experiences.map(exp => (
           <div key={exp.id} className="project-list-item">
