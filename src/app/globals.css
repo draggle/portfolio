@@ -684,6 +684,33 @@ html.dark .exp-logo-apple { filter: invert(1); }
   color: var(--text); margin: 1.5rem 0 0.75rem;
 }
 .contact-intro { font-size: 0.85rem; color: var(--muted); line-height: 1.8; max-width: 480px; margin-bottom: 2rem; }
+.tooltip-word {
+  position: relative;
+  cursor: default;
+  text-decoration: none;
+}
+.tooltip-word::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%) translateY(4px);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 0.72rem;
+  letter-spacing: 0.02em;
+  padding: 5px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.tooltip-word:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
 .contact-primary { margin-bottom: 2.5rem; }
 .contact-email { font-size: 1.1rem; font-weight: 500; }
 .contact-section { margin-top: 0.5rem; }

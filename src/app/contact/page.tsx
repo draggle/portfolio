@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { LinkPreview } from '@/components/ui/link-preview'
 import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
 import { ContactTitle } from '@/components/ui/contact-title'
+import { ContactIntro } from '@/components/ui/contact-intro'
 
 export const metadata: Metadata = {
   title: 'contact — ayan bin saif',
@@ -14,10 +15,7 @@ export default function ContactPage() {
       <Link href="/" className="nyx-link back-link">← ayan bin saif</Link>
 
       <ContactTitle />
-      <p className="contact-intro">
-        i'm currently open to winter 2027 co-op opportunities. feel free to reach out
-        about roles, collaborations, or anything else.
-      </p>
+      <ContactIntro />
 
       <div className="contact-primary">
         <a href="mailto:ayan.binsaif@uwaterloo.ca" className="contact-email nyx-link">
