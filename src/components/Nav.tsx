@@ -11,6 +11,7 @@ export default function Nav() {
         <a href="/#about" className="nav-section">about</a>
         <a href="/experience">experience</a>
         <Link href="/projects">projects</Link>
+        <Link href="/blog">blog</Link>
         <Link href="/contact">contact</Link>
         <TermNavLink />
         <DarkModeToggle />
