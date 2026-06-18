@@ -1,6 +1,6 @@
 import type { MDXComponents } from 'mdx/types'
 
-export function useMDXComponents(components: MDXComponents): MDXComponents {
+export function useMDXComponents(): MDXComponents {
   return {
     img: ({ src, alt, ...props }) => (
       // eslint-disable-next-line @next/next/no-img-element
@@ -11,6 +11,5 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         style={{ maxWidth: '100%', borderRadius: '4px', margin: '1.5rem 0', display: 'block' }}
       />
     ),
-    ...components,
   }
 }
