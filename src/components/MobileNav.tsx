@@ -39,35 +39,37 @@ export default function MobileNav() {
 
       <AnimatePresence>
         {isOpen && (
-          <>
-            <motion.div
-              className="mobile-backdrop"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 0.4 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.25 }}
-              onClick={close}
-            />
-            <motion.div
-              className="mobile-drawer"
-              initial={{ x: '100%' }}
-              animate={{ x: 0 }}
-              exit={{ x: '100%' }}
-              transition={{ duration: 0.25, ease: 'easeOut' }}
-            >
-              <nav className="mobile-drawer-links">
-                <a href="/#about" className="mobile-drawer-link" onClick={close}>about</a>
-                <a href="/experience" className="mobile-drawer-link" onClick={close}>experience</a>
-                <Link href="/projects" className="mobile-drawer-link" onClick={close}>projects</Link>
-                <Link href="/blog" className="mobile-drawer-link" onClick={close}>blog</Link>
-                <Link href="/contact" className="mobile-drawer-link" onClick={close}>contact</Link>
-                <div className="mobile-drawer-actions">
-                  <TermNavLink />
-                  <DarkModeToggle />
-                </div>
-              </nav>
-            </motion.div>
-          </>
+          <motion.div
+            key="backdrop"
+            className="mobile-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 0.4 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.25 }}
+            onClick={close}
+          />
+        )}
+        {isOpen && (
+          <motion.div
+            key="drawer"
+            className="mobile-drawer"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+          >
+            <nav className="mobile-drawer-links">
+              <a href="/#about" className="mobile-drawer-link" onClick={close}>about</a>
+              <a href="/experience" className="mobile-drawer-link" onClick={close}>experience</a>
+              <Link href="/projects" className="mobile-drawer-link" onClick={close}>projects</Link>
+              <Link href="/blog" className="mobile-drawer-link" onClick={close}>blog</Link>
+              <Link href="/contact" className="mobile-drawer-link" onClick={close}>contact</Link>
+              <div className="mobile-drawer-actions">
+                <TermNavLink />
+                <DarkModeToggle />
+              </div>
+            </nav>
+          </motion.div>
         )}
       </AnimatePresence>
     </>

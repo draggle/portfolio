@@ -21,6 +21,8 @@ describe('posts registry', () => {
       expect(p.date).toMatch(/^\d{4}-\d{2}-\d{2}$/)
       expect(typeof p.excerpt).toBe('string')
       expect(p.excerpt.length).toBeGreaterThan(0)
+      expect(typeof p.readTimeMinutes).toBe('number')
+      expect(p.readTimeMinutes).toBeGreaterThan(0)
     })
   })
 

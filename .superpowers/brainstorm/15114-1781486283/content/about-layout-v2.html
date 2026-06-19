@@ -1,0 +1,217 @@
+<style>
+  :root {
+    --bg: #fafafa; --text: #1a1a1a; --muted: #555;
+    --dimmed: #aaa; --border: #e8e8e8; --accent: #7c3aed; --card-bg: #fff;
+  }
+  body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+  .page-wrap { max-width: 700px; margin: 0 auto; padding: 2rem; }
+  h2 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .subtitle { font-size: 0.8rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+
+  .cards { display: flex; flex-direction: column; gap: 2.5rem; }
+  .card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card-bg); cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+  .card:hover { border-color: var(--accent); box-shadow: 0 2px 14px rgba(124,58,237,0.1); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .card-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmed); padding: 0.65rem 1rem 0; }
+  .card-desc { font-size: 0.76rem; color: var(--muted); padding: 0.5rem 1rem 1rem; line-height: 1.65; }
+
+  /* ── ASCII video placeholder (represents a real koi video rendered as coloured ASCII) ── */
+  .ascii-placeholder {
+    position: relative;
+    width: 100%;
+    font-family: 'Courier New', monospace;
+    font-size: 8.5px;
+    line-height: 1.18;
+    letter-spacing: 0.04em;
+    overflow: hidden;
+    background: #04111f;
+    white-space: pre;
+    padding: 10px;
+    box-sizing: border-box;
+    user-select: none;
+  }
+
+  /* Option A — text fades up from bottom */
+  .opt-a .ascii-placeholder { height: 230px; }
+  .opt-a .overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(4,17,31,0.88) 38%, transparent 100%);
+    padding: 1.4rem 1.5rem;
+    display: flex; flex-direction: column; justify-content: flex-end;
+  }
+  .opt-a .hero-name { font-size: 1.65rem; font-weight: 400; letter-spacing: -0.03em; color: #e8e8e8;
+    text-decoration: underline; text-decoration-color: #7c3aed; text-underline-offset: 5px; margin-bottom: 0.35rem; }
+  .opt-a .hero-bio { font-size: 0.73rem; color: #9ab; line-height: 1.7; max-width: 420px; }
+  .opt-a .hero-bio a { color: #7c3aed; }
+
+  /* Option B — frosted card top-left */
+  .opt-b .ascii-placeholder { height: 230px; }
+  .opt-b .overlay {
+    position: absolute; inset: 0;
+    padding: 1.25rem;
+    display: flex; align-items: flex-start;
+  }
+  .opt-b .glass {
+    background: rgba(4, 17, 31, 0.72);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(124,58,237,0.4);
+    border-radius: 9px;
+    padding: 0.9rem 1.15rem;
+    max-width: 320px;
+  }
+  .opt-b .hero-name { font-size: 1.45rem; font-weight: 400; letter-spacing: -0.03em; color: #e8e8e8;
+    text-decoration: underline; text-decoration-color: #7c3aed; text-underline-offset: 4px; margin-bottom: 0.3rem; }
+  .opt-b .hero-bio { font-size: 0.7rem; color: #9ab; line-height: 1.65; }
+  .opt-b .hero-bio a { color: #7c3aed; }
+
+  /* Option C — text on top, ASCII strip on bottom */
+  .opt-c .text-area {
+    padding: 1.4rem 1.5rem 0.9rem;
+  }
+  .opt-c .hero-name { font-size: 1.8rem; font-weight: 400; letter-spacing: -0.03em; color: var(--text);
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px; margin-bottom: 0.5rem; }
+  .opt-c .hero-bio { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+  .opt-c .hero-bio a { color: var(--accent); }
+  .opt-c .ascii-placeholder { height: 130px; border-radius: 0; }
+  .opt-c .ascii-placeholder::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to bottom, rgba(4,17,31,0) 60%, rgba(4,17,31,0.5) 100%);
+  }
+</style>
+
+<div class="page-wrap">
+  <h2>Where should your text sit?</h2>
+  <p class="subtitle">The ASCII box is the same width as your experience cards. The pond animation plays behind it — your bio text goes somewhere in/around it. Click your favourite.</p>
+
+  <div class="cards">
+
+    <!-- A -->
+    <div class="card" data-choice="a" onclick="toggleSelect(this)">
+      <div class="card-label">A — text fades up from the water</div>
+      <div class="opt-a">
+        <div class="ascii-placeholder" id="ap-a">
+          <div class="overlay">
+            <div class="hero-name">ayan bin saif</div>
+            <div class="hero-bio">
+              <a>applied mathematics with scientific computing ↗</a> student at the <a>university of waterloo ↗</a><br>
+              currently engineering at <a>tern ↗</a> · interested in software engineering, data science &amp; mobile
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">Text is inside the pond box, anchored at the bottom with a dark gradient wash. The koi and water fill the full box; your name emerges from the water.</div>
+    </div>
+
+    <!-- B -->
+    <div class="card" data-choice="b" onclick="toggleSelect(this)">
+      <div class="card-label">B — frosted glass card over the water</div>
+      <div class="opt-b">
+        <div class="ascii-placeholder" id="ap-b">
+          <div class="overlay">
+            <div class="glass">
+              <div class="hero-name">ayan bin saif</div>
+              <div class="hero-bio">
+                <a>applied mathematics ↗</a> at <a>university of waterloo ↗</a><br>
+                currently engineering at <a>tern ↗</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">A frosted/dark glass card floats top-left over the full pond. Koi are visible in the uncovered area. Feels more UI-like, distinct text vs. background.</div>
+    </div>
+
+    <!-- C -->
+    <div class="card" data-choice="c" onclick="toggleSelect(this)">
+      <div class="card-label">C — text above, pond strip below</div>
+      <div class="opt-c">
+        <div class="text-area">
+          <div class="hero-name">ayan bin saif</div>
+          <div class="hero-bio">
+            <a>applied mathematics with scientific computing ↗</a> student at the <a>university of waterloo ↗</a><br>
+            currently engineering at <a>tern ↗</a> · interested in software engineering, data science &amp; mobile
+          </div>
+        </div>
+        <div class="ascii-placeholder" id="ap-c"></div>
+      </div>
+      <div class="card-desc">Bio text in the top half (normal light background, full readability). ASCII pond in the bottom strip as pure decoration. Cleanest text legibility.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Animate a simple coloured ASCII water pattern as a stand-in for the real converted video
+const ROWS = [
+  ['#1e6ea0','#2a8fc4','#1e6ea0','#3aaee8','#1a5a8a'],
+  ['#2a8fc4','#4dbde8','#2a8fc4','#1e6ea0','#4dbde8'],
+  ['#e8b84d','#e87a1e','#e8b84d','#2a8fc4','#e87a1e'],
+  ['#1e6ea0','#2a8fc4','#e87a1e','#4dbde8','#2a8fc4'],
+];
+const CHARS = ['·','~','≈','∿','~','·',' ',' ','~','≈'];
+const KOI_COLORS = ['#e8743a','#e8c43a','#e84a7a','#f0f0f0'];
+
+function buildFrame(w, h, t) {
+  let out = '';
+  for (let r = 0; r < h; r++) {
+    for (let c = 0; c < w; c++) {
+      // wave pattern
+      const wave = Math.sin((c * 0.3 + r * 0.5 + t * 0.04)) * 0.5 +
+                   Math.sin((c * 0.15 + r * 0.2 + t * 0.025)) * 0.5;
+      const norm = (wave + 1) / 2;
+      const ci = Math.floor(norm * (CHARS.length - 1));
+      const ch = CHARS[ci];
+
+      // pick water color
+      const ci2 = Math.floor(((Math.sin(c * 0.2 + r * 0.3 + t * 0.015) + 1) / 2) * (ROWS.length - 1));
+      const base = ROWS[ci2 % ROWS.length];
+      const color = base[c % base.length];
+
+      out += `<span style="color:${color}">${ch}</span>`;
+    }
+    if (r < h - 1) out += '\n';
+  }
+  return out;
+}
+
+const panes = [
+  { el: document.getElementById('ap-a'), w: 0, h: 0 },
+  { el: document.getElementById('ap-b'), w: 0, h: 0 },
+  { el: document.getElementById('ap-c'), w: 0, h: 0 },
+].filter(p => p.el);
+
+panes.forEach(p => {
+  // measure
+  p.w = Math.floor(p.el.offsetWidth / 5.6);
+  p.h = Math.floor(p.el.offsetHeight / 10);
+});
+
+let t = 0;
+function tick() {
+  panes.forEach(p => {
+    if (p.w > 0 && p.h > 0) {
+      const frame = buildFrame(p.w, p.h, t);
+      // insert before overlay child if present
+      const overlay = p.el.querySelector('.overlay, .opt-c ~ *');
+      if (p.el.childNodes[0] && p.el.childNodes[0].nodeType === 3) {
+        p.el.childNodes[0].textContent = '';
+      }
+      // use a separate div for the ascii layer
+      let layer = p.el.querySelector('.ascii-layer');
+      if (!layer) {
+        layer = document.createElement('div');
+        layer.className = 'ascii-layer';
+        layer.style.cssText = 'position:absolute;inset:0;padding:10px;overflow:hidden;pointer-events:none;z-index:0';
+        p.el.style.position = 'relative';
+        p.el.insertBefore(layer, p.el.firstChild);
+      }
+      layer.innerHTML = frame;
+    }
+  });
+  t++;
+  requestAnimationFrame(tick);
+}
+tick();
+</script>

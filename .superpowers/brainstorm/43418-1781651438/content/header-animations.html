@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Header Animation Options</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0a0a0a;
+    color: #e5e5e5;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    padding: 40px 24px;
+  }
+
+  h2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #888;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 48px;
+  }
+
+  .cards {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+
+  .card {
+    background: #111;
+    border: 1px solid #222;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.15s;
+    user-select: none;
+  }
+
+  .card:hover { border-color: #444; transform: translateY(-1px); }
+  .card.selected { border-color: #e5e5e5; }
+  .card.selected .card-label { background: #e5e5e5; color: #0a0a0a; }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px 0;
+  }
+
+  .card-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: #222;
+    color: #888;
+    padding: 4px 10px;
+    border-radius: 4px;
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .card-name {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #ccc;
+  }
+
+  .card-desc {
+    font-size: 0.82rem;
+    color: #555;
+    padding: 6px 20px 0;
+  }
+
+  /* Demo area — mimics the actual page layout */
+  .demo-area {
+    margin: 20px;
+    background: #0d0d0d;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    padding: 32px 28px;
+    position: relative;
+    overflow: hidden;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+  }
+
+  .demo-header {
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: -0.02em;
+    color: #e5e5e5;
+    line-height: 1;
+  }
+
+  .replay-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    color: #666;
+    font-size: 0.72rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .replay-btn:hover { color: #ccc; border-color: #444; }
+
+  /* ---- OPTION A: Scramble ---- */
+  .scramble-char {
+    display: inline-block;
+  }
+
+  /* ---- OPTION B: Letter stagger ---- */
+  @keyframes letterFadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .stagger-char {
+    display: inline-block;
+    opacity: 0;
+  }
+
+  .stagger-char.run {
+    animation: letterFadeUp 0.35s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  /* ---- OPTION C: Wipe/reveal ---- */
+  @keyframes wipeReveal {
+    from { clip-path: inset(0 100% 0 0); }
+    to   { clip-path: inset(0 0% 0 0); }
+  }
+
+  @keyframes lineGrow {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .wipe-text {
+    clip-path: inset(0 100% 0 0);
+    display: inline-block;
+  }
+
+  .wipe-text.run {
+    animation: wipeReveal 0.65s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+  }
+
+  .wipe-underline {
+    display: block;
+    height: 1px;
+    background: #444;
+    transform-origin: left;
+    transform: scaleX(0);
+    margin-top: 6px;
+    width: 100%;
+  }
+
+  .wipe-underline.run {
+    animation: lineGrow 0.65s cubic-bezier(0.77, 0, 0.175, 1) 0.1s forwards;
+  }
+
+  /* selection indicator at bottom */
+  #indicator {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    padding: 14px 24px;
+    background: #111;
+    border-top: 1px solid #222;
+    font-size: 0.82rem;
+    color: #666;
+    text-align: center;
+    display: none;
+  }
+  #indicator.visible { display: block; }
+  #indicator strong { color: #e5e5e5; }
+</style>
+</head>
+<body>
+
+<div style="max-width:760px;margin:0 auto;">
+  <h2>Header Animation Options</h2>
+  <p class="subtitle">Click each card to select. Hit "replay" to re-watch any animation.</p>
+
+  <div class="cards">
+
+    <!-- OPTION A: Scramble -->
+    <div class="card" data-choice="a" onclick="selectCard(this)">
+      <div class="card-header">
+        <span class="card-label">A</span>
+        <span class="card-name">Scramble Reveal</span>
+      </div>
+      <p class="card-desc">Characters cycle through random glyphs before landing on the real letter — same family as the nav logo scramble already on the site.</p>
+      <div class="demo-area">
+        <div>
+          <div class="demo-header" id="scramble-demo">experience</div>
+        </div>
+        <button class="replay-btn" onclick="event.stopPropagation(); runScramble('scramble-demo', 'experience')">replay</button>
+      </div>
+    </div>
+
+    <!-- OPTION B: Letter stagger -->
+    <div class="card" data-choice="b" onclick="selectCard(this)">
+      <div class="card-header">
+        <span class="card-label">B</span>
+        <span class="card-name">Letter Stagger</span>
+      </div>
+      <p class="card-desc">Each letter fades up individually with a short delay — creates a flowing left-to-right entrance on page load.</p>
+      <div class="demo-area">
+        <div>
+          <div class="demo-header" id="stagger-demo"></div>
+        </div>
+        <button class="replay-btn" onclick="event.stopPropagation(); runStagger('stagger-demo', 'experience')">replay</button>
+      </div>
+    </div>
+
+    <!-- OPTION C: Wipe reveal -->
+    <div class="card" data-choice="c" onclick="selectCard(this)">
+      <div class="card-header">
+        <span class="card-label">C</span>
+        <span class="card-name">Wipe Reveal</span>
+      </div>
+      <p class="card-desc">The word slides in from left with a crisp clip-path wipe — sharp, editorial feel. Optional subtle underline that draws after.</p>
+      <div class="demo-area">
+        <div style="position:relative; display:inline-block;">
+          <div class="demo-header wipe-text" id="wipe-demo">experience</div>
+          <span class="wipe-underline" id="wipe-line"></span>
+        </div>
+        <button class="replay-btn" onclick="event.stopPropagation(); runWipe()">replay</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="indicator"></div>
+
+<script>
+  // ---- Scramble ----
+  const GLYPHS = '!<>-_\\/[]{}—=+*^?#abcdefghijklmnopqrstuvwxyz';
+  function runScramble(id, text) {
+    const el = document.getElementById(id);
+    el.innerHTML = text;
+    const chars = [...el.querySelectorAll('.scramble-char')];
+    // rebuild as scramble chars
+    el.innerHTML = '';
+    [...text].forEach(ch => {
+      const span = document.createElement('span');
+      span.className = 'scramble-char';
+      span.textContent = ch === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+      el.appendChild(span);
+    });
+
+    const spans = [...el.querySelectorAll('.scramble-char')];
+    const totalFrames = 18;
+    let frame = 0;
+    const interval = setInterval(() => {
+      frame++;
+      spans.forEach((span, i) => {
+        const revealAt = Math.floor((i / spans.length) * (totalFrames * 0.65));
+        if (frame >= revealAt + totalFrames * 0.35) {
+          span.textContent = text[i];
+        } else {
+          span.textContent = GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+        }
+      });
+      if (frame >= totalFrames) clearInterval(interval);
+    }, 50);
+  }
+
+  // ---- Stagger ----
+  function runStagger(id, text) {
+    const el = document.getElementById(id);
+    el.innerHTML = '';
+    [...text].forEach((ch, i) => {
+      const span = document.createElement('span');
+      span.className = 'stagger-char';
+      span.textContent = ch === ' ' ? ' ' : ch;
+      el.appendChild(span);
+      setTimeout(() => span.classList.add('run'), 60 + i * 45);
+    });
+  }
+
+  // ---- Wipe ----
+  function runWipe() {
+    const txt = document.getElementById('wipe-demo');
+    const line = document.getElementById('wipe-line');
+    // reset
+    txt.classList.remove('run');
+    line.classList.remove('run');
+    void txt.offsetWidth;
+    txt.classList.add('run');
+    setTimeout(() => line.classList.add('run'), 120);
+  }
+
+  // ---- Selection ----
+  const selected = new Set();
+  function selectCard(card) {
+    card.classList.toggle('selected');
+    const choice = card.dataset.choice;
+    if (card.classList.contains('selected')) {
+      selected.add(choice);
+    } else {
+      selected.delete(choice);
+    }
+    updateIndicator();
+    // record event
+    try {
+      fetch('/__event', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify({type:'click', choice, text: card.querySelector('.card-name').textContent})
+      });
+    } catch(e){}
+  }
+
+  function updateIndicator() {
+    const ind = document.getElementById('indicator');
+    if (selected.size === 0) { ind.classList.remove('visible'); return; }
+    const names = {a:'Scramble Reveal', b:'Letter Stagger', c:'Wipe Reveal'};
+    const picks = [...selected].map(k => `<strong>${names[k]}</strong>`).join(', ');
+    ind.innerHTML = `Selected: ${picks}`;
+    ind.classList.add('visible');
+  }
+
+  // Auto-run all on load (staggered)
+  window.addEventListener('load', () => {
+    setTimeout(() => runScramble('scramble-demo', 'experience'), 300);
+    setTimeout(() => runStagger('stagger-demo', 'experience'), 500);
+    setTimeout(() => runWipe(), 700);
+  });
+</script>
+</body>
+</html>

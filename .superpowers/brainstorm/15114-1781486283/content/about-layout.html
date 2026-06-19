@@ -1,0 +1,279 @@
+<style>
+  :root {
+    --bg: #fafafa;
+    --bg2: #ffffff;
+    --text: #1a1a1a;
+    --muted: #555555;
+    --dimmed: #aaaaaa;
+    --border: #e8e8e8;
+    --accent: #7c3aed;
+    --card-bg: #ffffff;
+  }
+  body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+  .page-wrap { max-width: 700px; margin: 0 auto; padding: 2rem; }
+  h2 { font-size: 1.1rem; font-weight: 400; margin-bottom: 0.4rem; color: var(--text); }
+  .subtitle { font-size: 0.82rem; color: var(--muted); margin-bottom: 2rem; }
+  .cards { display: flex; flex-direction: column; gap: 2rem; }
+  .card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card-bg); cursor: pointer; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--accent); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .card-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmed); padding: 0.6rem 1rem 0; }
+  .card-body { padding: 0.75rem 1rem 1rem; }
+  .card-desc { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; line-height: 1.6; }
+
+  /* ── ASCII Koi Canvas Simulation ── */
+  .ascii-box {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    border-radius: 8px;
+  }
+  .ascii-canvas {
+    width: 100%;
+    height: 100%;
+    font-size: 9px;
+    line-height: 1.15;
+    letter-spacing: 0.05em;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    white-space: pre;
+    padding: 8px;
+    box-sizing: border-box;
+  }
+
+  /* Option A: dark semi-transparent overlay behind text */
+  .option-a .ascii-canvas { background: #0a1628; }
+  .option-a .text-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background: linear-gradient(to top, rgba(10,22,40,0.85) 40%, transparent 100%);
+  }
+  .option-a .text-overlay .hero-name {
+    font-size: 1.6rem; font-weight: 400; letter-spacing: -0.03em; color: #e8e8e8;
+    text-decoration: underline; text-decoration-color: #7c3aed; text-underline-offset: 5px;
+    margin-bottom: 0.4rem;
+  }
+  .option-a .text-overlay .hero-bio { font-size: 0.72rem; color: #aaa; line-height: 1.7; max-width: 400px; }
+
+  /* Option B: floating card on top of ASCII */
+  .option-b .ascii-canvas { background: #0a1628; }
+  .option-b .text-overlay {
+    position: absolute;
+    inset: 0;
+    padding: 1.25rem;
+    display: flex;
+    align-items: flex-start;
+  }
+  .option-b .text-card {
+    background: rgba(10, 22, 40, 0.75);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(124, 58, 237, 0.35);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    max-width: 340px;
+  }
+  .option-b .text-card .hero-name {
+    font-size: 1.4rem; font-weight: 400; letter-spacing: -0.03em; color: #e8e8e8;
+    text-decoration: underline; text-decoration-color: #7c3aed; text-underline-offset: 5px;
+    margin-bottom: 0.35rem;
+  }
+  .option-b .text-card .hero-bio { font-size: 0.7rem; color: #aaa; line-height: 1.65; }
+
+  /* Option C: full box, text on top half, ASCII on bottom half */
+  .option-c-wrap {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--card-bg);
+    cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .option-c-wrap:hover { border-color: var(--accent); }
+  .option-c-text {
+    padding: 1.5rem 1.5rem 1rem;
+  }
+  .option-c-text .hero-name {
+    font-size: 1.8rem; font-weight: 400; letter-spacing: -0.03em; color: var(--text);
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px;
+    margin-bottom: 0.6rem;
+  }
+  .option-c-text .hero-bio { font-size: 0.8rem; color: var(--muted); line-height: 1.8; }
+  .option-c .ascii-canvas { background: #0a1628; border-radius: 0; height: 140px; }
+
+  /* shared ASCII canvas glow */
+  .ascii-canvas { color: #4fa3e0; }
+</style>
+
+<div class="page-wrap">
+  <h2>How should the text sit over the koi ASCII?</h2>
+  <p class="subtitle">Three options for the about section layout — click to select your favourite</p>
+
+  <div class="cards">
+
+    <!-- Option A -->
+    <div class="card" data-choice="a" onclick="toggleSelect(this)">
+      <div class="card-label">Option A — text fades up from ASCII</div>
+      <div class="card-body">
+        <div class="ascii-box option-a">
+          <div class="ascii-canvas" id="canvas-a"></div>
+          <div class="text-overlay">
+            <div class="hero-name">ayan bin saif</div>
+            <div class="hero-bio">applied mathematics with scientific computing student at the <span style="color:#7c3aed">university of waterloo ↗</span> · currently engineering at <span style="color:#7c3aed">tern ↗</span></div>
+          </div>
+        </div>
+        <p class="card-desc">Text lives <em>inside</em> the ASCII box, anchored at the bottom with a gradient fade. The koi swim behind your bio. Dark water mood, name always visible.</p>
+      </div>
+    </div>
+
+    <!-- Option B -->
+    <div class="card" data-choice="b" onclick="toggleSelect(this)">
+      <div class="card-label">Option B — frosted card floating over ASCII</div>
+      <div class="card-body">
+        <div class="ascii-box option-b">
+          <div class="ascii-canvas" id="canvas-b"></div>
+          <div class="text-overlay">
+            <div class="text-card">
+              <div class="hero-name">ayan bin saif</div>
+              <div class="hero-bio">applied mathematics · <span style="color:#7c3aed">university of waterloo ↗</span><br>currently engineering at <span style="color:#7c3aed">tern ↗</span></div>
+            </div>
+          </div>
+        </div>
+        <p class="card-desc">Text in a frosted-glass card (backdrop blur + subtle border) floating top-left over the ASCII. Koi fully visible elsewhere. More contrast, feels more deliberate.</p>
+      </div>
+    </div>
+
+    <!-- Option C -->
+    <div class="card" data-choice="c" onclick="toggleSelect(this)">
+      <div class="card-label">Option C — text above, ASCII below</div>
+      <div class="card-body">
+        <div class="option-c-wrap">
+          <div class="option-c-text">
+            <div class="hero-name">ayan bin saif</div>
+            <div class="hero-bio" style="font-size:0.8rem;color:var(--muted);line-height:1.8">applied mathematics with scientific computing student at the <span style="color:var(--accent)">university of waterloo ↗</span> · currently engineering at <span style="color:var(--accent)">tern ↗</span></div>
+          </div>
+          <div class="ascii-box option-c">
+            <div class="ascii-canvas" id="canvas-c"></div>
+          </div>
+        </div>
+        <p class="card-desc">Text sits in the top half of the box (normal readable colours), ASCII koi in the bottom half as a decorative strip. Cleanest readability, koi as accent.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Simple ASCII koi simulation for the mockup
+const KOI_COLORS = ['#4fa3e0','#00c8a0','#e07a4f','#e04fa3','#a0e04f','#c8b400','#4fe0c8'];
+const WATER_CHARS = [' ','·','~','≈','∿','⌇'];
+const KOI_CHARS = ['@','O','o','0','*','●','◉'];
+
+function makeKoi(cols, rows) {
+  return Array.from({length: 5}, (_, i) => ({
+    x: Math.random() * cols,
+    y: Math.random() * rows,
+    vx: (Math.random() - 0.5) * 0.4,
+    vy: (Math.random() - 0.5) * 0.2,
+    color: KOI_COLORS[i % KOI_COLORS.length],
+    tail: [],
+    wobble: Math.random() * Math.PI * 2,
+    wobbleSpeed: 0.05 + Math.random() * 0.03,
+  }));
+}
+
+function renderAscii(el, koi) {
+  const cols = Math.floor(el.offsetWidth / 6.2);
+  const rows = Math.floor(el.offsetHeight / 10.4);
+  if (!el._koi) el._koi = makeKoi(cols, rows);
+  const fish = el._koi;
+
+  // move fish
+  fish.forEach(f => {
+    f.wobble += f.wobbleSpeed;
+    f.x += f.vx + Math.sin(f.wobble) * 0.08;
+    f.y += f.vy + Math.cos(f.wobble) * 0.05;
+    if (f.x < 0) f.x = cols;
+    if (f.x > cols) f.x = 0;
+    if (f.y < 0) f.y = rows;
+    if (f.y > rows) f.y = 0;
+    f.tail.unshift({x: f.x, y: f.y});
+    if (f.tail.length > 6) f.tail.pop();
+  });
+
+  // build grid
+  const grid = Array.from({length: rows}, (_, r) =>
+    Array.from({length: cols}, (_, c) => ({
+      ch: WATER_CHARS[Math.floor(Math.random() * 2)],
+      color: '#1a3a5c'
+    }))
+  );
+
+  // draw ripples (if any)
+  if (el._ripples) {
+    el._ripples = el._ripples.filter(r => r.age < 20);
+    el._ripples.forEach(r => {
+      const rad = r.age * 1.5;
+      for (let a = 0; a < Math.PI * 2; a += 0.3) {
+        const rx = Math.round(r.x + Math.cos(a) * rad);
+        const ry = Math.round(r.y + Math.sin(a) * rad * 0.45);
+        if (rx >= 0 && rx < cols && ry >= 0 && ry < rows) {
+          grid[ry][rx] = { ch: '~', color: `rgba(79,163,224,${0.9 - r.age/20})` };
+        }
+      }
+      r.age++;
+    });
+  }
+
+  // draw fish tails
+  fish.forEach(f => {
+    f.tail.forEach((t, i) => {
+      const tx = Math.round(t.x), ty = Math.round(t.y);
+      if (tx >= 0 && tx < cols && ty >= 0 && ty < rows) {
+        const alpha = 1 - i / f.tail.length;
+        grid[ty][tx] = { ch: i === 0 ? KOI_CHARS[0] : i < 3 ? 'o' : '·', color: f.color };
+      }
+    });
+  });
+
+  // render to colored spans
+  el.innerHTML = grid.map(row => {
+    let line = '';
+    let prevColor = null;
+    row.forEach(cell => {
+      if (cell.color !== prevColor) {
+        if (prevColor !== null) line += '</span>';
+        line += `<span style="color:${cell.color}">`;
+        prevColor = cell.color;
+      }
+      line += cell.ch;
+    });
+    if (prevColor !== null) line += '</span>';
+    return line;
+  }).join('\n');
+}
+
+// animate all canvases
+const canvases = ['canvas-a','canvas-b','canvas-c'].map(id => document.getElementById(id)).filter(Boolean);
+
+canvases.forEach(el => {
+  el.addEventListener('click', e => {
+    const rect = el.getBoundingClientRect();
+    const charW = 6.2, charH = 10.4;
+    const x = Math.floor((e.clientX - rect.left - 8) / charW);
+    const y = Math.floor((e.clientY - rect.top - 8) / charH);
+    if (!el._ripples) el._ripples = [];
+    el._ripples.push({x, y, age: 0});
+  });
+});
+
+function tick() {
+  canvases.forEach(el => renderAscii(el, null));
+  requestAnimationFrame(tick);
+}
+tick();
+</script>

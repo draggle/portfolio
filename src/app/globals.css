@@ -862,6 +862,7 @@ html.dark .exp-logo-apple { filter: invert(1); }
   align-items: center;
   justify-content: center;
   transition: color 0.2s ease;
+  position: relative;
   z-index: 150;
 }
 .hamburger-btn:hover { color: var(--accent); }

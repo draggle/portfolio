@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  :root {
+    --bg: #fafafa; --text: #1a1a1a; --muted: #555;
+    --dimmed: #aaa; --border: #e8e8e8; --accent: #7c3aed;
+    --card-bg: #ffffff; --tag-bg: #f5f5f5;
+    --water: #04111f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    font-family: 'Courier New', monospace;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* ── FULL-WIDTH NAV ── */
+  .site-nav {
+    width: 100%;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+    position: sticky; top: 0; z-index: 100;
+    flex-shrink: 0;
+  }
+  .nav-logo { font-size: 0.9rem; font-weight: 600; color: var(--text); }
+  .nav-links { display: flex; gap: 1.4rem; font-size: 0.8rem; color: var(--muted); align-items: center; }
+  .nav-link-accent {
+    background: var(--text); color: var(--accent) !important;
+    border-radius: 4px; padding: 3px 9px; font-size: 0.72rem;
+  }
+
+  /* ── MIDDLE ROW: ascii | content | ascii ── */
+  .main-row {
+    display: flex;
+    flex: 1;
+    min-height: 0;
+  }
+
+  /* ASCII side columns */
+  .ascii-col {
+    flex: 1;
+    background: var(--water);
+    overflow: hidden;
+    position: relative;
+    font-family: 'Courier New', monospace;
+    font-size: 8px; line-height: 1.18; letter-spacing: 0.04em;
+    white-space: pre;
+  }
+  .ascii-col canvas-inner {
+    position: absolute; inset: 0;
+  }
+
+  /* Content column — wider than before */
+  .content-col {
+    width: 820px;
+    flex-shrink: 0;
+    background: var(--bg);
+    box-shadow: 0 0 50px rgba(0,0,0,0.35);
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  .hero { padding: 3.5rem 2.5rem 2.5rem; }
+  .hero-name {
+    font-size: 2.5rem; font-weight: 400; letter-spacing: -0.03em;
+    color: var(--text); margin-bottom: 1.2rem;
+    text-decoration: underline; text-decoration-color: var(--accent);
+    text-underline-offset: 6px; text-decoration-thickness: 2px;
+  }
+  .hero-bio { font-size: 0.87rem; color: var(--muted); line-height: 1.85; max-width: 580px; margin-bottom: 1.3rem; }
+  .hero-bio a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .hero-bio strong { color: var(--text); }
+  .hero-links { display: flex; flex-wrap: wrap; align-items: center; font-size: 0.85rem; margin-bottom: 1.5rem; }
+  .hero-links a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .sep { color: var(--dimmed); margin: 0 0.4rem; }
+  .loc {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--card-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.45rem 0.9rem;
+    font-size: 0.78rem; color: var(--muted);
+  }
+  .loc-dot { width: 7px; height: 7px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+  /* ── SECTIONS — dividers extend into ASCII gutters ── */
+  .section {
+    padding: 2.5rem 2.5rem;
+    position: relative;
+  }
+  .section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -40px; right: -40px;
+    height: 1px;
+    background: var(--border);
+  }
+  .sec-label {
+    font-size: 0.67rem; color: var(--dimmed); letter-spacing: 0.1em;
+    text-transform: uppercase; margin-bottom: 1.1rem;
+  }
+
+  /* ── EXP CARDS ── */
+  .exp-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .exp-card {
+    border: 1px solid var(--border); border-radius: 10px;
+    padding: 1.1rem 1.3rem; background: var(--card-bg);
+    transition: border-color 0.2s;
+  }
+  .exp-card:hover { border-color: var(--accent); }
+  .exp-header { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem; }
+  .logo-sq { width: 28px; height: 28px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 0.65rem; font-weight: 700; }
+  .exp-meta { flex: 1; }
+  .exp-co { font-weight: 600; font-size: 0.88rem; }
+  .exp-role { font-size: 0.73rem; color: var(--muted); }
+  .exp-date { font-size: 0.7rem; color: var(--dimmed); white-space: nowrap; }
+  .exp-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.65; margin-bottom: 0.5rem; }
+  .tags { display: flex; gap: 4px; flex-wrap: wrap; }
+  .tag { background: var(--tag-bg); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 0.63rem; color: var(--muted); }
+  .view-all { margin-top: 1rem; font-size: 0.8rem; }
+  .view-all a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+
+  /* ── PROJECTS ── */
+  .proj-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .proj-card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card-bg); transition: border-color 0.2s; }
+  .proj-card:hover { border-color: var(--accent); }
+  .proj-card.featured { grid-column: 1/-1; display: flex; }
+  .proj-thumb { height: 90px; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; }
+  .proj-card.featured .proj-thumb { width: 200px; height: auto; }
+  .proj-body { padding: 0.9rem; flex: 1; }
+  .proj-title { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .proj-desc { font-size: 0.73rem; color: var(--muted); line-height: 1.55; margin-bottom: 6px; }
+
+  /* ── SKILLS ── */
+  .skills-zone {
+    border: 1px dashed var(--border); border-radius: 10px;
+    padding: 1.2rem; background: var(--card-bg); position: relative;
+  }
+  .skill-row { font-size: 0.79rem; color: var(--muted); line-height: 2.1; }
+  .skill-row strong { color: var(--text); }
+
+  /* ── FULL-WIDTH FOOTER ── */
+  .site-footer {
+    width: 100%;
+    padding: 1.5rem 2rem;
+    border-top: 1px solid var(--border);
+    background: var(--bg);
+    display: flex; justify-content: space-between; align-items: flex-start;
+    font-size: 0.78rem;
+    flex-shrink: 0;
+  }
+  .footer-name { font-weight: 600; margin-bottom: 6px; }
+  .footer-links { display: flex; gap: 1rem; }
+  .footer-links a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .footer-copy { font-size: 0.7rem; color: var(--dimmed); }
+</style>
+</head>
+<body>
+
+<!-- FULL-WIDTH NAV -->
+<nav class="site-nav">
+  <div class="nav-logo">ayan bin saif</div>
+  <div class="nav-links">
+    <a style="color:var(--muted);text-decoration:none">about</a>
+    <a style="color:var(--muted);text-decoration:none">experience</a>
+    <a style="color:var(--muted);text-decoration:none">projects</a>
+    <span class="nav-link-accent">terminal_</span>
+    <span>☀</span>
+  </div>
+</nav>
+
+<!-- MIDDLE ROW -->
+<div class="main-row">
+
+  <div class="ascii-col" id="ascii-left"></div>
+
+  <div class="content-col">
+
+    <!-- ABOUT -->
+    <div class="hero">
+      <div class="hero-name">ayan bin saif</div>
+      <div class="hero-bio">
+        <a>applied mathematics with scientific computing and scientific machine learning ↗</a>
+        student at the <strong>university of waterloo ↗</strong><br><br>
+        currently engineering at <a>tern ↗</a>. interested in software engineering, data science, full-stack development, and mobile engineering.
+      </div>
+      <div class="hero-links">
+        <a>email ↗</a><span class="sep">·</span>
+        <a>github ↗</a><span class="sep">·</span>
+        <a>linkedin ↗</a><span class="sep">·</span>
+        <a>resume ↗</a>
+      </div>
+      <div class="loc"><span class="loc-dot"></span>Waterloo, ON · 9:27 PM 🌙</div>
+    </div>
+
+    <!-- EXPERIENCE -->
+    <div class="section">
+      <div class="sec-label">experience</div>
+      <div class="exp-cards">
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="logo-sq" style="background:#000;color:#fff">T</div>
+            <div class="exp-meta">
+              <div class="exp-co">Tern</div>
+              <div class="exp-role">Software Engineer · Remote</div>
+            </div>
+            <div class="exp-date">2025 — now</div>
+          </div>
+          <div class="exp-desc">Building core product features across the full stack. TypeScript, React, distributed systems.</div>
+          <div class="tags"><span class="tag">TypeScript</span><span class="tag">React</span><span class="tag">Node.js</span></div>
+        </div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div class="logo-sq" style="background:#555;color:#fff">A</div>
+            <div class="exp-meta">
+              <div class="exp-co">Apple</div>
+              <div class="exp-role">iOS Developer Intern · Cupertino, CA</div>
+            </div>
+            <div class="exp-date">2024</div>
+          </div>
+          <div class="exp-desc">Developed SwiftUI features shipped to millions of users. Accessibility and performance work.</div>
+          <div class="tags"><span class="tag">Swift</span><span class="tag">SwiftUI</span><span class="tag">Xcode</span></div>
+        </div>
+      </div>
+      <div class="view-all"><a>view all experience →</a></div>
+    </div>
+
+    <!-- PROJECTS -->
+    <div class="section">
+      <div class="sec-label">projects</div>
+      <div class="proj-grid">
+        <div class="proj-card featured">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#1a1a2e,#16213e);color:#7c3aed;font-size:1.8rem">◈</div>
+          <div class="proj-body">
+            <div class="proj-title">featured project</div>
+            <div class="proj-desc">A machine learning pipeline for scientific computing with real-time data visualization.</div>
+            <div class="tags"><span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">React</span></div>
+          </div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#0f2027,#203a43)">🌐</div>
+          <div class="proj-body"><div class="proj-title">project two</div><div class="proj-desc">Full-stack web app with real-time features.</div></div>
+        </div>
+        <div class="proj-card">
+          <div class="proj-thumb" style="background:linear-gradient(135deg,#1a0a2e,#2d1b69)">📱</div>
+          <div class="proj-body"><div class="proj-title">project three</div><div class="proj-desc">Native iOS app using SwiftUI and CoreML.</div></div>
+        </div>
+      </div>
+      <div class="view-all"><a>view all projects →</a></div>
+    </div>
+
+    <!-- SKILLS -->
+    <div class="section">
+      <div class="sec-label">skills</div>
+      <div class="skills-zone">
+        <div class="skill-row"><strong>languages</strong> · python, c, c++, typescript, javascript, swift, bash, java, racket, sql, html/css</div>
+        <div class="skill-row"><strong>frameworks</strong> · next.js, react, react native, swiftui, node.js, tailwind css, opencv, mediapipe</div>
+        <div class="skill-row"><strong>tools</strong> · docker, supabase, postgresql, firebase, git, unix/linux, xcode, vercel, figma</div>
+        <div class="skill-row"><strong>concepts</strong> · dsa, restful api, multi-agent systems, oop, ui/ux design, hci</div>
+      </div>
+    </div>
+
+  </div><!-- end content-col -->
+
+  <div class="ascii-col" id="ascii-right"></div>
+
+</div><!-- end main-row -->
+
+<!-- FULL-WIDTH FOOTER -->
+<footer class="site-footer">
+  <div>
+    <div class="footer-name">ayan bin saif</div>
+    <div class="footer-links">
+      <a>email →</a><a>github →</a><a>linkedin →</a><a>contact →</a>
+    </div>
+  </div>
+  <div style="text-align:right">
+    <div class="footer-copy">© 2026 ayan · built with love and late nights</div>
+  </div>
+</footer>
+
+<script>
+const WATER = ['·','~','≈','∿',' ',' ',' ','~','·'];
+const WCOLS = [
+  ['#0d3d6b','#155e9e','#0d3d6b','#1e80c8','#0a2f52'],
+  ['#155e9e','#2ea0d8','#155e9e','#0d3d6b','#2ea0d8'],
+  ['#c87a1a','#c84a1a','#c87a1a','#155e9e','#c84a1a'],
+  ['#0d3d6b','#155e9e','#c84a1a','#2ea0d8','#155e9e'],
+];
+const CHAR_W = 5.55, CHAR_H = 9.44;
+
+function buildFrame(cols, rows, t, offset) {
+  const parts = [];
+  for (let r = 0; r < rows; r++) {
+    let row = '';
+    for (let c = 0; c < cols; c++) {
+      const wave = Math.sin(c * 0.28 + r * 0.45 + t * 0.036 + offset) * 0.5 +
+                   Math.sin(c * 0.13 + r * 0.19 + t * 0.021 + offset * 0.7) * 0.5;
+      const norm = (wave + 1) / 2;
+      const ch = WATER[Math.floor(norm * (WATER.length - 1))];
+      const ri = Math.floor(((Math.sin(c * 0.17 + r * 0.27 + t * 0.011 + offset) + 1) / 2) * (WCOLS.length - 1));
+      const color = WCOLS[ri][c % WCOLS[ri].length];
+      row += `<span style="color:${color}">${ch}</span>`;
+    }
+    parts.push(row);
+  }
+  return parts.join('\n');
+}
+
+const leftEl  = document.getElementById('ascii-left');
+const rightEl = document.getElementById('ascii-right');
+
+let t = 0;
+function tick() {
+  const lw = leftEl.offsetWidth,  lh = leftEl.offsetHeight;
+  const rw = rightEl.offsetWidth, rh = rightEl.offsetHeight;
+  const lc = Math.floor(lw / CHAR_W), lr = Math.ceil(lh / CHAR_H) + 2;
+  const rc = Math.floor(rw / CHAR_W), rr = Math.ceil(rh / CHAR_H) + 2;
+  if (lc > 0) leftEl.innerHTML  = buildFrame(lc, lr, t, 0);
+  if (rc > 0) rightEl.innerHTML = buildFrame(rc, rr, t, 3.7);
+  t++;
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>

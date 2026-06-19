@@ -1,0 +1,239 @@
+<style>
+  :root {
+    --bg: #fafafa; --text: #1a1a1a; --muted: #555;
+    --dimmed: #aaa; --border: #e8e8e8; --accent: #7c3aed;
+    --card-bg: #ffffff; --tag-bg: #f5f5f5;
+  }
+  body { font-family: 'Courier New', monospace; background: var(--bg); color: var(--text); margin: 0; padding: 0; }
+  .page-wrap { max-width: 760px; margin: 0 auto; padding: 2rem; }
+  h2 { font-size: 1.05rem; font-weight: 400; margin-bottom: 0.3rem; }
+  .subtitle { font-size: 0.78rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.6; }
+
+  .cards { display: flex; flex-direction: column; gap: 2.5rem; }
+  .card { border: 1px solid var(--border); border-radius: 10px; overflow: hidden; background: var(--card-bg); cursor: pointer; transition: border-color 0.2s, box-shadow 0.2s; }
+  .card:hover { border-color: var(--accent); box-shadow: 0 2px 14px rgba(124,58,237,0.1); }
+  .card.selected { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent); }
+  .card-label { font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--dimmed); padding: 0.65rem 1rem 0; }
+  .card-desc { font-size: 0.76rem; color: var(--muted); padding: 0.5rem 1rem 1rem; line-height: 1.65; border-top: 1px solid var(--border); margin-top: 0; }
+
+  /* ── shared ASCII stage ── */
+  .stage {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #04111f;
+  }
+  .ascii-layer {
+    position: absolute; inset: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 8px; line-height: 1.18; letter-spacing: 0.04em;
+    padding: 10px; white-space: pre; pointer-events: none;
+    overflow: hidden; z-index: 0;
+  }
+
+  /* ── Option D: full-width stage, box centered ── */
+  .opt-d .stage { height: 310px; }
+  .opt-d .center-box {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opt-d .about-box {
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    width: 360px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  }
+  .opt-d .hero-name {
+    font-size: 1.55rem; font-weight: 400; letter-spacing: -0.03em; color: var(--text);
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px;
+    margin-bottom: 0.55rem;
+  }
+  .opt-d .hero-bio { font-size: 0.72rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.7rem; }
+  .opt-d .hero-bio a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-d .hero-links { font-size: 0.78rem; display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 0.7rem; }
+  .opt-d .hero-links a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-d .sep { color: var(--dimmed); margin: 0 0.35rem; }
+  .opt-d .loc { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 7px; padding: 0.35rem 0.75rem; font-size: 0.7rem; color: var(--muted); }
+  .opt-d .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+  /* ── Option E: same but box aligned left-of-center ── */
+  .opt-e .stage { height: 310px; }
+  .opt-e .center-box {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: flex-start;
+    padding-left: 14%;
+  }
+  .opt-e .about-box {
+    background: var(--card-bg);
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    width: 340px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+  }
+  .opt-e .hero-name {
+    font-size: 1.55rem; font-weight: 400; letter-spacing: -0.03em; color: var(--text);
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px;
+    margin-bottom: 0.55rem;
+  }
+  .opt-e .hero-bio { font-size: 0.72rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.7rem; }
+  .opt-e .hero-bio a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-e .hero-links { font-size: 0.78rem; display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 0.7rem; }
+  .opt-e .hero-links a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-e .sep { color: var(--dimmed); margin: 0 0.35rem; }
+  .opt-e .loc { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 7px; padding: 0.35rem 0.75rem; font-size: 0.7rem; color: var(--muted); }
+  .opt-e .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+  /* ── Option F: wider box, accent-colored top border strip ── */
+  .opt-f .stage { height: 310px; }
+  .opt-f .center-box {
+    position: absolute; inset: 0; z-index: 1;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .opt-f .about-box {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.4rem 1.6rem;
+    width: 400px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.2);
+  }
+  .opt-f .hero-name {
+    font-size: 1.55rem; font-weight: 400; letter-spacing: -0.03em; color: var(--text);
+    text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 5px;
+    margin-bottom: 0.55rem;
+  }
+  .opt-f .hero-bio { font-size: 0.72rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.7rem; }
+  .opt-f .hero-bio a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-f .hero-links { font-size: 0.78rem; display: flex; flex-wrap: wrap; gap: 0; margin-bottom: 0.7rem; }
+  .opt-f .hero-links a { color: var(--accent); text-decoration: underline; text-decoration-style: dashed; }
+  .opt-f .sep { color: var(--dimmed); margin: 0 0.35rem; }
+  .opt-f .loc { display: inline-flex; align-items: center; gap: 0.4rem; background: var(--card-bg); border: 1px solid var(--border); border-radius: 7px; padding: 0.35rem 0.75rem; font-size: 0.7rem; color: var(--muted); }
+  .opt-f .dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+</style>
+
+<div class="page-wrap">
+  <h2>Text box over full-width ASCII koi — three variations</h2>
+  <p class="subtitle">ASCII plays edge-to-edge. Your about text sits in a solid, theme-coloured box on top. Click to pick your favourite.</p>
+
+  <div class="cards">
+
+    <!-- D: centered, accent border -->
+    <div class="card" data-choice="d" onclick="toggleSelect(this)">
+      <div class="card-label">D — centered box · accent border</div>
+      <div class="opt-d">
+        <div class="stage">
+          <div class="ascii-layer" id="al-d"></div>
+          <div class="center-box">
+            <div class="about-box">
+              <div class="hero-name">ayan bin saif</div>
+              <div class="hero-bio">
+                <a>applied mathematics with scientific computing ↗</a> student at the <a>university of waterloo ↗</a><br><br>
+                currently engineering at <a>tern ↗</a>. interested in software engineering, data science, full-stack development, and mobile engineering.
+              </div>
+              <div class="hero-links">
+                <a>email ↗</a><span class="sep">·</span><a>github ↗</a><span class="sep">·</span><a>linkedin ↗</a><span class="sep">·</span><a>resume ↗</a>
+              </div>
+              <div class="loc"><span class="dot"></span>Waterloo, ON · 9:27 PM 🌙</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">Box centered, full accent-color border. ASCII koi visible in equal strips left + right. Clean, symmetrical.</div>
+    </div>
+
+    <!-- E: left-leaning, accent border -->
+    <div class="card" data-choice="e" onclick="toggleSelect(this)">
+      <div class="card-label">E — left-leaning box · more ASCII on right</div>
+      <div class="opt-e">
+        <div class="stage">
+          <div class="ascii-layer" id="al-e"></div>
+          <div class="center-box">
+            <div class="about-box">
+              <div class="hero-name">ayan bin saif</div>
+              <div class="hero-bio">
+                <a>applied mathematics with scientific computing ↗</a> student at the <a>university of waterloo ↗</a><br><br>
+                currently engineering at <a>tern ↗</a>. interested in software engineering, data science, full-stack development, and mobile engineering.
+              </div>
+              <div class="hero-links">
+                <a>email ↗</a><span class="sep">·</span><a>github ↗</a><span class="sep">·</span><a>linkedin ↗</a><span class="sep">·</span><a>resume ↗</a>
+              </div>
+              <div class="loc"><span class="dot"></span>Waterloo, ON · 9:27 PM 🌙</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">Box shifted left (matching the existing left-aligned page layout). More ASCII visible on the right — asymmetric, matches your site's current layout rhythm.</div>
+    </div>
+
+    <!-- F: centered, wider, accent top-border only -->
+    <div class="card" data-choice="f" onclick="toggleSelect(this)">
+      <div class="card-label">F — centered box · accent top-stripe only</div>
+      <div class="opt-f">
+        <div class="stage">
+          <div class="ascii-layer" id="al-f"></div>
+          <div class="center-box">
+            <div class="about-box">
+              <div class="hero-name">ayan bin saif</div>
+              <div class="hero-bio">
+                <a>applied mathematics with scientific computing ↗</a> student at the <a>university of waterloo ↗</a><br><br>
+                currently engineering at <a>tern ↗</a>. interested in software engineering, data science, full-stack development, and mobile engineering.
+              </div>
+              <div class="hero-links">
+                <a>email ↗</a><span class="sep">·</span><a>github ↗</a><span class="sep">·</span><a>linkedin ↗</a><span class="sep">·</span><a>resume ↗</a>
+              </div>
+              <div class="loc"><span class="dot"></span>Waterloo, ON · 9:27 PM 🌙</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-desc">Slightly wider box, subtle border on three sides but a bold accent-colored top stripe. Less visually loud than a full accent border — the top stripe anchors it.</div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const WATER = ['·','~','≈','∿',' ',' ','~'];
+const WCOLS = [
+  ['#0e4a7a','#1a6fab','#0e4a7a','#2589c8','#0a3a60'],
+  ['#1a6fab','#3ba8d8','#1a6fab','#0e4a7a','#3ba8d8'],
+  ['#d4891a','#d45a1a','#d4891a','#1a6fab','#d45a1a'],
+  ['#0e4a7a','#1a6fab','#d45a1a','#3ba8d8','#1a6fab'],
+];
+
+function buildFrame(w, h, t) {
+  const parts = [];
+  for (let r = 0; r < h; r++) {
+    let row = '';
+    for (let c = 0; c < w; c++) {
+      const wave = Math.sin(c * 0.28 + r * 0.45 + t * 0.038) * 0.5 +
+                   Math.sin(c * 0.12 + r * 0.18 + t * 0.022) * 0.5;
+      const norm = (wave + 1) / 2;
+      const ch = WATER[Math.floor(norm * (WATER.length - 1))];
+      const ri = Math.floor(((Math.sin(c * 0.18 + r * 0.28 + t * 0.012) + 1) / 2) * (WCOLS.length - 1));
+      const color = WCOLS[ri][c % WCOLS[ri].length];
+      row += `<span style="color:${color}">${ch}</span>`;
+    }
+    parts.push(row);
+  }
+  return parts.join('\n');
+}
+
+const layers = ['al-d','al-e','al-f'].map(id => {
+  const el = document.getElementById(id);
+  if (!el) return null;
+  return { el, w: Math.floor(el.parentElement.offsetWidth / 5.55), h: Math.floor(el.parentElement.offsetHeight / 9.5) };
+}).filter(Boolean);
+
+let t = 0;
+function tick() {
+  layers.forEach(l => { l.el.innerHTML = buildFrame(l.w, l.h, t); });
+  t++;
+  requestAnimationFrame(tick);
+}
+tick();
+</script>

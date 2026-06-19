@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import type { Metadata } from 'next'
 import { posts } from '@/data/posts'
+import { formatDate } from '@/lib/utils'
 
 export const metadata: Metadata = {
   title: 'blog — ayan bin saif',
 }
 
 export default function BlogPage() {
-  const sorted = [...posts].reverse()
+  const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))
 
   return (
     <div className="projects-page">
@@ -28,13 +29,7 @@ export default function BlogPage() {
                 read post →
               </Link>
             </div>
-            <p className="blog-list-date">
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric',
-              })}
-            </p>
+            <p className="blog-list-date">{formatDate(post.date)}</p>
             <p className="project-list-desc">{post.excerpt}</p>
           </div>
         ))}
