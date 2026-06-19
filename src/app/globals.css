@@ -140,7 +140,7 @@ body {
   background: var(--bg);
   position: sticky;
   top: 0;
-  z-index: 100;
+  z-index: 160;
   backdrop-filter: blur(10px);
   transition: background 0.4s ease, border-color 0.4s ease;
 }
@@ -876,7 +876,7 @@ html.dark .exp-logo-apple { filter: invert(1); }
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  z-index: 149;
+  z-index: 140;
 }
 
 .mobile-drawer {
@@ -916,3 +916,17 @@ html.dark .exp-logo-apple { filter: invert(1); }
   gap: 1rem;
   margin-top: 0.5rem;
 }
+
+.mobile-drawer-close {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: flex-end;
+  transition: color 0.2s ease;
+}
+.mobile-drawer-close:hover { color: var(--accent); }
