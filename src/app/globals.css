@@ -875,7 +875,7 @@ html.dark .exp-logo-apple { filter: invert(1); }
 .mobile-backdrop {
   position: fixed;
   inset: 0;
-  background: var(--text);
+  background: rgba(0, 0, 0, 0.5);
   z-index: 149;
 }
 
