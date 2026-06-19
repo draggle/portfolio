@@ -850,3 +850,68 @@ html.dark .exp-logo-apple { filter: invert(1); }
 @media (max-width: 600px) {
   .blog-post-page { padding: 1.25rem; }
 }
+
+/* ── MOBILE NAV DRAWER ── */
+.hamburger-btn {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  cursor: pointer;
+  padding: 4px;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+  z-index: 150;
+}
+.hamburger-btn:hover { color: var(--accent); }
+
+@media (max-width: 640px) {
+  .nav-links { display: none; }
+  .hamburger-btn { display: flex; }
+}
+
+.mobile-backdrop {
+  position: fixed;
+  inset: 0;
+  background: var(--text);
+  z-index: 149;
+}
+
+.mobile-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100dvh;
+  width: 75vw;
+  max-width: 300px;
+  background: var(--bg);
+  border-left: 1px solid var(--border);
+  z-index: 150;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-drawer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.mobile-drawer-link {
+  font-size: 1.1rem;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+  font-family: inherit;
+}
+.mobile-drawer-link:hover { color: var(--accent); }
+
+.mobile-drawer-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}

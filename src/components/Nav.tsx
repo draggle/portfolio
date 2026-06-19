@@ -2,6 +2,7 @@ import Link from 'next/link'
 import DarkModeToggle from './DarkModeToggle'
 import TermNavLink from './TermNavLink'
 import ScrambleLogo from './ScrambleLogo'
+import MobileNav from './MobileNav'
 
 export default function Nav() {
   return (
@@ -16,6 +17,7 @@ export default function Nav() {
         <TermNavLink />
         <DarkModeToggle />
       </div>
+      <MobileNav />
     </nav>
   )
 }
