@@ -29,7 +29,7 @@ export default function LayoutClient({ children }: { children: React.ReactNode }
 
   return (
     <>
-      {mounted && ['/', '/contact', '/projects', '/experience'].includes(pathname) && (
+      {mounted && ['/', '/contact', '/projects', '/experience', '/blog'].includes(pathname) && (
         <div className="falling-col" aria-hidden="true">
           <FallingPattern
             color="var(--accent)"
