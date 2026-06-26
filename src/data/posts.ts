@@ -12,7 +12,7 @@ export const posts: Post[] = [
   {
     id: 1,
     title: 'My experience attending a Y Combinator hackathon (and visiting San Francisco)',
-    date: '2025-02-15',
+    date: '2026-02-15',
     excerpt: 'My first time in SF — sleep-deprived, building an AI investment platform, riding a Waymo, and missing two quizzes. Worth every second.',
     readTimeMinutes: 3,
   },
