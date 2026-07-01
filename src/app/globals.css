@@ -928,3 +928,21 @@ html.dark .exp-logo-apple { filter: invert(1); }
   transition: color 0.2s ease;
 }
 .mobile-drawer-close:hover { color: var(--accent); }
+
+/* Blog carousel: arrows fade in on hover (desktop), stay visible on touch */
+.carousel-arrow {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.carousel-frame:hover .carousel-arrow { opacity: 0.9; }
+.carousel-arrow:focus-visible { opacity: 0.9; }
+.carousel-arrow:disabled { opacity: 0 !important; pointer-events: none; }
+@media (hover: none) {
+  .carousel-arrow { opacity: 0.9; }
+  .carousel-arrow:disabled { opacity: 0 !important; }
+}
+.carousel-dot:hover span,
+.carousel-dot:focus-visible span {
+  background: var(--accent) !important;
+  transform: scale(1.3);
+}
