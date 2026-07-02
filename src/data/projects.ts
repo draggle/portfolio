@@ -101,8 +101,7 @@ export const projects: Project[] = [
     ],
     tags: ['swift', 'swiftui', 'ios', 'apple hig'],
     links: {
-      recommendation:
-        'https://github.com/draggle/portfolio/raw/main/Ayan_Letter_Of_Recommendation.pdf',
+      recommendation: '/recommendation-letter.pdf',
     },
     thumbnail: { emoji: '📚', gradient: 'linear-gradient(135deg, #1e3a5f, #2563eb)' },
     featured: false,

@@ -91,7 +91,7 @@ const CMDS: Record<string, Cmd> = {
                               ${a('https://github.com/draggle', 'github.com/draggle')}
                               ${a('https://linkedin.com/in/stitches', 'linkedin.com/in/stitches')}
                              ─────────────────────────────
-                             <span style="color:${N.gray}">RESUME</span>   ${a('https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf', 'download pdf')}`,
+                             <span style="color:${N.gray}">RESUME</span>   ${a('/resume.pdf', 'download pdf')}`,
   },
 
   projects: {
@@ -122,7 +122,7 @@ const CMDS: Record<string, Cmd> = {
 <span style="color:${N.gold}">apple</span>  ·  ios app developer (mentorship)  ·  feb 2024 – jul 2024
   built native ios features in swift/swiftui · 400ms ui load reduction · 25% memory usage drop
   selected for showcase among 200+ participants
-  ${a('https://github.com/draggle/portfolio/raw/main/Ayan_Letter_Of_Recommendation.pdf', 'letter of recommendation')}
+  ${a('/recommendation-letter.pdf', 'letter of recommendation')}
 
 <span style="color:${N.gold}">university of waterloo</span>  ·  student  ·  present
   amath + computing + scientific machine learning`,
@@ -131,7 +131,7 @@ const CMDS: Record<string, Cmd> = {
   resume: {
     desc: 'Open my resume in your browser.',
     fn: () => {
-      window.open('https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf')
+      window.open('/resume.pdf')
       return 'opening resume...'
     },
   },

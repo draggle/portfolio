@@ -49,7 +49,7 @@ export default function HomePage() {
           <LinkedInBadgePreview className="nyx-link">linkedin ↗</LinkedInBadgePreview>
           <span className="sep">·</span>
           <a
-            href="https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="nyx-link"

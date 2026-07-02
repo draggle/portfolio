@@ -44,7 +44,7 @@ export default function ContactPage() {
           </LinkedInBadgePreview>
 
           <a
-            href="https://github.com/draggle/portfolio/raw/main/Ayan_Resume.pdf"
+            href="/resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             className="contact-link-row"

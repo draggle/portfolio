@@ -51,7 +51,7 @@ export const experiences: Experience[] = [
     tags: ['swift', 'swiftui', 'xcode', 'ios', 'hig'],
     logoColor: '#555555',
     logoUrl: '/logos/apple.svg',
-    link: 'https://github.com/draggle/portfolio/raw/main/Ayan_Letter_Of_Recommendation.pdf',
+    link: '/recommendation-letter.pdf',
     linkLabel: 'view recommendation letter ↗',
   },
   {
