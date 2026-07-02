@@ -1,10 +1,12 @@
 import Link from 'next/link'
-import type { Metadata } from 'next'
 import { experiences } from '@/data/experience'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'experience — ayan bin saif',
-}
+  description: 'work experience and education — tern, apple ios mentorship, and the university of waterloo.',
+  path: '/experience',
+})
 
 export default function ExperiencePage() {
   return (

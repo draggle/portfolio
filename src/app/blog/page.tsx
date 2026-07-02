@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import type { Metadata } from 'next'
 import { posts } from '@/data/posts'
 import { formatDate } from '@/lib/utils'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'blog — ayan bin saif',
-}
+  description: 'writing by ayan bin saif on hackathons, waterloo, and building software.',
+  path: '/blog',
+})
 
 export default function BlogPage() {
   const sorted = [...posts].sort((a, b) => b.date.localeCompare(a.date))

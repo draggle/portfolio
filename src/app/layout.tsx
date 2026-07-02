@@ -4,13 +4,17 @@ import LayoutClient from '@/components/LayoutClient'
 import './globals.css'
 import { Geist } from "next/font/google";
 import { cn } from "@/lib/utils";
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, pageMetadata } from '@/lib/seo'
 
 const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 export const metadata: Metadata = {
-  title: 'ayan bin saif',
-  description:
-    'applied mathematics with scientific computing and scientific machine learning student at the university of waterloo. software engineer.',
+  metadataBase: new URL(SITE_URL),
+  ...pageMetadata({ title: SITE_NAME, description: SITE_DESCRIPTION, path: '/' }),
+  alternates: {
+    canonical: '/',
+    types: { 'application/rss+xml': `${SITE_URL}/rss.xml` },
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

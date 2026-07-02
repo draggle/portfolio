@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { posts } from '@/data/posts'
 import BlogPostLayout from '@/components/BlogPostLayout'
+import { pageMetadata } from '@/lib/seo'
 
 export function generateStaticParams() {
   return posts.map(p => ({ id: String(p.id) }))
@@ -18,7 +19,13 @@ export async function generateMetadata(
   const { id } = await params
   const post = getPost(id)
   if (!post) notFound()
-  return { title: `${post!.title} — ayan bin saif` }
+  return pageMetadata({
+    title: `${post!.title} — ayan bin saif`,
+    description: post!.excerpt,
+    path: `/blog/${post!.id}`,
+    ogType: 'article',
+    publishedTime: post!.date,
+  })
 }
 
 export default async function BlogPostPage(

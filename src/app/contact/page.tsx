@@ -1,13 +1,15 @@
-import type { Metadata } from 'next'
 import Link from 'next/link'
 import { LinkPreview } from '@/components/ui/link-preview'
 import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
 import { ContactTitle } from '@/components/ui/contact-title'
 import { ContactIntro } from '@/components/ui/contact-intro'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata: Metadata = {
+export const metadata = pageMetadata({
   title: 'contact — ayan bin saif',
-}
+  description: 'get in touch with ayan bin saif — email, github, linkedin.',
+  path: '/contact',
+})
 
 export default function ContactPage() {
   return (

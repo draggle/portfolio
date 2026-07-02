@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { projects } from '@/data/projects'
 import { LinkPreview } from '@/components/ui/link-preview'
+import { pageMetadata } from '@/lib/seo'
 
 export function generateStaticParams() {
   return projects.map(p => ({ slug: p.slug }))
@@ -11,7 +12,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const project = projects.find(p => p.slug === slug)
-  return { title: project ? `${project.title} — ayan bin saif` : 'project not found' }
+  if (!project) return { title: 'project not found' }
+  return pageMetadata({
+    title: `${project.title} — ayan bin saif`,
+    description: project.shortDescription,
+    path: `/projects/${project.slug}`,
+  })
 }
 
 function getYouTubeId(url: string): string {

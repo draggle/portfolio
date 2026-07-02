@@ -1,9 +1,12 @@
 import Link from 'next/link'
 import { projects } from '@/data/projects'
+import { pageMetadata } from '@/lib/seo'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'projects — ayan bin saif',
-}
+  description: 'selected software projects by ayan bin saif — full-stack, ios, and computer vision work.',
+  path: '/projects',
+})
 
 export default function ProjectsPage() {
   return (

@@ -3,6 +3,7 @@ import Link from 'next/link'
 import type { Metadata } from 'next'
 import { experiences } from '@/data/experience'
 import { LinkPreview } from '@/components/ui/link-preview'
+import { pageMetadata } from '@/lib/seo'
 
 export function generateStaticParams() {
   return experiences.map(e => ({ id: e.id }))
@@ -11,7 +12,12 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const exp = experiences.find(e => e.id === id)
-  return { title: exp ? `${exp.company} — ayan bin saif` : 'not found' }
+  if (!exp) return { title: 'not found' }
+  return pageMetadata({
+    title: `${exp.company} — ayan bin saif`,
+    description: exp.cardDescription ?? exp.description,
+    path: `/experience/${exp.id}`,
+  })
 }
 
 const STATIC_PREVIEWS: Record<string, string> = {
