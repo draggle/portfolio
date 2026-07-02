@@ -11,10 +11,6 @@ const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   ...pageMetadata({ title: SITE_NAME, description: SITE_DESCRIPTION, path: '/' }),
-  alternates: {
-    canonical: '/',
-    types: { 'application/rss+xml': `${SITE_URL}/rss.xml` },
-  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

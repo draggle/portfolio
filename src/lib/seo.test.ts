@@ -20,12 +20,16 @@ describe('pageMetadata', () => {
     expect(meta.title).toBe('projects — ayan bin saif')
     expect(meta.description).toBe('some description')
     expect(meta.alternates?.canonical).toBe('/projects')
+    expect(meta.alternates?.types).toMatchObject({
+      'application/rss+xml': 'https://www.ayans.dev/rss.xml',
+    })
     expect(meta.openGraph).toMatchObject({
       title: 'projects — ayan bin saif',
       description: 'some description',
       url: '/projects',
       siteName: 'ayan bin saif',
       type: 'website',
+      locale: 'en_US',
     })
     expect(meta.twitter).toMatchObject({ card: 'summary_large_image' })
   })

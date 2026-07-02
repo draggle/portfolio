@@ -18,11 +18,14 @@ interface PageMetadataOptions {
 
 export function pageMetadata(opts: PageMetadataOptions): Metadata {
   const { title, description, path, ogType = 'website', publishedTime } = opts
-  const shared = { title, description, url: path, siteName: SITE_NAME }
+  const shared = { title, description, url: path, siteName: SITE_NAME, locale: 'en_US' }
   return {
     title,
     description,
-    alternates: { canonical: path },
+    alternates: {
+      canonical: path,
+      types: { 'application/rss+xml': `${SITE_URL}/rss.xml` },
+    },
     openGraph:
       ogType === 'article'
         ? { ...shared, type: 'article', publishedTime }
