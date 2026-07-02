@@ -34,6 +34,9 @@ export default function BlogPage() {
           </div>
         ))}
       </div>
+      <div className="view-all">
+        <a href="/rss.xml" className="nyx-link">subscribe via rss →</a>
+      </div>
     </div>
   )
 }
