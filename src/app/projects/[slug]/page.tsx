@@ -70,7 +70,8 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     <div className="page">
       <p><Link href="/projects">← Projects</Link></p>
       <h1>{project.title}</h1>
-      <p>{linkItems.map((item, i) => <span key={i}>{i > 0 && ' · '}{item}</span>)}</p>
+      {/* .para div, not <p>: LinkPreview's hover popup renders a <div>, invalid inside <p> */}
+      <div className="para">{linkItems.map((item, i) => <span key={i}>{i > 0 && ' · '}{item}</span>)}</div>
       {project.links.video && (
         <div className="video-embed">
           <iframe

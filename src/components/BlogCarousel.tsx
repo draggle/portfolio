@@ -77,7 +77,7 @@ export function BlogCarousel({ slides }: Props) {
     justifyContent: 'center',
     borderRadius: '50%',
     border: '1px solid var(--border)',
-    background: 'var(--card-bg)',
+    background: 'var(--bg)',
     color: 'var(--text)',
     fontSize: '1.25rem',
     lineHeight: 1,
@@ -106,7 +106,7 @@ export function BlogCarousel({ slides }: Props) {
           overflow: 'hidden',
           height: 'min(65vh, 560px)',
           borderRadius: '4px',
-          background: 'var(--bg2)',
+          background: 'var(--bg)',
           outline: 'none',
           touchAction: 'pan-y',
           cursor: dragging ? 'grabbing' : 'grab',
@@ -190,7 +190,7 @@ export function BlogCarousel({ slides }: Props) {
                   width: '0.5rem',
                   height: '0.5rem',
                   borderRadius: '50%',
-                  background: i === index ? 'var(--accent)' : 'var(--border)',
+                  background: i === index ? 'var(--text)' : 'var(--border)',
                   transition: 'background 0.2s, transform 0.2s',
                 }}
               />
@@ -203,7 +203,7 @@ export function BlogCarousel({ slides }: Props) {
         <figcaption
           style={{
             fontSize: '0.85rem',
-            color: 'var(--accent)',
+            color: 'var(--muted)',
             textAlign: 'center',
             marginTop: '0.5rem',
             fontStyle: 'italic',

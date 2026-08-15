@@ -42,7 +42,8 @@ export default async function ExperienceDetailPage({ params }: { params: Promise
         {exp.location && ` · ${exp.location}`} · {exp.dateRange}
       </p>
       {exp.link && (
-        <p>
+        // .para div, not <p>: LinkPreview's hover popup renders a <div>, invalid inside <p>
+        <div className="para">
           {linkIsPdf ? (
             <a href={exp.link} target="_blank" rel="noopener noreferrer">{exp.linkLabel ?? 'Visit ↗'}</a>
           ) : previewSrc ? (
@@ -50,7 +51,7 @@ export default async function ExperienceDetailPage({ params }: { params: Promise
           ) : (
             <LinkPreview url={exp.link}>{exp.linkLabel ?? 'Visit ↗'}</LinkPreview>
           )}
-        </p>
+        </div>
       )}
       <p>{exp.description}</p>
       {exp.highlights && exp.highlights.length > 0 && (

@@ -90,6 +90,10 @@ a {
 
 .muted { color: var(--muted); font-size: 0.9rem; margin-bottom: 0.5rem; }
 
+/* paragraph-styled div for content that must not live inside <p>
+   (LinkPreview's hover popup renders a <div>) */
+.para { margin-bottom: 1rem; }
+
 ul { padding-left: 1.25rem; list-style: disc; margin-bottom: 1rem; }
 
 /* ── Lists of items (experience, projects, writing) ── */
