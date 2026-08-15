@@ -58,7 +58,6 @@ export function BlogLink({ href = '', children }: Props) {
       <a
         ref={anchorRef}
         href={href}
-        className="nyx-link"
         target={isExternal ? '_blank' : undefined}
         rel={isExternal ? 'noopener noreferrer' : undefined}
         onMouseEnter={imageSrc ? handleMouseEnter : undefined}

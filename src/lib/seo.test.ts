@@ -13,18 +13,18 @@ describe('SITE_URL', () => {
 describe('pageMetadata', () => {
   it('builds website metadata with canonical path and OG/twitter blocks', () => {
     const meta = pageMetadata({
-      title: 'projects — ayan bin saif',
+      title: 'Projects — Ayan Bin Saif',
       description: 'some description',
       path: '/projects',
     })
-    expect(meta.title).toBe('projects — ayan bin saif')
+    expect(meta.title).toBe('Projects — Ayan Bin Saif')
     expect(meta.description).toBe('some description')
     expect(meta.alternates?.canonical).toBe('/projects')
     expect(meta.alternates?.types).toMatchObject({
       'application/rss+xml': 'https://www.ayans.dev/rss.xml',
     })
     expect(meta.openGraph).toMatchObject({
-      title: 'projects — ayan bin saif',
+      title: 'Projects — Ayan Bin Saif',
       description: 'some description',
       url: '/projects',
       siteName: 'Ayan Bin Saif',
@@ -36,7 +36,7 @@ describe('pageMetadata', () => {
 
   it('builds article metadata with publishedTime for blog posts', () => {
     const meta = pageMetadata({
-      title: 'a post — ayan bin saif',
+      title: 'A post — Ayan Bin Saif',
       description: 'excerpt',
       path: '/writing/1',
       ogType: 'article',
@@ -63,7 +63,7 @@ describe('buildSitemapEntries', () => {
     expect(urls).not.toContain('https://www.ayans.dev/terminal')
   })
 
-  it('includes every blog post with its date as lastModified', () => {
+  it('includes every post with its date as lastModified', () => {
     for (const post of posts) {
       const entry = entries.find(e => e.url === `https://www.ayans.dev/writing/${post.id}`)
       expect(entry).toBeDefined()
