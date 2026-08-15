@@ -114,7 +114,7 @@ a {
   max-width: none; /* tailwind preflight caps video at max-width: 100% */
   margin-left: calc(50% - 50vw);
   margin-bottom: -5rem;
-  height: 62vh;
+  height: 68vh;
   object-fit: cover;
   object-position: top; /* keep the mountain peak; crop the bottom instead */
 }
