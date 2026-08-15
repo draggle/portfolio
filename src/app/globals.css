@@ -29,6 +29,8 @@ body {
   line-height: 1.7;
   background: var(--bg);
   color: var(--text);
+  /* the full-bleed home video's 100vw includes the scrollbar gutter */
+  overflow-x: hidden;
 }
 
 /* ── Nav ── */
@@ -95,16 +97,22 @@ a {
 .para { margin-bottom: 1rem; }
 
 /* ── Home ── */
-/* fill the viewport (minus nav + page paddings) so the video pins to the bottom */
+/* fill the viewport (minus nav + top padding; bottom padding is cancelled
+   by the video's negative margin) so the video pins to the bottom */
 .home-page {
   display: flex;
   flex-direction: column;
-  min-height: calc(100svh - 12rem);
+  min-height: calc(100svh - 7rem);
 }
 
+/* full-bleed: break out of the centered 42rem column to span the viewport,
+   and swallow the page-wrap's 5rem bottom padding to sit flush with the
+   bottom edge */
 .home-video {
   margin-top: auto;
-  width: 100%;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-bottom: -5rem;
   height: 50vh;
   object-fit: cover;
 }
