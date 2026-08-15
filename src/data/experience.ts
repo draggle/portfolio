@@ -20,7 +20,7 @@ export interface Experience {
 export const experiences: Experience[] = [
   {
     id: 'tern',
-    company: 'Tern',
+    company: 'TERN',
     role: 'Engineering Intern',
     dateRange: 'May 2026 → Present',
     isCurrent: true,

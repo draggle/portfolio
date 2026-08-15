@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'Ayan Bin Saif — Applied Math @ Waterloo · Engineering @ Tern'
+export const alt = 'Ayan Bin Saif — Applied Math @ Waterloo · Engineering @ TERN'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -21,7 +21,7 @@ export default function Image() {
       >
         <div style={{ display: 'flex', fontSize: 84, fontWeight: 700 }}>Ayan Bin Saif</div>
         <div style={{ display: 'flex', fontSize: 34, color: '#666666', marginTop: 28 }}>
-          Applied Math @ Waterloo · Engineering @ Tern
+          Applied Math @ Waterloo · Engineering @ TERN
         </div>
         <div
           style={{

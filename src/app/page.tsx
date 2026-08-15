@@ -21,7 +21,7 @@ export default function HomePage() {
         </LinkPreview>
         , and currently engineering at{' '}
         <LinkPreview url="https://tern.ai" isStatic imageSrc="/previews/tern.png">
-          Tern
+          TERN
         </LinkPreview>
         . I&apos;m interested in software engineering, data science, full-stack development, and
         mobile engineering.

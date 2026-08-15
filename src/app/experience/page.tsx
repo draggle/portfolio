@@ -4,7 +4,7 @@ import { pageMetadata } from '@/lib/seo'
 
 export const metadata = pageMetadata({
   title: 'Experience — Ayan Bin Saif',
-  description: 'Work experience and education — Tern, Apple iOS mentorship, and the University of Waterloo.',
+  description: 'Work experience and education — TERN, Apple iOS mentorship, and the University of Waterloo.',
   path: '/experience',
 })
 
