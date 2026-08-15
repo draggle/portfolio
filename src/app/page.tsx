@@ -36,7 +36,7 @@ export default function HomePage() {
       </div>
       <video
         className="home-video"
-        src="/HillAsci.mp4"
+        src="/AsciiMountain.mp4"
         autoPlay
         loop
         muted
