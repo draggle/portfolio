@@ -1,5 +1,6 @@
 # Plain Redesign — Design Spec
 
+
 **Date:** 2026-08-14
 **Status:** Approved direction; pending implementation plan
 **Branch:** `redesign` (merges to `main` to ship)
