@@ -13,6 +13,8 @@ export interface Experience {
   logoUrl?: string
   link?: string
   linkLabel?: string
+  websiteUrl?: string
+  websiteLabel?: string
 }
 
 export const experiences: Experience[] = [
@@ -53,6 +55,8 @@ export const experiences: Experience[] = [
     logoUrl: '/logos/apple.svg',
     link: '/recommendation-letter.pdf',
     linkLabel: 'View recommendation letter ↗',
+    websiteUrl: 'https://www.apple.com',
+    websiteLabel: 'apple.com ↗',
   },
   {
     id: 'uwaterloo',
