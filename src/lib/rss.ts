@@ -14,7 +14,7 @@ export function buildRssXml(posts: Post[]): string {
   const items = [...posts]
     .sort((a, b) => b.date.localeCompare(a.date))
     .map(post => {
-      const link = `${SITE_URL}/blog/${post.id}`
+      const link = `${SITE_URL}/writing/${post.id}`
       const pubDate = new Date(post.date + 'T00:00:00Z').toUTCString()
       return `    <item>
       <title>${escapeXml(post.title)}</title>
@@ -29,8 +29,8 @@ export function buildRssXml(posts: Post[]): string {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>${escapeXml(SITE_NAME)} — blog</title>
-    <link>${SITE_URL}/blog</link>
+    <title>${escapeXml(SITE_NAME)} — Writing</title>
+    <link>${SITE_URL}/writing</link>
     <description>${escapeXml(SITE_DESCRIPTION)}</description>
     <language>en</language>
 ${items}

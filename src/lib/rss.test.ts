@@ -36,13 +36,14 @@ describe('buildRssXml', () => {
 
   it('is an rss 2.0 document with the site channel', () => {
     expect(xml).toContain('<rss version="2.0">')
-    expect(xml).toContain('<link>https://www.ayans.dev/blog</link>')
+    expect(xml).toContain('<link>https://www.ayans.dev/writing</link>')
+    expect(xml).toContain('<title>Ayan Bin Saif — Writing</title>')
   })
 
   it('contains one item per post with absolute links', () => {
-    expect(xml).toContain('<link>https://www.ayans.dev/blog/1</link>')
-    expect(xml).toContain('<link>https://www.ayans.dev/blog/2</link>')
-    expect(xml).toContain('<guid>https://www.ayans.dev/blog/1</guid>')
+    expect(xml).toContain('<link>https://www.ayans.dev/writing/1</link>')
+    expect(xml).toContain('<link>https://www.ayans.dev/writing/2</link>')
+    expect(xml).toContain('<guid>https://www.ayans.dev/writing/1</guid>')
   })
 
   it('escapes titles and excerpts', () => {
@@ -51,7 +52,7 @@ describe('buildRssXml', () => {
   })
 
   it('lists newest posts first', () => {
-    expect(xml.indexOf('/blog/2</link>')).toBeLessThan(xml.indexOf('/blog/1</link>'))
+    expect(xml.indexOf('/writing/2</link>')).toBeLessThan(xml.indexOf('/writing/1</link>'))
   })
 
   it('formats pubDate as UTC rfc822', () => {

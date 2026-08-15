@@ -27,7 +27,7 @@ describe('pageMetadata', () => {
       title: 'projects — ayan bin saif',
       description: 'some description',
       url: '/projects',
-      siteName: 'ayan bin saif',
+      siteName: 'Ayan Bin Saif',
       type: 'website',
       locale: 'en_US',
     })
@@ -38,14 +38,14 @@ describe('pageMetadata', () => {
     const meta = pageMetadata({
       title: 'a post — ayan bin saif',
       description: 'excerpt',
-      path: '/blog/1',
+      path: '/writing/1',
       ogType: 'article',
       publishedTime: '2026-02-15',
     })
     expect(meta.openGraph).toMatchObject({
       type: 'article',
       publishedTime: '2026-02-15',
-      url: '/blog/1',
+      url: '/writing/1',
     })
   })
 })
@@ -54,15 +54,18 @@ describe('buildSitemapEntries', () => {
   const entries = buildSitemapEntries()
   const urls = entries.map(e => e.url)
 
-  it('includes all static routes, including /terminal', () => {
-    for (const path of ['', '/experience', '/projects', '/blog', '/contact', '/terminal']) {
+  it('includes exactly the four static routes', () => {
+    for (const path of ['', '/experience', '/projects', '/writing']) {
       expect(urls).toContain(`https://www.ayans.dev${path}`)
     }
+    expect(urls).not.toContain('https://www.ayans.dev/blog')
+    expect(urls).not.toContain('https://www.ayans.dev/contact')
+    expect(urls).not.toContain('https://www.ayans.dev/terminal')
   })
 
   it('includes every blog post with its date as lastModified', () => {
     for (const post of posts) {
-      const entry = entries.find(e => e.url === `https://www.ayans.dev/blog/${post.id}`)
+      const entry = entries.find(e => e.url === `https://www.ayans.dev/writing/${post.id}`)
       expect(entry).toBeDefined()
       expect(entry!.lastModified).toEqual(new Date(post.date + 'T00:00:00Z'))
     }
