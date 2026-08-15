@@ -12,9 +12,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params
   const exp = experiences.find(e => e.id === id)
-  if (!exp) return { title: 'not found' }
+  if (!exp) return { title: 'Not found' }
   return pageMetadata({
-    title: `${exp.company} — ayan bin saif`,
+    title: `${exp.company} — Ayan Bin Saif`,
     description: exp.cardDescription ?? exp.description,
     path: `/experience/${exp.id}`,
   })
@@ -34,63 +34,30 @@ export default async function ExperienceDetailPage({ params }: { params: Promise
   const previewSrc = STATIC_PREVIEWS[id]
 
   return (
-    <div className="detail-page">
-      <Link href="/experience" className="nyx-link back-link">← experience</Link>
-
-      <div className="detail-header">
-        <div className="exp-detail-logo-row">
-          {exp.logoUrl && (
-            <div className={`exp-logo-wrap exp-logo-wrap-${exp.id} exp-logo-wrap-lg`}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={exp.logoUrl} alt={exp.company} className={`exp-logo exp-logo-${exp.id}`} />
-            </div>
-          )}
-          <div>
-            <h1 className="detail-title">{exp.company}</h1>
-            <div className="exp-detail-role">
-              {exp.role}
-              {exp.location && <span className="exp-card-location"> · {exp.location}</span>}
-            </div>
-            <div className="exp-detail-dates">{exp.dateRange}</div>
-          </div>
-        </div>
-        {exp.tags && (
-          <div className="proj-tags" style={{ marginTop: '0.75rem' }}>
-            {exp.tags.map(tag => (
-              <span key={tag} className="proj-tag">{tag}</span>
-            ))}
-          </div>
-        )}
-      </div>
-
+    <div className="page">
+      <p><Link href="/experience">← Experience</Link></p>
+      <h1>{exp.company}</h1>
+      <p className="muted">
+        {exp.role}
+        {exp.location && ` · ${exp.location}`} · {exp.dateRange}
+      </p>
       {exp.link && (
-        <div className="detail-links">
+        <p>
           {linkIsPdf ? (
-            <a href={exp.link} target="_blank" rel="noopener noreferrer" className="detail-btn">
-              {exp.linkLabel ?? 'visit ↗'}
-            </a>
+            <a href={exp.link} target="_blank" rel="noopener noreferrer">{exp.linkLabel ?? 'Visit ↗'}</a>
           ) : previewSrc ? (
-            <LinkPreview url={exp.link} className="detail-btn" isStatic imageSrc={previewSrc}>
-              {exp.linkLabel ?? 'visit ↗'}
-            </LinkPreview>
+            <LinkPreview url={exp.link} isStatic imageSrc={previewSrc}>{exp.linkLabel ?? 'Visit ↗'}</LinkPreview>
           ) : (
-            <LinkPreview url={exp.link} className="detail-btn">
-              {exp.linkLabel ?? 'visit ↗'}
-            </LinkPreview>
+            <LinkPreview url={exp.link}>{exp.linkLabel ?? 'Visit ↗'}</LinkPreview>
           )}
-        </div>
+        </p>
       )}
-
-      <div className="detail-body">
-        <p className="detail-para">{exp.description}</p>
-        {exp.highlights && exp.highlights.length > 0 && (
-          <ul className="exp-highlights">
-            {exp.highlights.map((h, i) => (
-              <li key={i} className="exp-highlight-item">{h}</li>
-            ))}
-          </ul>
-        )}
-      </div>
+      <p>{exp.description}</p>
+      {exp.highlights && exp.highlights.length > 0 && (
+        <ul>
+          {exp.highlights.map((h, i) => <li key={i}>{h}</li>)}
+        </ul>
+      )}
     </div>
   )
 }

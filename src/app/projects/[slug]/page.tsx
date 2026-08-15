@@ -12,9 +12,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
   const project = projects.find(p => p.slug === slug)
-  if (!project) return { title: 'project not found' }
+  if (!project) return { title: 'Project not found' }
   return pageMetadata({
-    title: `${project.title} — ayan bin saif`,
+    title: `${project.title} — Ayan Bin Saif`,
     description: project.shortDescription,
     path: `/projects/${project.slug}`,
   })
@@ -39,50 +39,38 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
 
   const previews = STATIC_PREVIEWS[slug] ?? {}
 
+  const linkItems: React.ReactNode[] = []
+  if (project.links.github) linkItems.push(
+    previews.github
+      ? <LinkPreview key="gh" url={project.links.github} isStatic imageSrc={previews.github}>GitHub ↗</LinkPreview>
+      : <LinkPreview key="gh" url={project.links.github}>GitHub ↗</LinkPreview>
+  )
+  if (project.links.demo) linkItems.push(
+    previews.demo
+      ? <LinkPreview key="demo" url={project.links.demo} isStatic imageSrc={previews.demo}>Demo ↗</LinkPreview>
+      : <LinkPreview key="demo" url={project.links.demo}>Demo ↗</LinkPreview>
+  )
+  if (project.links.event) linkItems.push(
+    previews.event
+      ? <LinkPreview key="event" url={project.links.event} isStatic imageSrc={previews.event}>YC event ↗</LinkPreview>
+      : <LinkPreview key="event" url={project.links.event}>YC event ↗</LinkPreview>
+  )
+  if (project.links.video) linkItems.push(
+    previews.video
+      ? <LinkPreview key="video" url={project.links.video} isStatic imageSrc={previews.video}>Demo video ↗</LinkPreview>
+      : <LinkPreview key="video" url={project.links.video}>Demo video ↗</LinkPreview>
+  )
+  if (project.links.recommendation) linkItems.push(
+    <a key="rec" href={project.links.recommendation} target="_blank" rel="noopener noreferrer">
+      Recommendation letter ↗
+    </a>
+  )
+
   return (
-    <div className="detail-page">
-      <Link href="/projects" className="nyx-link back-link">← projects</Link>
-
-      <div
-        className="detail-header"
-        style={{ viewTransitionName: `project-card-${project.slug}` } as React.CSSProperties}
-      >
-        <h1 className="detail-title">{project.title}</h1>
-        <div className="proj-tags">
-          {project.tags.map(tag => (
-            <span key={tag} className="proj-tag">{tag}</span>
-          ))}
-        </div>
-      </div>
-
-      <div className="detail-links">
-        {project.links.github && (
-          previews.github
-            ? <LinkPreview url={project.links.github} className="detail-btn" isStatic imageSrc={previews.github}>github ↗</LinkPreview>
-            : <LinkPreview url={project.links.github} className="detail-btn">github ↗</LinkPreview>
-        )}
-        {project.links.demo && (
-          previews.demo
-            ? <LinkPreview url={project.links.demo} className="detail-btn" isStatic imageSrc={previews.demo}>demo ↗</LinkPreview>
-            : <LinkPreview url={project.links.demo} className="detail-btn">demo ↗</LinkPreview>
-        )}
-        {project.links.event && (
-          previews.event
-            ? <LinkPreview url={project.links.event} className="detail-btn" isStatic imageSrc={previews.event}>yc event ↗</LinkPreview>
-            : <LinkPreview url={project.links.event} className="detail-btn">yc event ↗</LinkPreview>
-        )}
-        {project.links.video && (
-          previews.video
-            ? <LinkPreview url={project.links.video} className="detail-btn" isStatic imageSrc={previews.video}>demo video ↗</LinkPreview>
-            : <LinkPreview url={project.links.video} className="detail-btn">demo video ↗</LinkPreview>
-        )}
-        {project.links.recommendation && (
-          <a href={project.links.recommendation} target="_blank" rel="noopener noreferrer" className="detail-btn">
-            recommendation letter ↗
-          </a>
-        )}
-      </div>
-
+    <div className="page">
+      <p><Link href="/projects">← Projects</Link></p>
+      <h1>{project.title}</h1>
+      <p>{linkItems.map((item, i) => <span key={i}>{i > 0 && ' · '}{item}</span>)}</p>
       {project.links.video && (
         <div className="video-embed">
           <iframe
@@ -93,15 +81,12 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
           />
         </div>
       )}
-
-      <div className="detail-body">
-        {project.description.map((para, i) => (
-          <p key={i} className="detail-para">{para}</p>
-        ))}
-        {project.builtAt && (
-          <p className="detail-builtat">built with love @ {project.builtAt.toLowerCase()}</p>
-        )}
-      </div>
+      {project.description.map((para, i) => (
+        <p key={i}>{para}</p>
+      ))}
+      {project.builtAt && (
+        <p className="muted">Built at {project.builtAt}</p>
+      )}
     </div>
   )
 }
