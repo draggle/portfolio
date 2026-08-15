@@ -3,7 +3,7 @@ import { LinkedInBadgePreview } from '@/components/ui/linkedin-badge-preview'
 
 export default function HomePage() {
   return (
-    <div className="page home-page">
+    <div className="page">
       <h1>Ayan Bin Saif</h1>
       {/* .para divs, not <p>: LinkPreview's hover popup renders a <div>, invalid inside <p> */}
       <div className="para">
