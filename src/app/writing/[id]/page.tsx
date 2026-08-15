@@ -20,9 +20,9 @@ export async function generateMetadata(
   const post = getPost(id)
   if (!post) notFound()
   return pageMetadata({
-    title: `${post!.title} — ayan bin saif`,
+    title: `${post!.title} — Ayan Bin Saif`,
     description: post!.excerpt,
-    path: `/blog/${post!.id}`,
+    path: `/writing/${post!.id}`,
     ogType: 'article',
     publishedTime: post!.date,
   })

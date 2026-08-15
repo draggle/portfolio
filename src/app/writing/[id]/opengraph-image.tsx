@@ -2,15 +2,15 @@ import { ImageResponse } from 'next/og'
 import { posts } from '@/data/posts'
 import { formatDate } from '@/lib/utils'
 
-export const alt = 'blog post by ayan bin saif'
+export const alt = 'Writing by Ayan Bin Saif'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
 export default async function Image({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params
   const post = posts.find(p => p.id === Number(id))
-  const title = post?.title ?? 'blog'
-  const date = post ? formatDate(post.date).toLowerCase() : ''
+  const title = post?.title ?? 'Writing'
+  const date = post ? formatDate(post.date) : ''
   const titleSize = title.length > 60 ? 52 : 64
 
   return new ImageResponse(
@@ -27,7 +27,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
           color: '#fafafa',
         }}
       >
-        <div style={{ display: 'flex', fontSize: 28, color: '#ef4444' }}>blog · {date}</div>
+        <div style={{ display: 'flex', fontSize: 28, color: '#ef4444' }}>Writing · {date}</div>
         <div
           style={{
             display: 'flex',
@@ -49,7 +49,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
             color: '#999999',
           }}
         >
-          www.ayans.dev · ayan bin saif
+          www.ayans.dev · Ayan Bin Saif
         </div>
       </div>
     ),
