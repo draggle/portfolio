@@ -109,12 +109,15 @@ a {
    and swallow the page-wrap's 5rem bottom padding to sit flush with the
    bottom edge */
 .home-video {
-  margin-top: auto;
+  /* grow to fill all space between the text and the viewport bottom, so the
+     whole page fits on screen with no scrolling */
+  flex: 1 1 0;
+  min-height: 0;
+  margin-top: 2rem;
   width: 100vw;
   max-width: none; /* tailwind preflight caps video at max-width: 100% */
   margin-left: calc(50% - 50vw);
   margin-bottom: -5rem;
-  height: 68vh;
   object-fit: cover;
   object-position: top; /* keep the mountain peak; crop the bottom instead */
 }
