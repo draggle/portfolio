@@ -23,11 +23,11 @@ export default async function Image({ params }: { params: Promise<{ id: string }
           flexDirection: 'column',
           justifyContent: 'center',
           padding: '0 96px',
-          background: '#111111',
-          color: '#fafafa',
+          background: '#ffffff',
+          color: '#111111',
         }}
       >
-        <div style={{ display: 'flex', fontSize: 28, color: '#ef4444' }}>Writing · {date}</div>
+        <div style={{ display: 'flex', fontSize: 28, color: '#666666' }}>Writing · {date}</div>
         <div
           style={{
             display: 'flex',
@@ -46,7 +46,7 @@ export default async function Image({ params }: { params: Promise<{ id: string }
             left: 96,
             display: 'flex',
             fontSize: 28,
-            color: '#999999',
+            color: '#666666',
           }}
         >
           www.ayans.dev · Ayan Bin Saif
