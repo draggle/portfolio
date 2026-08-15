@@ -4,6 +4,9 @@ import type { NextConfig } from 'next'
 const nextConfig: NextConfig = {
   images: { unoptimized: true },
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],
+  // A stray package-lock.json in the home directory makes Next infer ~ as the
+  // workspace root, so the dev watcher reloads on unrelated file changes.
+  turbopack: { root: __dirname },
   async redirects() {
     return [
       { source: '/blog', destination: '/writing', permanent: true },
