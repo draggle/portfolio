@@ -1,6 +1,6 @@
 import { ImageResponse } from 'next/og'
 
-export const alt = 'ayan bin saif — applied math @ waterloo · engineering @ tern'
+export const alt = 'Ayan Bin Saif — Applied Math @ Waterloo · Engineering @ Tern'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -15,13 +15,13 @@ export default function Image() {
           flexDirection: 'column',
           justifyContent: 'center',
           padding: '0 96px',
-          background: '#111111',
-          color: '#fafafa',
+          background: '#ffffff',
+          color: '#111111',
         }}
       >
-        <div style={{ display: 'flex', fontSize: 84, fontWeight: 700 }}>ayan bin saif</div>
-        <div style={{ display: 'flex', fontSize: 34, color: '#999999', marginTop: 28 }}>
-          applied math @ waterloo · engineering @ tern
+        <div style={{ display: 'flex', fontSize: 84, fontWeight: 700 }}>Ayan Bin Saif</div>
+        <div style={{ display: 'flex', fontSize: 34, color: '#666666', marginTop: 28 }}>
+          Applied Math @ Waterloo · Engineering @ Tern
         </div>
         <div
           style={{
@@ -30,7 +30,7 @@ export default function Image() {
             left: 96,
             display: 'flex',
             fontSize: 28,
-            color: '#ef4444',
+            color: '#666666',
           }}
         >
           www.ayans.dev
