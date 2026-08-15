@@ -95,8 +95,13 @@ a {
 .para { margin-bottom: 1rem; }
 
 /* ── Home ── */
+/* a bit wider than the text column, centered, never past the viewport edge */
 .home-video {
-  width: 100%;
+  width: min(120%, calc(100vw - 2.5rem));
+  max-width: none; /* tailwind preflight caps video at max-width: 100% */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   margin-top: 2rem;
 }
 
