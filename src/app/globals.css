@@ -102,7 +102,9 @@ a {
    and the video's bottom edge is exactly the window's bottom edge. */
 body:has(.home-page) {
   height: 100svh;
-  overflow: hidden;
+  /* no scrolling while everything fits; scrollable when zoom/window size
+     makes the content overflow (overflow: hidden would clip it forever) */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
 }
@@ -127,7 +129,7 @@ body:has(.home-page) .page-wrap {
    bottom, breaking out of the centered 42rem column to span edge to edge */
 .home-video {
   flex: 1 1 0;
-  min-height: 0;
+  min-height: 14rem; /* keep the video visible even when zoom squeezes the layout */
   margin-top: 2rem;
   width: 100vw;
   max-width: none; /* tailwind preflight caps video at max-width: 100% */
