@@ -95,43 +95,8 @@ a {
 .para { margin-bottom: 1rem; }
 
 /* ── Home ── */
-/* Fit the home page in exactly one viewport: body becomes a fixed-height
-   flex column and the video shrinks (letterboxed, never cropped) to fill
-   whatever space the text leaves. Falls back to scrolling only when zoom
-   or a tiny window makes even the text overflow. */
-body:has(.home-page) {
-  height: 100svh;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-}
-
-body:has(.home-page) .page-wrap {
-  flex: 1;
-  min-height: 0;
-  width: 100%;
-  padding-bottom: 2rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.home-page {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-/* a bit wider than the text column, centered, whole frame always visible */
 .home-video {
-  flex: 1 1 auto;
-  min-height: 10rem;
-  object-fit: contain;
-  width: min(120%, calc(100vw - 2.5rem));
-  max-width: none; /* tailwind preflight caps video at max-width: 100% */
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 100%;
   margin-top: 2rem;
 }
 
