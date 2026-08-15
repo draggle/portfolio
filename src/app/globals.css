@@ -107,8 +107,8 @@ a {
   width: 100%;
   height: 50vh;
   object-fit: cover;
-  /* the video is light-on-dark; invert it to match light mode */
-  filter: invert(1);
+  /* the video is light-on-dark; partially invert it to match light mode */
+  filter: invert(0.85);
 }
 
 html.dark .home-video { filter: none; }
