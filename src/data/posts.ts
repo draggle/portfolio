@@ -23,4 +23,11 @@ export const posts: Post[] = [
     excerpt: 'Not because of the lectures — because of the culture. A take on why Waterloo produces great outcomes for students in tech, and what actually drives it.',
     readTimeMinutes: 4,
   },
+  {
+    id: 3,
+    title: 'My experience at Y Combinator Startup School 2026 (and SF for the second time :D)',
+    date: '2026-08-01',
+    excerpt: 'Back in SF for a week to attend YC Startup School — talks from people building at the frontier, afterparties, and more of a beautiful city.',
+    readTimeMinutes: 2,
+  },
 ]
