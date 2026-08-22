@@ -94,6 +94,72 @@ a {
    (LinkPreview's hover popup renders a <div>) */
 .para { margin-bottom: 1rem; }
 
+/* ── GradientText (gold) ──
+   Consumed as hsl(var(--color-N)) by src/components/ui/gradient-text.tsx,
+   so these are bare HSL triplets, not full colour functions.
+
+   All four blobs are gold, varied by hue rather than by colour, so the text
+   stays legible whichever way the blobs drift. Lightness is theme-dependent:
+   the blend tints the glyphs *to* these values, so light mode needs deep golds
+   to read against a white page, and dark mode needs bright ones against #111. */
+:root {
+  --color-1: 43 80% 40%;   /* gold */
+  --color-2: 36 75% 34%;   /* bronze */
+  --color-3: 47 85% 45%;   /* brighter gold */
+  --color-4: 39 72% 31%;   /* deepest */
+}
+
+html.dark {
+  --color-1: 43 85% 66%;
+  --color-2: 36 78% 58%;
+  --color-3: 48 90% 72%;
+  --color-4: 39 75% 61%;
+}
+
+@keyframes gradient-border {
+  0%, 100% { border-radius: 37% 29% 27% 27% / 28% 25% 41% 37%; }
+  25%      { border-radius: 47% 29% 39% 49% / 61% 19% 66% 26%; }
+  50%      { border-radius: 57% 23% 47% 72% / 63% 17% 66% 33%; }
+  75%      { border-radius: 28% 49% 29% 100% / 93% 20% 64% 25%; }
+}
+
+@keyframes gradient-1 {
+  0%, 100% { top: 0; right: 0; }
+  50%      { top: 50%; right: 25%; }
+  75%      { top: 25%; right: 50%; }
+}
+
+@keyframes gradient-2 {
+  0%, 100% { top: 0; left: 0; }
+  60%      { top: 75%; left: 25%; }
+  85%      { top: 50%; left: 50%; }
+}
+
+@keyframes gradient-3 {
+  0%, 100% { bottom: 0; left: 0; }
+  40%      { bottom: 50%; left: 25%; }
+  65%      { bottom: 25%; left: 50%; }
+}
+
+@keyframes gradient-4 {
+  0%, 100% { bottom: 0; right: 0; }
+  50%      { bottom: 25%; right: 40%; }
+  90%      { bottom: 50%; right: 25%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text-blob * { animation: none !important; }
+}
+
+/* small brand mark sitting on the baseline beside a link */
+.inline-logo {
+  display: inline-block;
+  height: 1em;
+  width: auto;
+  vertical-align: -0.15em;
+  margin-left: 0.3em;
+}
+
 /* ── Home ── */
 .home-video {
   width: 100%;
