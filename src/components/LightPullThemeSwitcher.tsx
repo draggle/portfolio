@@ -2,7 +2,7 @@
 import { motion, useMotionValue, useTransform } from "motion/react";
 
 // Distance from the top of the wrapper down to the knob at rest.
-const CORD_REST = 32;
+const CORD_REST = 64;
 
 export function LightPullThemeSwitcher() {
     const toggleDarkMode = () => {
@@ -23,7 +23,10 @@ export function LightPullThemeSwitcher() {
     const cordHeight = useTransform(y, (v) => Math.max(0, CORD_REST + v));
 
     return (
-      <div className="relative ml-auto self-start -mt-8 pt-8">
+      /* Positioned against .site-nav, not laid out in its flex row: the rope has to
+         start at y=0 even when the nav links wrap, and right-12 keeps the 120px
+         hint box inside the viewport instead of forcing a horizontal scroll. */
+      <div className="absolute right-12 top-0 pt-16">
         {/* Stationary hint: a sibling of the knob rather than a child, pinned to the
             knob's rest centre (16px across, 48px down). It comes first in the DOM so
             the cord and knob paint over it when pulled. The arc runs left-to-right
@@ -32,7 +35,7 @@ export function LightPullThemeSwitcher() {
         <svg
           aria-hidden="true"
           viewBox="0 0 120 120"
-          className="pointer-events-none absolute left-1/2 top-[48px] z-0 h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500"
+          className="pointer-events-none absolute left-1/2 top-[80px] z-0 h-[120px] w-[120px] -translate-x-1/2 -translate-y-1/2 text-neutral-400 dark:text-neutral-500"
         >
           <path id="theme-pull-arc" d="M 12 60 A 48 48 0 0 0 108 60" fill="none" />
           <text fill="currentColor" fontSize="8.5" letterSpacing="1.1" textAnchor="middle">

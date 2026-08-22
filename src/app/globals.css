@@ -24,6 +24,9 @@ html {
 }
 
 body {
+  /* clip, not hidden: no sideways scroll from a stray overflow, and unlike
+     hidden it creates no scroll container, so pinch-zoom panning still works */
+  overflow-x: clip;
   font-family: var(--font-sans), system-ui, sans-serif;
   font-size: 1rem;
   line-height: 1.7;
@@ -33,6 +36,9 @@ body {
 
 /* ── Nav ── */
 .site-nav {
+  /* anchors the pull-cord switcher, which is positioned rather than a flex
+     item so its rope starts at the page's top edge regardless of link wrap */
+  position: relative;
   max-width: 42rem;
   margin: 0 auto;
   padding: 2rem 1.25rem 0;
