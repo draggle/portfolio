@@ -33,7 +33,7 @@ export default function HomePage() {
           TERN
         </LinkPreview>
         <Image className="inline-logo" src="/logos/tern.png" alt="" width={32} height={32} />
-        . I&apos;m passionate about all things software and ML (especially the intersection of the two)!
+        . I&apos;m passionate about all things software and ML!
       </div>
       <div className="para">
         Outside of work I play piano, guitar, and flute, all self-taught &mdash; piano since I was
