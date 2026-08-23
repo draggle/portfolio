@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { LightPullThemeSwitcher } from './LightPullThemeSwitcher'
+import { ThemeToggle } from './ThemeToggle'
 
 export default function Nav() {
   return (
@@ -8,7 +8,7 @@ export default function Nav() {
       <Link href="/experience">Experience</Link>
       <Link href="/projects">Projects</Link>
       <Link href="/writing">Writing</Link>
-      <LightPullThemeSwitcher />
+      <ThemeToggle className="ml-auto self-center" />
     </nav>
   )
 }
