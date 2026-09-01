@@ -28,17 +28,23 @@ export default function HomePage() {
           </GradientText>
         </LinkPreview>
         <Image className="inline-logo" src="/logos/uwaterloo.svg" alt="" width={32} height={32} />
-        , and currently engineering at{' '}
+        . Previously, I was the first engineering intern at{' '}
         <LinkPreview url="https://tern.ai" isStatic imageSrc="/previews/tern.png">
           TERN
         </LinkPreview>
         <Image className="inline-logo" src="/logos/tern.png" alt="" width={32} height={32} />
-        . I&apos;m passionate about all things software and ML!
+        , where I worked on localization algorithms and engine optimization.
+      </div>
+      <div className="para">
+        I&apos;m at an ambitious stage of my life. I believe that the most important thing about
+        building software is to build something that improves people&apos;s lives. In the next few
+        years, I want to have helped build something that makes a difference in the lives of millions 
+        of people. I find it extremely rewarding knowing someone is able to benefit from my work.
       </div>
       <div className="para">
         Outside of work I play piano, guitar, and flute, all self-taught &mdash; piano since I was
-        ten. The rest of my free time goes to playing video games, watching anime, and listening to  
-        music. I also enjoy napping!
+        ten. The rest of my free time goes to playing video games, watching anime, and listening
+        to music. I also love cats!
       </div>
       <div className="para">
         You can reach me by <a href="mailto:ayan.binsaif@uwaterloo.ca">email</a>, find me on{' '}
