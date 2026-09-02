@@ -51,10 +51,10 @@ export const experiences: Experience[] = [
     description:
       'Mentorship on iOS native apps. Built native iOS features in Swift and SwiftUI.',
     highlights: [
-      'Built EduBuddy — a personalized iOS productivity app selected for showcase among 200+ participants',
-      'Reduced UI load times by 400ms through architectural improvements',
-      'Lowered memory usage by 25% via optimized data flow and lazy loading',
-      'Architected HIG-aligned UX with SwiftUI, including a personalized recommendation engine',
+      'Built native iOS features in Swift and SwiftUI as part of a selective technical Apple mentorship in iOS development, emphasizing performance optimization and scalable UI architecture',
+      'Architected EduBuddy, an iOS productivity app with a personalized recommendation engine; increased beta engagement by 30% through HIG-aligned UX design and performance optimization',
+      'Reduced UI load times by 400ms and memory usage by 25% via lazy loading, view hierarchy refactoring, and SwiftUI lifecycle optimization',
+      'Owned full SDLC from wireframing to TestFlight deployment; presented a technical demo to Apple iOS engineers and was selected for showcase among 200+ participants',
     ],
     tags: ['Swift', 'SwiftUI', 'Xcode', 'iOS', 'HIG'],
     logoColor: '#555555',
