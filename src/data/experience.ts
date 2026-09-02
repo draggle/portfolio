@@ -47,9 +47,7 @@ export const experiences: Experience[] = [
     dateRange: 'Feb 2024 → Jul 2024',
     isCurrent: false,
     location: 'Toronto, Ontario, Canada',
-    cardDescription: 'Mentorship on iOS native apps.',
-    description:
-      'Mentorship on iOS native apps. Built native iOS features in Swift and SwiftUI.',
+    description: 'Mentorship on iOS native apps.',
     highlights: [
       'Built native iOS features in Swift and SwiftUI as part of a selective technical Apple mentorship in iOS development, emphasizing performance optimization and scalable UI architecture',
       'Architected EduBuddy, an iOS productivity app with a personalized recommendation engine; increased beta engagement by 30% through HIG-aligned UX design and performance optimization',
