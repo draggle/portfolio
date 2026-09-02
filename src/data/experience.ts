@@ -31,8 +31,8 @@ export const experiences: Experience[] = [
     highlights: [
       'Engineered a GPS-free cold-start localization stack using scored road-graph matching and persisted position priors, delivering 5.2x more position fixes at a 2.6x lower error rate, validated on a 251-drive RTK corpus',
       'Rebuilt the offline road-graph builder (OpenStreetMap → matching graphs), eliminating non-determinism across runs and threads, while achieving 3.8x faster runtime and 53% lower peak memory',
-      'Built the RTK ground-truth evaluation harness used as the ship gate for localization changes, with per-drive scoring that uncovered a bug understating baseline accuracy by 5x',
-      'Built a magnetometer validation channel that learned per-vehicle compass calibration and vetoed incorrect heading candidates, catching localization failures up to 29 km away that other signals could not detect',
+      'Owned the RTK ground-truth evaluation harness used as the ship gate for localization changes, with per-drive scoring that uncovered a bug understating baseline accuracy by 5x',
+      'Developed a magnetometer validation channel that learned per-vehicle compass calibration and vetoed incorrect heading candidates, catching localization failures up to 29 km away that other signals could not detect',
     ],
     tags: ['TypeScript', 'Next.js', 'Python', 'AI/ML', 'Positioning Systems'],
     logoColor: '#0ea5e9',
