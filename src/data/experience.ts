@@ -43,7 +43,7 @@ export const experiences: Experience[] = [
   {
     id: 'apple',
     company: 'Apple',
-    role: 'iOS App Developer',
+    role: 'Software Engineering Mentorship',
     dateRange: 'Feb 2024 → Jul 2024',
     isCurrent: false,
     location: 'Toronto, Ontario, Canada',
