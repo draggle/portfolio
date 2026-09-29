@@ -25,7 +25,8 @@ function getYouTubeId(url: string): string {
   return match?.[1] ?? ''
 }
 
-const STATIC_PREVIEWS: Record<string, { github?: string; demo?: string; event?: string; video?: string }> = {
+const STATIC_PREVIEWS: Record<string, { github?: string; demo?: string; event?: string; devpost?: string; video?: string }> = {
+  'squawk':           { github: '/previews/squawk-github.png', demo: '/previews/squawk-demo.png', devpost: '/previews/squawk-devpost.png' },
   'alphahedge':       { github: '/previews/alphahedge-github.png', event: '/previews/yc-event.png' },
   'rate-my-rez':      { github: '/previews/ratemyrez-github.png', demo: '/previews/ratemyrez-demo.png' },
   'cheeto-fingers':   { github: '/previews/cheeto-github.png' },
@@ -54,6 +55,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     previews.event
       ? <LinkPreview key="event" url={project.links.event} isStatic imageSrc={previews.event}>YC event ↗</LinkPreview>
       : <LinkPreview key="event" url={project.links.event}>YC event ↗</LinkPreview>
+  )
+  if (project.links.devpost) linkItems.push(
+    previews.devpost
+      ? <LinkPreview key="devpost" url={project.links.devpost} isStatic imageSrc={previews.devpost}>Devpost ↗</LinkPreview>
+      : <LinkPreview key="devpost" url={project.links.devpost}>Devpost ↗</LinkPreview>
   )
   if (project.links.video) linkItems.push(
     previews.video

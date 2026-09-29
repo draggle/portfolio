@@ -2,8 +2,8 @@ import { describe, it, expect } from 'vitest'
 import { projects, type Project } from './projects'
 
 describe('projects data', () => {
-  it('has exactly 5 projects', () => {
-    expect(projects).toHaveLength(5)
+  it('has exactly 6 projects', () => {
+    expect(projects).toHaveLength(6)
   })
 
   it('all slugs are unique', () => {
@@ -23,8 +23,8 @@ describe('projects data', () => {
     })
   })
 
-  it('exactly 2 projects are featured', () => {
-    expect(projects.filter(p => p.featured)).toHaveLength(2)
+  it('exactly 3 projects are featured', () => {
+    expect(projects.filter(p => p.featured)).toHaveLength(3)
   })
 
   it('alphahedge has a video link', () => {

@@ -8,6 +8,7 @@ export interface Project {
     github?: string
     demo?: string
     event?: string
+    devpost?: string
     video?: string
     recommendation?: string
   }
@@ -21,6 +22,28 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    slug: 'squawk',
+    title: 'Squawk',
+    shortDescription:
+      'AI copilot for air traffic controllers that won Best Use of ElevenLabs at Hack the North 2026 and made the Baseten finals. Plans a conflict-free path for every flight, replans the moment something changes, and catches a pilot\'s wrong readback before the plane flies it.',
+    description: [
+      "Pilots have copilots, so we built one for air traffic controllers. Squawk optimizes a conflict-free path for every flight, replans the moment something changes, and listens to the radio to catch a pilot's wrong readback before the plane flies it (essentially Cursor for air traffic control). It won Best Use of ElevenLabs and made the Baseten finals.",
+      'Every tick, a two-minute look-ahead plays the next 120 seconds forward up to 256 times under random noise and checks every pair of aircraft. 256 runs of a 9-aircraft sky take 5.3 ms, roughly 440,000 aircraft trajectories a second. A geometric search planner routes around storms, drones, and emergencies in 10 to 60 ms with 30 aircraft flying. Measured against fixed routes, Squawk had 1 loss of separation versus 1,016 over 826 simulated flight hours with 5% pilot errors, and on replayed real European traffic (159 flights, 1,314 flight hours) cut losses from 258 to 36, 86% fewer.',
+      "In the simulator, pilots slip up like humans would: ElevenLabs voices through a radio filter, heard on the same channel as the mic. Cleared 018, read back 008, and the plane flies the incorrect readback; Squawk caught all 121 in our dense test. Whisper was fine-tuned for ATC on 21,269 clips in 71 minutes on one Baseten H100, cutting errors per 100 words from 71 to 16 on real held-out radio, with transcripts back in 0.3 s. Rules check every readback first, and if the cleared value shows up in one of Whisper's runner-up transcripts, Squawk treats it as a possible mishearing and escalates it to an agent instead of alarming the controller.",
+      'Three tool-calling agents back the controller: one investigates readbacks the rules can\'t settle (max 4 tool calls, radar watch, Elasticsearch memory), one interprets non-standard instructions, and one answers questions like "why is Jazz 912 turning?" and edits the scenario. Scenarios are generated on request ("a storm on Air Canada 859", "twice as much traffic"), from 2 to 80 aircraft at up to 60x speed, or from a snapshot of aircraft flying right now, so any event, even an abstract one, can be simulated to see how Squawk would fix it.',
+    ],
+    tags: ['Python', 'FastAPI', 'Next.js', 'TypeScript', 'deck.gl', 'Whisper', 'ElevenLabs', 'Baseten', 'Elasticsearch'],
+    links: {
+      github: 'https://github.com/draggle/squawk',
+      demo: 'https://www.squawk.fit/',
+      devpost: 'https://devpost.com/software/atc',
+      video: 'https://www.youtube.com/watch?v=kBiB2bNY1BI',
+    },
+    thumbnail: { emoji: '✈️', gradient: 'linear-gradient(135deg, #0b1220, #1e3a5f)' },
+    featured: true,
+    builtAt: 'Hack the North 2026 · Best Use of ElevenLabs winner, Baseten finalist',
+  },
   {
     slug: 'alphahedge',
     title: 'AlphaHedge',
