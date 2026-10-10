@@ -30,4 +30,11 @@ export const posts: Post[] = [
     excerpt: 'Back in SF for a week to attend YC Startup School — talks from people building at the frontier, afterparties, and more of a beautiful city.',
     readTimeMinutes: 2,
   },
+  {
+    id: 4,
+    title: 'Sticker Dilemma',
+    date: '2026-10-10',
+    excerpt: "I used to hoard stickers because I was scared of wasting them on the wrong thing. I've since realized I did the same with ideas — and the only fix is to peel it and start doing.",
+    readTimeMinutes: 2,
+  },
 ]
