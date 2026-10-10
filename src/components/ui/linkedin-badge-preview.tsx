@@ -43,10 +43,10 @@ function LinkedInCard({ isDark }: { isDark: boolean }) {
               Ayan Bin Saif
             </div>
             <div style={{ fontSize: 12, color: sub, marginTop: 4, lineHeight: 1.45 }}>
-              Engineering @ TERN | Applied Math + Computing + Machine Learning @ University of Waterloo
+              Applied Math, Computing &amp; Machine Learning @ University of Waterloo | Prev. @ tern.ai
             </div>
             <div style={{ fontSize: 11, color: sub, marginTop: 3 }}>
-              TERN · University of Waterloo
+              University of Waterloo
             </div>
           </div>
         </div>
