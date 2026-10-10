@@ -17,6 +17,8 @@ type LinkPreviewProps = {
   | { isStatic?: false; imageSrc?: never }
 );
 
+const subscribeNoop = () => () => {};
+
 export const LinkPreview = ({
   children,
   url,
@@ -45,11 +47,13 @@ export const LinkPreview = ({
   }
 
   const [isOpen, setOpen] = React.useState(false);
-  const [isMounted, setIsMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setIsMounted(true);
-  }, []);
+  // Hydration-safe "am I on the client" flag: false during SSR and the first
+  // client render, true afterwards, without an extra effect-triggered render.
+  const isMounted = React.useSyncExternalStore(
+    subscribeNoop,
+    () => true,
+    () => false,
+  );
 
   const springConfig = { stiffness: 100, damping: 15 };
   const x = useMotionValue(0);
